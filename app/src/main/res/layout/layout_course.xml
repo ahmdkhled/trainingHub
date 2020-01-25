@@ -17,11 +17,39 @@
         <ImageView
             android:layout_width="300dp"
             android:layout_height="200dp"
+            android:id="@+id/course_thumbnail"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             android:src="@drawable/course_placeholder"
             android:scaleType="fitXY"
             />
+
+        <com.example.traininghub.GrostesqueTextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:id="@+id/course_name"
+            android:text="@string/dummy_course_name"
+            app:layout_constraintStart_toStartOf="@+id/course_thumbnail"
+            app:layout_constraintEnd_toEndOf="@+id/course_thumbnail"
+            app:layout_constraintBottom_toTopOf="@id/course_price"
+            android:maxLines="2"
+            android:ellipsize="marquee"
+            android:layout_marginStart="5dp"
+            android:layout_marginEnd="5dp"
+
+            />
+
+        <com.example.traininghub.GrostesqueTextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:id="@+id/course_price"
+            android:text="@string/dummy_price"
+            app:layout_constraintStart_toStartOf="@+id/course_name"
+            app:layout_constraintEnd_toEndOf="@+id/course_name"
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:textColor="@color/mainColor"
+            />
+
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

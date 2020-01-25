@@ -3,4 +3,6 @@
     <string name="categories">Categories</string>
     <string name="for_you">For you</string>
     <string name="RecentlyAdded">Recently Added</string>
+    <string name="dummy_course_name">The Complete Web Developer Course 2.0</string>
+    <string name="dummy_price" >550 EG</string>
 </resources>
