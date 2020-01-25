@@ -7,6 +7,23 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:id="@+id/mainFragContainer"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/mainBottomNavigation"/>
+
+
+<com.google.android.material.bottomnavigation.BottomNavigationView
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:id="@+id/mainBottomNavigation"
+    app:layout_constraintBottom_toBottomOf="parent"
+    app:menu="@menu/bottom_navigation_menu"
+    android:background="@color/navigation_bg"
+
+    />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
