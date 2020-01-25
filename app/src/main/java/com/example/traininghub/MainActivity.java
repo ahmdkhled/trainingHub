@@ -15,9 +15,14 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.fragment_main);
 
         RecyclerView recyclerView=findViewById(R.id.coursesForYouRecycler);
+        RecyclerView categoriesRecycler=findViewById(R.id.categories_recycler);
+
         recyclerView.setLayoutManager(new LinearLayoutManager(this,RecyclerView.HORIZONTAL,false));
         CoursesAdapter coursesAdapter=new CoursesAdapter(this);
         recyclerView.setAdapter(coursesAdapter);
 
+        categoriesRecycler.setLayoutManager(new LinearLayoutManager(this,RecyclerView.HORIZONTAL,false));
+        CategoriesAdapter categoriesAdapter=new CategoriesAdapter(this);
+        categoriesRecycler.setAdapter(categoriesAdapter);
     }
 }

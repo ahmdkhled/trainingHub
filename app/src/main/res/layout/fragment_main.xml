@@ -29,7 +29,7 @@
         android:text="@string/for_you"
         android:textSize="19sp"
         android:textStyle="bold"
-        android:textColor="#2B2A2A"
+        android:textColor="#E6E4E4"
         android:layout_marginStart="5dp"
         android:layout_marginLeft="5dp"
         android:layout_marginTop="50dp"
