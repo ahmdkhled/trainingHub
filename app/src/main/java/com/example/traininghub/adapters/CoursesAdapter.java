@@ -1,4 +1,4 @@
-package com.example.traininghub;
+package com.example.traininghub.adapters;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -8,7 +8,7 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import java.util.ArrayList;
+import com.example.traininghub.R;
 
 public class CoursesAdapter extends RecyclerView.Adapter<CoursesAdapter.CourseHolder> {
 

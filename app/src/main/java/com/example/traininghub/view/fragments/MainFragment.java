@@ -12,8 +12,8 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.traininghub.CategoriesAdapter;
-import com.example.traininghub.CoursesAdapter;
+import com.example.traininghub.adapters.CategoriesAdapter;
+import com.example.traininghub.adapters.CoursesAdapter;
 import com.example.traininghub.R;
 
 public class MainFragment extends Fragment {
