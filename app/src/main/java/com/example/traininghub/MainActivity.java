@@ -3,16 +3,21 @@ package com.example.traininghub;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTransaction;
+import androidx.lifecycle.ViewModelProvider;
+import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.ViewGroup;
 
 import com.example.traininghub.view.fragments.AccountFragment;
 import com.example.traininghub.view.fragments.MainFragment;
 import com.example.traininghub.view.fragments.MyCoursesFragment;
+import com.example.traininghub.viewModel.MainActivityVM;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import butterknife.BindView;
@@ -23,30 +28,30 @@ public class MainActivity extends AppCompatActivity {
     @BindView(R.id.mainBottomNavigation)
     BottomNavigationView mainBottomNavigation;
     Fragment currentFrag;
-    MainFragment mainFragment=new MainFragment();
-    MyCoursesFragment myCoursesFragment=new MyCoursesFragment();
-    AccountFragment accountFragment=new AccountFragment();
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
 
+        MainActivityVM mainActivityVM= ViewModelProviders.of(this).get(MainActivityVM.class);
 
 
 
-        showFragment(mainFragment);
+        if (savedInstanceState==null)
+        showFragment(mainActivityVM.getMainFragment(),false);
 
 
         mainBottomNavigation.setOnNavigationItemSelectedListener(menuItem -> {
             if (menuItem.getItemId()==R.id.home){
-                showFragment(mainFragment);
-                currentFrag=mainFragment;
+                showFragment(mainActivityVM.getMainFragment(),true);
+                currentFrag=mainActivityVM.getMainFragment();
             } else if (menuItem.getItemId()==R.id.myCourses){
-                showFragment(myCoursesFragment);
+                showFragment(mainActivityVM.getMyCoursesFragment(),true);
 
             } else if (menuItem.getItemId()==R.id.account){
-                showFragment(accountFragment);
+                showFragment(mainActivityVM.getAccountFragment(),true);
             }
             return true;
         });
@@ -54,25 +59,36 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-    private void showFragment(Fragment fragment){
+    private void showFragment(Fragment fragment,boolean addToBackStack){
+        Log.d("FRAGG", "added: "+fragment.isAdded());
         if (fragment.isAdded()){
-            getSupportFragmentManager()
+            FragmentTransaction fragmentTransaction=getSupportFragmentManager()
                     .beginTransaction()
-                    .show(fragment)
-                    .commit();
+                    .show(fragment);
+                    if (addToBackStack)fragmentTransaction.addToBackStack(null);
+                    fragmentTransaction.commit();
+
+
+            for(Fragment frag : getSupportFragmentManager().getFragments()){
+                if(frag != fragment && frag.isAdded()){
+                    getSupportFragmentManager()
+                            .beginTransaction()
+                            .hide(frag)
+                            .commit();
+                }
+            }
+
         }else {
             getSupportFragmentManager()
                     .beginTransaction()
                     .add(R.id.mainFragContainer,fragment)
                     .addToBackStack(null)
                     .commit();
+
+
         }
 
-        for(Fragment frag : getSupportFragmentManager().getFragments()){
-            if(frag != fragment && frag.isAdded()){
-                getSupportFragmentManager().beginTransaction().hide(frag).commit();
-            }
-        }
+
     }
 
 
