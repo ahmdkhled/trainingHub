@@ -1,4 +1,4 @@
-package com.example.traininghub;
+package com.example.traininghub.helpers;
 
 import android.content.Context;
 import android.graphics.Typeface;

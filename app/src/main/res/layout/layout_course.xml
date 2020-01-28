@@ -24,7 +24,7 @@
             android:scaleType="fitXY"
             />
 
-        <com.example.traininghub.GrostesqueTextView
+        <com.example.traininghub.helpers.GrostesqueTextView
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:id="@+id/course_name"
@@ -39,7 +39,7 @@
 
             />
 
-        <com.example.traininghub.GrostesqueTextView
+        <com.example.traininghub.helpers.GrostesqueTextView
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:id="@+id/course_price"

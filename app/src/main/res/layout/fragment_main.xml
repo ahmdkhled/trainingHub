@@ -28,7 +28,7 @@
         app:layout_constraintEnd_toEndOf="parent"/>
 
 
-    <com.example.traininghub.GrostesqueTextView
+    <com.example.traininghub.helpers.GrostesqueTextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/courseForYou_label"
@@ -52,7 +52,7 @@
         app:layout_constraintTop_toBottomOf="@id/courseForYou_label"
         />
 
-    <com.example.traininghub.GrostesqueTextView
+    <com.example.traininghub.helpers.GrostesqueTextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/categories_label"
@@ -67,7 +67,7 @@
         app:layout_constraintStart_toStartOf="parent"
          />
 
-    <com.example.traininghub.GrostesqueTextView
+    <com.example.traininghub.helpers.GrostesqueTextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/seeAllCategories"
@@ -88,7 +88,7 @@
         app:layout_constraintTop_toBottomOf="@id/categories_label"
         />
 
-    <com.example.traininghub.GrostesqueTextView
+    <com.example.traininghub.helpers.GrostesqueTextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/recentlyAdded_label"
@@ -103,7 +103,7 @@
         app:layout_constraintStart_toStartOf="parent"
         />
 
-    <com.example.traininghub.GrostesqueTextView
+    <com.example.traininghub.helpers.GrostesqueTextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/seeAllRecentlyAdded"
