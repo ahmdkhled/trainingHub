@@ -45,6 +45,7 @@ public class MainActivity extends AppCompatActivity {
 
 
         mainBottomNavigation.setOnNavigationItemSelectedListener(menuItem -> {
+            Log.d("FRAGG", "OnNavigationItemSelected: "+menuItem.getItemId());
             if (menuItem.getItemId()==R.id.home){
                 showFragment(mainActivityVM.getMainFragment(),true);
                 currentFrag=mainActivityVM.getMainFragment();
@@ -80,12 +81,11 @@ public class MainActivity extends AppCompatActivity {
             }
 
         }else {
-            getSupportFragmentManager()
+            FragmentTransaction fragmentTransaction=getSupportFragmentManager()
                     .beginTransaction()
-                    .add(R.id.mainFragContainer,fragment)
-                    .addToBackStack(null)
-                    .commit();
-
+                    .add(R.id.mainFragContainer,fragment);
+                    if (addToBackStack)fragmentTransaction.addToBackStack(null);
+                    fragmentTransaction.commit();
 
         }
 
