@@ -1,4 +1,4 @@
-package com.example.traininghub;
+package com.example.traininghub.view.activities;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -14,6 +14,7 @@ import android.util.Log;
 import android.view.MenuItem;
 import android.view.ViewGroup;
 
+import com.example.traininghub.R;
 import com.example.traininghub.view.fragments.AccountFragment;
 import com.example.traininghub.view.fragments.MainFragment;
 import com.example.traininghub.view.fragments.MyCoursesFragment;

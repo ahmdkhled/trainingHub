@@ -1,10 +1,12 @@
-package com.example.traininghub;
+package com.example.traininghub.view.activities;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
+
+import com.example.traininghub.R;
 
 public class SplashActivity extends AppCompatActivity {
 
