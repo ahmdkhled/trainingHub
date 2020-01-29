@@ -71,14 +71,7 @@ public class MainActivity extends AppCompatActivity {
                     fragmentTransaction.commit();
 
 
-            for(Fragment frag : getSupportFragmentManager().getFragments()){
-                if(frag != fragment && frag.isAdded()){
-                    getSupportFragmentManager()
-                            .beginTransaction()
-                            .hide(frag)
-                            .commit();
-                }
-            }
+
 
         }else {
             FragmentTransaction fragmentTransaction=getSupportFragmentManager()
@@ -89,6 +82,14 @@ public class MainActivity extends AppCompatActivity {
 
         }
 
+        for(Fragment frag : getSupportFragmentManager().getFragments()){
+            if(frag != fragment && frag.isAdded()){
+                getSupportFragmentManager()
+                        .beginTransaction()
+                        .hide(frag)
+                        .commit();
+            }
+        }
 
     }
 

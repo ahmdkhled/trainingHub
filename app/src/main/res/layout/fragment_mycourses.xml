@@ -1,8 +1,76 @@
-<?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
+<androidx.coordinatorlayout.widget.CoordinatorLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
-    android:background="@color/mainColor"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:fitsSystemWindows="true">
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+
+    <com.google.android.material.appbar.AppBarLayout
+        android:id="@+id/app_bar_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
+        android:fitsSystemWindows="true">
+        <com.google.android.material.appbar.CollapsingToolbarLayout
+            android:id="@+id/collapsing_toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:contentScrim="?attr/colorPrimary"
+            app:layout_scrollFlags="scroll|exitUntilCollapsed"
+            android:fitsSystemWindows="true"
+            >
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@drawable/background"
+
+                >
+
+
+                <com.example.traininghub.helpers.GrostesqueTextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/quote"
+                    android:text="Learn \n  Something \n    new \n      Today"
+                    android:textColor="@color/white"
+                    android:textStyle="bold"
+                    android:textSize="25sp"
+                    app:layout_constraintTop_toTopOf="parent"
+                    android:padding="5dp"
+                    />
+
+                <androidx.appcompat.widget.SearchView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/searchView"
+                    app:queryHint="search Your Courses"
+                    app:iconifiedByDefault="false"
+                    app:layout_constraintTop_toBottomOf="@+id/quote"
+                    android:layout_marginTop="5dp"
+                    />
+
+
+
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+        </com.google.android.material.appbar.CollapsingToolbarLayout>
+
+    </com.google.android.material.appbar.AppBarLayout>
+
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/courses_recycler"
+        app:layout_constraintTop_toBottomOf="@id/searchView"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior"
+
+        />
+
+
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>
