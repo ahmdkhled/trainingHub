@@ -7,4 +7,5 @@
     <string name="account">Account</string>
     <string name="instructors">instructors</string>
     <string name="dummy_instructor_name">Ahmed Khaled</string>
+    <string name="dummy_course_duration">70h</string>
 </resources>
