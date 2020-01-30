@@ -5,4 +5,6 @@
     <string name="home">home</string>
     <string name="my_courses">my courses</string>
     <string name="account">Account</string>
+    <string name="instructors">instructors</string>
+    <string name="dummy_instructor_name">Ahmed Khaled</string>
 </resources>

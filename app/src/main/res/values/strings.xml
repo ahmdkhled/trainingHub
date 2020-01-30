@@ -4,8 +4,11 @@
     <string name="for_you">For you</string>
     <string name="RecentlyAdded">Recently Added</string>
     <string name="dummy_course_name">The Complete Web Developer Course 2.0</string>
-    <string name="dummy_price" >550 EG</string>
+    <string name="dummy_course_desc">The Complete Web Developer Course is great course where you will learn a lot of web techologies like Html ,Css ,javascript ,Jquery ,Angular and Saas also backEnd Technology like php laravel </string>
+    <string name="dummy_price">550 EG</string>
     <string name="home">home</string>
     <string name="my_courses">my courses</string>
     <string name="account">Account</string>
+    <string name="instructors">instructors</string>
+    <string name="dummy_instructor_name">Ahmed Khaled</string>
 </resources>
