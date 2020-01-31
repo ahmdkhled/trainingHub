@@ -15,6 +15,8 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.traininghub.R;
 import com.example.traininghub.adapters.CoursesAdapter;
 
+import java.util.ArrayList;
+
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
@@ -31,7 +33,7 @@ public class MyCoursesFragment extends Fragment {
 
         courses_recycler.setLayoutManager(new GridLayoutManager(
                 getContext(), 2));
-        CoursesAdapter coursesAdapter=new CoursesAdapter(getContext());
+        CoursesAdapter coursesAdapter=new CoursesAdapter(getContext(),null);
         courses_recycler.setAdapter(coursesAdapter);
 
         return v;

@@ -1,4 +1,22 @@
 package com.example.traininghub.network;
 
+import com.example.traininghub.models.Course;
+import com.example.traininghub.models.CoursesResponse;
+import com.example.traininghub.models.Instructor;
+
+import java.util.ArrayList;
+
+import io.reactivex.Single;
+import retrofit2.Call;
+import retrofit2.Response;
+import retrofit2.http.GET;
+import retrofit2.http.Query;
+
 public interface Api {
+
+    @GET("/api/instructors")
+    Call<ArrayList<Instructor>> getInstructors(@Query("limit")String limit);
+
+    @GET("/api/courses")
+    Single<Response<CoursesResponse>> getCourses(@Query("limit")String limit);
 }
