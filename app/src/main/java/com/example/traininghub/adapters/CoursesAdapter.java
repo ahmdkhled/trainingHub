@@ -1,6 +1,7 @@
 package com.example.traininghub.adapters;
 
 import android.content.Context;
+import android.content.Intent;
 import android.media.Image;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -13,6 +14,7 @@ import androidx.appcompat.widget.AppCompatRatingBar;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
+import com.example.traininghub.DetailActivity;
 import com.example.traininghub.R;
 import com.example.traininghub.models.Course;
 
@@ -66,7 +68,14 @@ public class CoursesAdapter extends RecyclerView.Adapter<CoursesAdapter.CourseHo
         public CourseHolder(@NonNull View itemView) {
             super(itemView);
             ButterKnife.bind(this,itemView);
+            itemView.setOnClickListener(view -> {
+                Intent intent=new Intent(context, DetailActivity.class);
+                intent.putExtra(DetailActivity.EXTRA_COURSE,courses.get(getAdapterPosition()));
+                context.startActivity(intent);
+            });
 
         }
+
+
     }
 }

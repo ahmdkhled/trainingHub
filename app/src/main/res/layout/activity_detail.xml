@@ -5,6 +5,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:fillViewport="true"
     tools:context=".DetailActivity"
     >
 
@@ -45,7 +46,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="180dp"
                 android:id="@+id/course_media"
-                tools:background="@drawable/bg"
+                android:background="@drawable/bg"
 
                 app:layout_constraintTop_toTopOf="parent"
                 android:layout_marginTop="20dp"
@@ -57,7 +58,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:id="@+id/course_name"
-                tools:text="@string/dummy_course_name"
+                android:text="@string/dummy_course_name"
                 android:textSize="18sp"
                 android:textStyle="bold"
                 app:layout_constraintTop_toBottomOf="@id/course_media"
@@ -81,7 +82,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:id="@+id/course_duration"
-                tools:text="@string/dummy_course_duration"
+                android:text="@string/dummy_course_duration"
                 app:layout_constraintTop_toBottomOf="@id/course_name"
                 app:layout_constraintStart_toEndOf="@+id/course_rating"
                 app:layout_constraintBottom_toBottomOf="parent"
