@@ -62,7 +62,7 @@ public class MainFragment extends Fragment {
                 .observe(this, new Observer<CoursesResponse>() {
                     @Override
                     public void onChanged(CoursesResponse coursesResponse) {
-                        Log.d("COURSES", "onChanged: size "+coursesResponse.getCourses().size());
+                        Log.d("COURSES", "onChanged: size "+coursesResponse.getCourses().get(1).getInstructors().get(0).getImage());
                         CoursesAdapter coursesAdapter=new CoursesAdapter(getContext(),coursesResponse.getCourses());
                         coursesForYouRecycler.setAdapter(coursesAdapter);
                         coursesForYouRecycler.setLayoutManager(new LinearLayoutManager(getContext(),RecyclerView.HORIZONTAL,false));

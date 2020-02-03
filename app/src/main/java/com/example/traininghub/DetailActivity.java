@@ -1,12 +1,15 @@
 package com.example.traininghub;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.widget.RatingBar;
 import android.widget.TextView;
 
+import com.example.traininghub.adapters.InstructorsAdapter;
 import com.example.traininghub.models.Course;
 
 import butterknife.BindView;
@@ -23,6 +26,8 @@ public class DetailActivity extends AppCompatActivity {
     TextView course_desc;
     @BindView(R.id.course_duration)
     TextView course_duration;
+    @BindView(R.id.instructors_recycler)
+    RecyclerView instructors_recycler;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,6 +46,9 @@ public class DetailActivity extends AppCompatActivity {
         course_name.setText(course.getName());
         course_rating.setRating(course.getRating());
         course_desc.setText(course.getDescription());
-        course_duration.setText(course.getDuration());
+        course_duration.setText(course.getDuration()+" hours");
+        InstructorsAdapter instructorsAdapter=new InstructorsAdapter(this,course.getInstructors());
+        instructors_recycler.setLayoutManager(new LinearLayoutManager(this));
+        instructors_recycler.setAdapter(instructorsAdapter);
     }
 }

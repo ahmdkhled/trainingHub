@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:orientation="vertical"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content">
@@ -8,20 +9,19 @@
     <androidx.cardview.widget.CardView
         android:layout_width="100dp"
         android:layout_height="100dp"
-        app:cardCornerRadius="150dp"
+        app:cardCornerRadius="50dp"
         android:id="@+id/instructor_img_container"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         android:layout_margin="10dp"
-        app:cardElevation="20dp"
+        app:cardElevation="10dp"
         >
 
         <de.hdodenhof.circleimageview.CircleImageView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:id="@+id/instructor_img"
-            android:src="@drawable/bg"
-            android:layout_margin="3dp"
+            tools:src="@drawable/bg"
 
             />
 

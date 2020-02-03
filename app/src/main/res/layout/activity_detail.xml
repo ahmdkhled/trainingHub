@@ -149,6 +149,7 @@
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:minHeight="100dp"
         android:id="@+id/course_Instructor_container"
         app:cardElevation="15dp"
         app:cardCornerRadius="15dp"

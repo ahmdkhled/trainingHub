@@ -47,13 +47,13 @@ public class MainActivity extends AppCompatActivity {
         mainBottomNavigation.setOnNavigationItemSelectedListener(menuItem -> {
             Log.d("FRAGG", "OnNavigationItemSelected: "+menuItem.getItemId());
             if (menuItem.getItemId()==R.id.home){
-                showFragment(mainActivityVM.getMainFragment(),true);
+                showFragment(mainActivityVM.getMainFragment(),false);
                 currentFrag=mainActivityVM.getMainFragment();
             } else if (menuItem.getItemId()==R.id.myCourses){
-                showFragment(mainActivityVM.getMyCoursesFragment(),true);
+                showFragment(mainActivityVM.getMyCoursesFragment(),false);
 
             } else if (menuItem.getItemId()==R.id.account){
-                showFragment(mainActivityVM.getAccountFragment(),true);
+                showFragment(mainActivityVM.getAccountFragment(),false);
             }
             return true;
         });

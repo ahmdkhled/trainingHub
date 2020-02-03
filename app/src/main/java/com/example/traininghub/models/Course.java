@@ -25,6 +25,7 @@ public class Course implements Parcelable {
         description = in.readString();
         content = in.readString();
         rating = in.readFloat();
+        instructors=in.readArrayList(this.getClass().getClassLoader());
     }
 
     public static final Creator<Course> CREATOR = new Creator<Course>() {
@@ -85,5 +86,6 @@ public class Course implements Parcelable {
         parcel.writeString(description);
         parcel.writeString(content);
         parcel.writeFloat(rating);
+        parcel.writeList(instructors);
     }
 }
