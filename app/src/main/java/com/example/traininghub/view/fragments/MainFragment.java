@@ -5,6 +5,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.LayoutAnimationController;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -66,7 +67,7 @@ public class MainFragment extends Fragment {
                         CoursesAdapter coursesAdapter=new CoursesAdapter(getContext(),coursesResponse.getCourses());
                         coursesForYouRecycler.setAdapter(coursesAdapter);
                         coursesForYouRecycler.setLayoutManager(new LinearLayoutManager(getContext(),RecyclerView.HORIZONTAL,false));
-
+                        coursesForYouRecycler.startLayoutAnimation();
 
                         recentlyAdded_recycler.setLayoutManager(new LinearLayoutManager(getContext(),RecyclerView.HORIZONTAL,false));
                         recentlyAdded_recycler.setAdapter(coursesAdapter);

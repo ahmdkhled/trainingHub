@@ -15,6 +15,7 @@ public class Course implements Parcelable {
     private String content;
     private float rating;
     private ArrayList<Instructor> instructors;
+    private Center center;
 
 
     protected Course(Parcel in) {
@@ -25,7 +26,26 @@ public class Course implements Parcelable {
         description = in.readString();
         content = in.readString();
         rating = in.readFloat();
-        instructors=in.readArrayList(this.getClass().getClassLoader());
+        instructors = in.createTypedArrayList(Instructor.CREATOR);
+        center = in.readParcelable(Center.class.getClassLoader());
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeInt(id);
+        dest.writeString(name);
+        dest.writeString(duration);
+        dest.writeString(price);
+        dest.writeString(description);
+        dest.writeString(content);
+        dest.writeFloat(rating);
+        dest.writeTypedList(instructors);
+        dest.writeParcelable(center, flags);
+    }
+
+    @Override
+    public int describeContents() {
+        return 0;
     }
 
     public static final Creator<Course> CREATOR = new Creator<Course>() {
@@ -72,20 +92,7 @@ public class Course implements Parcelable {
         return instructors;
     }
 
-    @Override
-    public int describeContents() {
-        return 0;
-    }
-
-    @Override
-    public void writeToParcel(Parcel parcel, int i) {
-        parcel.writeInt(id);
-        parcel.writeString(name);
-        parcel.writeString(duration);
-        parcel.writeString(price);
-        parcel.writeString(description);
-        parcel.writeString(content);
-        parcel.writeFloat(rating);
-        parcel.writeList(instructors);
+    public Center getCenter() {
+        return center;
     }
 }

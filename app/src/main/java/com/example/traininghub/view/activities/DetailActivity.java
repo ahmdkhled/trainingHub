@@ -1,4 +1,4 @@
-package com.example.traininghub;
+package com.example.traininghub.view.activities;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -9,11 +9,14 @@ import android.os.Bundle;
 import android.widget.RatingBar;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
+import com.example.traininghub.R;
 import com.example.traininghub.adapters.InstructorsAdapter;
 import com.example.traininghub.models.Course;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import de.hdodenhof.circleimageview.CircleImageView;
 
 public class DetailActivity extends AppCompatActivity {
 
@@ -28,6 +31,14 @@ public class DetailActivity extends AppCompatActivity {
     TextView course_duration;
     @BindView(R.id.instructors_recycler)
     RecyclerView instructors_recycler;
+    @BindView(R.id.center_name)
+    TextView center_name;
+    @BindView(R.id.center_bio)
+    TextView center_bio;
+    @BindView(R.id.center_logo)
+    CircleImageView center_logo;
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,9 +57,16 @@ public class DetailActivity extends AppCompatActivity {
         course_name.setText(course.getName());
         course_rating.setRating(course.getRating());
         course_desc.setText(course.getDescription());
-        course_duration.setText(course.getDuration()+" hours");
+        course_duration.setText(String.format(getString(R.string.course_hours),course.getDuration()));
         InstructorsAdapter instructorsAdapter=new InstructorsAdapter(this,course.getInstructors());
         instructors_recycler.setLayoutManager(new LinearLayoutManager(this));
         instructors_recycler.setAdapter(instructorsAdapter);
+
+        center_name.setText(course.getCenter().getName());
+        if (course.getCenter().getBio()!=null)
+            center_bio.setText(course.getCenter().getBio());
+        Glide.with(this)
+                .load(course.getCenter().getLogo())
+                .into(center_logo);
     }
 }

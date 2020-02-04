@@ -2,7 +2,6 @@ package com.example.traininghub.adapters;
 
 import android.content.Context;
 import android.content.Intent;
-import android.media.Image;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,8 +12,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.widget.AppCompatRatingBar;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.bumptech.glide.Glide;
-import com.example.traininghub.DetailActivity;
+import com.example.traininghub.view.activities.DetailActivity;
 import com.example.traininghub.R;
 import com.example.traininghub.models.Course;
 
