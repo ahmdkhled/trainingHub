@@ -16,6 +16,8 @@ import com.example.traininghub.R;
 import com.example.traininghub.adapters.CourseMediaAdapter;
 import com.example.traininghub.adapters.InstructorsAdapter;
 import com.example.traininghub.models.Course;
+import com.rd.PageIndicatorView;
+import com.rd.animation.type.AnimationType;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -42,6 +44,8 @@ public class DetailActivity extends AppCompatActivity {
     TextView center_bio;
     @BindView(R.id.center_logo)
     CircleImageView center_logo;
+    @BindView(R.id.course_media_indicator)
+    PageIndicatorView pageIndicatorView;
 
 
 
@@ -77,5 +81,26 @@ public class DetailActivity extends AppCompatActivity {
 
         CourseMediaAdapter courseMediaAdapter=new CourseMediaAdapter(course.getMedia());
         course_media.setAdapter(courseMediaAdapter);
+        pageIndicatorView.setCount(course.getMedia().size());
+        pageIndicatorView.setAnimationType(AnimationType.DROP);
+        pageIndicatorView.setAnimationDuration(1500);
+
+        course_media.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+            @Override
+            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+
+            }
+
+            @Override
+            public void onPageSelected(int position) {
+                pageIndicatorView.setSelection(position);
+            }
+
+            @Override
+            public void onPageScrollStateChanged(int state) {
+
+            }
+        });
+
     }
 }

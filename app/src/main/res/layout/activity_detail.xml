@@ -53,6 +53,16 @@
                 android:layout_marginEnd="10dp"
                 />
 
+            <com.rd.PageIndicatorView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/course_media_indicator"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintBottom_toBottomOf="@id/course_media"
+                />
+
+
             <com.example.traininghub.helpers.GrostesqueTextView
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
