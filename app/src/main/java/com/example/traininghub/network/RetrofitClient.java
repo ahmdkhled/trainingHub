@@ -1,5 +1,7 @@
 package com.example.traininghub.network;
 
+import okhttp3.OkHttpClient;
+import okhttp3.logging.HttpLoggingInterceptor;
 import retrofit2.Retrofit;
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
 import retrofit2.converter.gson.GsonConverterFactory;
@@ -14,10 +16,18 @@ public class RetrofitClient {
         return retrofitClient == null ? retrofitClient=new RetrofitClient() : retrofitClient;
     }
 
+    private static OkHttpClient buildClient() {
+        return new OkHttpClient
+                .Builder()
+                .addInterceptor(new HttpLoggingInterceptor().setLevel(HttpLoggingInterceptor.Level.BODY))
+                .build();
+    }
+
     private Retrofit getRetrofit()
     {
         return retrofit==null?new Retrofit.Builder()
-                .baseUrl("http://traininghub.tk")
+                .baseUrl("http://traininghub.tk/")
+                .client(buildClient())
                 .addConverterFactory(GsonConverterFactory.create())
                 .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
                 .build():retrofit;
