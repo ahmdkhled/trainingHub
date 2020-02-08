@@ -16,6 +16,7 @@ public class Course implements Parcelable {
     private float rating;
     private ArrayList<Instructor> instructors;
     private Center center;
+    private ArrayList<Media> media;
 
 
     protected Course(Parcel in) {
@@ -28,6 +29,7 @@ public class Course implements Parcelable {
         rating = in.readFloat();
         instructors = in.createTypedArrayList(Instructor.CREATOR);
         center = in.readParcelable(Center.class.getClassLoader());
+        media = in.createTypedArrayList(Media.CREATOR);
     }
 
     @Override
@@ -41,6 +43,7 @@ public class Course implements Parcelable {
         dest.writeFloat(rating);
         dest.writeTypedList(instructors);
         dest.writeParcelable(center, flags);
+        dest.writeTypedList(media);
     }
 
     @Override
@@ -94,5 +97,9 @@ public class Course implements Parcelable {
 
     public Center getCenter() {
         return center;
+    }
+
+    public ArrayList<Media> getMedia() {
+        return media;
     }
 }
