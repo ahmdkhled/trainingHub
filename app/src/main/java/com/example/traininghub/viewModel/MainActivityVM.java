@@ -62,6 +62,7 @@ public class MainActivityVM extends ViewModel {
                     public void onError(Throwable e) {
                         isCoursesLoading.setValue(false);
                         coursesLoadingError.setValue("Error Loading Courses");
+                        Log.d("COURSESS", "onError: "+e.getMessage());
                     }
                 });
         return courses;

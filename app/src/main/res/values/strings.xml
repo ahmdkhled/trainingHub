@@ -17,4 +17,5 @@
     <string name="dummy_center_name">ITC</string>
     <string name="description">description</string>
     <string name="course_hours">%1$s hours</string>
+    <string name="course_duration">%s h</string>
 </resources>

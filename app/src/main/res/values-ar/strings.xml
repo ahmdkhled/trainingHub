@@ -12,4 +12,5 @@
     <string name="dummy_center_bio">itc is a traiing center established in 1990 , itc offers training courses in all fields with well trained instructors</string>
     <string name="dummy_center_name">ITC</string>
     <string name="description">description</string>
+    <string name="course_duration">%s h</string>
 </resources>

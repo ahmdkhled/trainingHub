@@ -1,5 +1,6 @@
 package com.example.traininghub.network;
 
+
 import okhttp3.OkHttpClient;
 import okhttp3.logging.HttpLoggingInterceptor;
 import retrofit2.Retrofit;
@@ -16,12 +17,13 @@ public class RetrofitClient {
         return retrofitClient == null ? retrofitClient=new RetrofitClient() : retrofitClient;
     }
 
-    private static OkHttpClient buildClient() {
+    private OkHttpClient buildClient() {
         return new OkHttpClient
                 .Builder()
                 .addInterceptor(new HttpLoggingInterceptor().setLevel(HttpLoggingInterceptor.Level.BODY))
                 .build();
     }
+
 
     private Retrofit getRetrofit()
     {
