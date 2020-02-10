@@ -18,4 +18,5 @@
     <string name="description">description</string>
     <string name="course_hours">%1$s hours</string>
     <string name="course_duration">%s h</string>
+    <string name="take_this_course">take this course</string>
 </resources>
