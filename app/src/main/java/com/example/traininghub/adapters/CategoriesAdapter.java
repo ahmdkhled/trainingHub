@@ -11,6 +11,9 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.example.traininghub.R;
+import com.example.traininghub.models.Category;
+
+import java.util.ArrayList;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -18,9 +21,15 @@ import butterknife.ButterKnife;
 public class CategoriesAdapter extends RecyclerView.Adapter<CategoriesAdapter.CategoriesViewHolder> {
 
     private Context context;
+    ArrayList<Category> categories;
 
     public CategoriesAdapter(Context context) {
         this.context = context;
+    }
+
+    public CategoriesAdapter(Context context, ArrayList<Category> categories) {
+        this.context = context;
+        this.categories = categories;
     }
 
     @NonNull
@@ -34,14 +43,14 @@ public class CategoriesAdapter extends RecyclerView.Adapter<CategoriesAdapter.Ca
     public void onBindViewHolder(@NonNull CategoriesViewHolder holder, int position) {
         Glide
                 .with(context)
-                .load("https://picsum.photos/200/300")
+                .load(categories.get(position).getImage())
                 .into(holder.category_image);
 
     }
 
     @Override
     public int getItemCount() {
-        return 10;
+        return categories==null?0:categories.size();
     }
 
     class CategoriesViewHolder extends RecyclerView.ViewHolder{

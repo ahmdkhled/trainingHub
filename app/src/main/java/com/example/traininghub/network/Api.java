@@ -1,5 +1,7 @@
 package com.example.traininghub.network;
 
+import com.example.traininghub.models.CategoriesResponse;
+import com.example.traininghub.models.Category;
 import com.example.traininghub.models.Course;
 import com.example.traininghub.models.CoursesResponse;
 import com.example.traininghub.models.Instructor;
@@ -19,4 +21,9 @@ public interface Api {
 
     @GET("/api/courses")
     Single<Response<CoursesResponse>> getCourses(@Query("limit")String limit);
+
+    @GET("/api/categories")
+    Single<Response<CategoriesResponse>> getCategories(@Query("courses")String courses, @Query("limit")String limit);
+
+
 }

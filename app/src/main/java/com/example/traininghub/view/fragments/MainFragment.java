@@ -19,6 +19,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.traininghub.adapters.CategoriesAdapter;
 import com.example.traininghub.adapters.CoursesAdapter;
 import com.example.traininghub.R;
+import com.example.traininghub.models.CategoriesResponse;
 import com.example.traininghub.models.Course;
 import com.example.traininghub.models.CoursesResponse;
 import com.example.traininghub.view.activities.MainActivity;
@@ -50,11 +51,10 @@ public class MainFragment extends Fragment {
 
 
         getCourses();
+        getCategories();
 
 
-        categories_recycler.setLayoutManager(new LinearLayoutManager(getContext(),RecyclerView.HORIZONTAL,false));
-        CategoriesAdapter categoriesAdapter=new CategoriesAdapter(getContext());
-        categories_recycler.setAdapter(categoriesAdapter);
+
         return v;
     }
 
@@ -81,6 +81,17 @@ public class MainFragment extends Fragment {
                     public void onChanged(String s) {
                         Toast.makeText(getContext(), s, Toast.LENGTH_SHORT).show();
                     }
+                });
+    }
+
+    private void getCategories(){
+        mainActivityVM
+                .getCategories(null,null)
+                .observe(this, categoriesResponse -> {
+                    Log.d("CATEGORRIIS", "onChanged: "+categoriesResponse.getCurrent_page());
+                    categories_recycler.setLayoutManager(new LinearLayoutManager(getContext(),RecyclerView.HORIZONTAL,false));
+                    CategoriesAdapter categoriesAdapter=new CategoriesAdapter(getContext(),categoriesResponse.getCategories());
+                    categories_recycler.setAdapter(categoriesAdapter);
                 });
     }
 }
