@@ -37,6 +37,7 @@
                 android:layout_height="wrap_content"
                 android:id="@+id/course_name"
                 tools:text="@string/dummy_course_name"
+                android:textColor="@color/white"
                 android:text="@{course.name}"
                 app:layout_constraintStart_toStartOf="@+id/course_thumbnail"
                 app:layout_constraintEnd_toEndOf="@+id/course_thumbnail"
@@ -75,7 +76,7 @@
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                android:background="#08202020" />
+                android:background="#16202020" />
 
 
         </androidx.constraintlayout.widget.ConstraintLayout>

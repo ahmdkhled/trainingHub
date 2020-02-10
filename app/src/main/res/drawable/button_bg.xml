@@ -8,7 +8,10 @@
         <shape>
             <gradient android:startColor="@color/mainColor"
                 android:endColor="@color/pink"/>
+
+            <corners android:radius="10dp"/>
         </shape>
+
 
     </item>
 </selector>
