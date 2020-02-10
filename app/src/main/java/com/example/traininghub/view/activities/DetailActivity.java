@@ -91,6 +91,7 @@ public class DetailActivity extends AppCompatActivity {
     public static void bindImage(ImageView imageView,String url){
         Glide.with(imageView.getContext())
                 .load(url)
+                .placeholder(R.drawable.bg)
                 .into(imageView);
     }
 }

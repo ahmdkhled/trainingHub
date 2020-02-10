@@ -10,8 +10,13 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.widget.AppCompatRatingBar;
+import androidx.databinding.BindingAdapter;
+import androidx.databinding.DataBindingUtil;
+import androidx.databinding.ViewDataBinding;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
+import com.example.traininghub.databinding.LayoutCourseBinding;
 import com.example.traininghub.view.activities.DetailActivity;
 import com.example.traininghub.R;
 import com.example.traininghub.models.Course;
@@ -34,17 +39,15 @@ public class CoursesAdapter extends RecyclerView.Adapter<CoursesAdapter.CourseHo
     @NonNull
     @Override
     public CourseHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view=LayoutInflater.from(context).inflate(R.layout.layout_course,parent,false);
-        return new CourseHolder(view);
+        LayoutCourseBinding binding= DataBindingUtil.inflate(LayoutInflater.from(context),R.layout.layout_course,parent,false);
+        return new CourseHolder(binding);
     }
+
 
     @Override
     public void onBindViewHolder(@NonNull CourseHolder holder, int position) {
         Course course=courses.get(position);
-        holder.name.setText(course.getName());
-        holder.price.setText(course.getPrice());
-        holder.ratingBar.setRating(course.getRating());
-
+        holder.binding.setCourse(course);
 
     }
 
@@ -53,19 +56,19 @@ public class CoursesAdapter extends RecyclerView.Adapter<CoursesAdapter.CourseHo
         return courses==null?0:courses.size();
     }
 
-    class CourseHolder extends RecyclerView.ViewHolder{
+    @BindingAdapter("android:src")
+    public static void showImage(ImageView imageView,String url){
+        Glide
+             .with(imageView.getContext())
+             .load(url)
+             .into(imageView);
+    }
 
-        @BindView(R.id.course_name)
-        TextView name;
-        @BindView(R.id.course_price)
-        TextView price;
-        @BindView(R.id.course_thumbnail)
-        ImageView thumbnail;
-        @BindView(R.id.course_rating)
-        AppCompatRatingBar ratingBar;
-        public CourseHolder(@NonNull View itemView) {
-            super(itemView);
-            ButterKnife.bind(this,itemView);
+    class CourseHolder extends RecyclerView.ViewHolder{
+        LayoutCourseBinding binding;
+        CourseHolder(LayoutCourseBinding binding) {
+            super(binding.getRoot());
+            this.binding=binding;
             itemView.setOnClickListener(view -> {
                 Intent intent=new Intent(context, DetailActivity.class);
                 intent.putExtra(DetailActivity.EXTRA_COURSE,courses.get(getAdapterPosition()));
