@@ -5,6 +5,7 @@ import com.example.traininghub.models.Category;
 import com.example.traininghub.models.Course;
 import com.example.traininghub.models.CoursesResponse;
 import com.example.traininghub.models.Instructor;
+import com.example.traininghub.models.ReviewsResponse;
 
 import java.util.ArrayList;
 
@@ -25,5 +26,7 @@ public interface Api {
     @GET("/api/categories")
     Single<Response<CategoriesResponse>> getCategories(@Query("courses")String courses, @Query("limit")String limit);
 
+    @GET("/api/reviews")
+    Single<Response<ReviewsResponse>> getReviews (@Query("page")String page,@Query("limit")String limit);
 
 }
