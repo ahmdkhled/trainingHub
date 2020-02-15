@@ -34,5 +34,15 @@
             android:textSize="20sp"
             android:textStyle="bold" />
 
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/action"
+            android:text="@string/back_to_course"
+            android:background="#302F2F"
+            android:textColor="#fff"
+            app:layout_constraintTop_toBottomOf="@id/message"
+            />
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

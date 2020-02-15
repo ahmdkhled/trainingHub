@@ -20,4 +20,6 @@
     <string name="no_reviews">There is no Reviews for this course</string>
     <string name="reviews">reviews</string>
     <string name="see_course_reviews">See Course Reviews</string>
+    <string name="back_to_course">Back to Course</string>
+    <string name="retry" />
 </resources>

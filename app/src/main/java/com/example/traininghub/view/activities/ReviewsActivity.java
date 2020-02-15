@@ -10,6 +10,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.Toast;
 
 import com.example.traininghub.R;
 import com.example.traininghub.adapters.ReviewsAdapter;
@@ -25,6 +26,7 @@ public class ReviewsActivity extends AppCompatActivity {
     ReviewsVM reviewsVM;
     ReviewsAdapter reviewsAdapter;
     ActivityReviewsBinding binding;
+    Course course;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -39,7 +41,7 @@ public class ReviewsActivity extends AppCompatActivity {
         binding.reviewsRecycler.setLayoutManager(layoutManager);
         binding.reviewsRecycler.addItemDecoration(new DividerItemDecoration(this,DividerItemDecoration.VERTICAL));
 
-        Course course=getIntent().getParcelableExtra(DetailActivity.EXTRA_COURSE);
+        course=getIntent().getParcelableExtra(DetailActivity.EXTRA_COURSE);
 
         observeReviews(String.valueOf(course.getId()),"1",null);
 
@@ -52,6 +54,9 @@ public class ReviewsActivity extends AppCompatActivity {
                 .observe(this, reviews -> {
                     if (reviews.isEmpty()){
                         binding.emptyView.setVisibility(View.VISIBLE);
+                        binding.emptyLayout.action.setOnClickListener(view -> {
+                            finish();
+                        });
                         return;
                     }
                     binding.emptyView.setVisibility(View.GONE);
@@ -59,7 +64,7 @@ public class ReviewsActivity extends AppCompatActivity {
                     reviewsAdapter.addReviews(reviews);
                 });
         observeReviewsLoading(page);
-        observeError();
+        observeError(page);
     }
     private void observeReviewsLoading(String page){
         reviewsVM.getIsReviewsLoading()
@@ -82,7 +87,7 @@ public class ReviewsActivity extends AppCompatActivity {
                 });
     }
 
-    private void observeError(){
+    private void observeError(String page){
         reviewsVM
                 .getReviewsLoadingError()
                 .observe(this, new Observer<String>() {
@@ -90,6 +95,13 @@ public class ReviewsActivity extends AppCompatActivity {
                     public void onChanged(String s) {
                         binding.emptyView.setVisibility(View.VISIBLE);
                         binding.emptyLayout.message.setText(s);
+                        binding.emptyLayout.action.setText(R.string.retry);
+                        Toast.makeText(ReviewsActivity.this, "error", Toast.LENGTH_SHORT).show();
+
+                        binding.emptyLayout.message
+                                .setOnClickListener(view->{
+                                    if (page.equals("1"))observeReviews(String.valueOf(course.getId()),"1",null);
+                                });
                         //todo handle retry button
 
                     }
