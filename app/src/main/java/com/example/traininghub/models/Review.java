@@ -8,6 +8,7 @@ public class Review {
     private int course_id;
     private String created_at;
     private String updated_at;
+    private Student student;
 
 
 
@@ -33,5 +34,9 @@ public class Review {
 
     public String getUpdated_at() {
         return updated_at;
+    }
+
+    public Student getStudent() {
+        return student;
     }
 }

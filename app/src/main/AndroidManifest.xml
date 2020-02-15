@@ -10,6 +10,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity android:name=".view.activities.ReviewsActivity"
+            android:theme="@style/ReviewsActivityTheme"
             android:exported="true"/>
         <activity android:name=".view.activities.DetailActivity" />
         <activity android:name=".view.activities.MainActivity" />

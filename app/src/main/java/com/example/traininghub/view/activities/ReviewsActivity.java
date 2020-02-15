@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.DataBindingUtil;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
+import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
 import android.os.Bundle;
@@ -32,6 +33,7 @@ public class ReviewsActivity extends AppCompatActivity {
         LinearLayoutManager layoutManager=new LinearLayoutManager(this);
         binding.reviewsRecycler.setAdapter(reviewsAdapter);
         binding.reviewsRecycler.setLayoutManager(layoutManager);
+        binding.reviewsRecycler.addItemDecoration(new DividerItemDecoration(this,DividerItemDecoration.VERTICAL));
 
         observeReviews("1",null);
 

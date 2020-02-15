@@ -11,13 +11,15 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:layout_margin="5dp">
 
         <de.hdodenhof.circleimageview.CircleImageView
             android:layout_width="50dp"
             android:layout_height="50dp"
             android:id="@+id/image"
             tools:src="@color/mainColor"
+            android:src="@{review.student.image}"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             />
@@ -29,7 +31,8 @@
             app:layout_constraintTop_toTopOf="@id/image"
             app:layout_constraintStart_toEndOf="@+id/image"
             app:layout_constraintEnd_toEndOf="parent"
-            android:text="@string/dummy_name"
+            tools:text="@string/dummy_name"
+            android:text="@{review.student.nameEn}"
             android:layout_marginStart="5dp"
             android:layout_marginLeft="5dp" />
 
@@ -38,7 +41,8 @@
             android:layout_height="wrap_content"
             android:id="@+id/rating"
             style="@style/customRatingBar"
-            android:rating="3"
+            tools:rating="3"
+            android:rating="@{review.rating}"
             app:layout_constraintTop_toBottomOf="@id/reviewer"
             app:layout_constraintStart_toStartOf="@id/reviewer"
 
@@ -51,7 +55,8 @@
             app:layout_constraintTop_toBottomOf="@id/rating"
             app:layout_constraintStart_toStartOf="@id/rating"
             app:layout_constraintEnd_toEndOf="parent"
-            android:text="@string/Lorem_Ipsum"
+            tools:text="@string/Lorem_Ipsum"
+            android:text="@{review.review_body}"
             app:trimMode="trimModeLine"
             app:trimLines="4"
             />

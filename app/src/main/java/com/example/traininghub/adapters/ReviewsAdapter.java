@@ -4,11 +4,14 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 
 import androidx.annotation.NonNull;
+import androidx.databinding.BindingAdapter;
 import androidx.databinding.DataBindingUtil;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
 import com.example.traininghub.R;
 import com.example.traininghub.databinding.LayoutReviewBinding;
 import com.example.traininghub.models.Review;
@@ -50,6 +53,14 @@ public class ReviewsAdapter extends RecyclerView.Adapter<ReviewsAdapter.ReviewHo
 
         this.reviews.addAll(reviews);
         notifyDataSetChanged();
+    }
+
+    @BindingAdapter("android:src")
+    public static void bindImage(ImageView imageView,String url){
+        Glide
+                .with(imageView.getContext())
+                .load(url)
+                .into(imageView);
     }
 
     class ReviewHolder extends RecyclerView.ViewHolder {
