@@ -14,6 +14,7 @@ import android.view.View;
 import com.example.traininghub.R;
 import com.example.traininghub.adapters.ReviewsAdapter;
 import com.example.traininghub.databinding.ActivityReviewsBinding;
+import com.example.traininghub.models.Course;
 import com.example.traininghub.models.Review;
 import com.example.traininghub.viewModel.ReviewsVM;
 
@@ -38,7 +39,9 @@ public class ReviewsActivity extends AppCompatActivity {
         binding.reviewsRecycler.setLayoutManager(layoutManager);
         binding.reviewsRecycler.addItemDecoration(new DividerItemDecoration(this,DividerItemDecoration.VERTICAL));
 
-        observeReviews("13","1",null);
+        Course course=getIntent().getParcelableExtra(DetailActivity.EXTRA_COURSE);
+
+        observeReviews(String.valueOf(course.getId()),"1",null);
 
 
     }
