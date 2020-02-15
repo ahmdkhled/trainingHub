@@ -15,11 +15,11 @@ public class ReviewsRepo {
     }
 
 
-    public Single<Response<ReviewsResponse>> getReviews (String page, String limit){
+    public Single<Response<ReviewsResponse>> getReviews (String course,String page, String limit){
         return RetrofitClient
                 .getInstance()
                 .getApi()
-                .getReviews(page,limit);
+                .getReviews(course,page,limit);
     }
 
 

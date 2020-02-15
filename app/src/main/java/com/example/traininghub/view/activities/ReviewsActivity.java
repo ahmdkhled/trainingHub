@@ -8,6 +8,7 @@ import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
 import android.os.Bundle;
+import android.view.View;
 
 import com.example.traininghub.R;
 import com.example.traininghub.adapters.ReviewsAdapter;
@@ -21,12 +22,13 @@ public class ReviewsActivity extends AppCompatActivity {
 
     ReviewsVM reviewsVM;
     ReviewsAdapter reviewsAdapter;
+    ActivityReviewsBinding binding;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_reviews);
 
-        ActivityReviewsBinding binding= DataBindingUtil.setContentView(this,R.layout.activity_reviews);
+        binding= DataBindingUtil.setContentView(this,R.layout.activity_reviews);
 
         reviewsVM= ViewModelProviders.of(this).get(ReviewsVM.class);
         reviewsAdapter=new ReviewsAdapter(this,null);
@@ -35,15 +37,21 @@ public class ReviewsActivity extends AppCompatActivity {
         binding.reviewsRecycler.setLayoutManager(layoutManager);
         binding.reviewsRecycler.addItemDecoration(new DividerItemDecoration(this,DividerItemDecoration.VERTICAL));
 
-        observeReviews("1",null);
+        observeReviews("13","1",null);
 
 
     }
 
-    private void observeReviews(String page,String limit){
+    private void observeReviews(String course,String page,String limit){
         reviewsVM
-                .getReviews(page,limit)
+                .getReviews(course,page,limit)
                 .observe(this, reviews -> {
+                    if (reviews.isEmpty()){
+                        binding.emptyView.setVisibility(View.VISIBLE);
+                        return;
+                    }
+                    binding.emptyView.setVisibility(View.GONE);
+
                     reviewsAdapter.addReviews(reviews);
                 });
     }

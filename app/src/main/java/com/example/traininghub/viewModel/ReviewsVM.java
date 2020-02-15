@@ -31,11 +31,11 @@ public class ReviewsVM extends AndroidViewModel {
         super(application);
     }
 
-    public MutableLiveData<ArrayList<Review>> getReviews(String page,String limit){
+    public MutableLiveData<ArrayList<Review>> getReviews(String course,String page,String limit){
         reviews=new MutableLiveData<>();
         ReviewsRepo
                 .getInstance()
-                .getReviews(page,limit)
+                .getReviews(course,page,limit)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new SingleObserver<Response<ReviewsResponse>>() {

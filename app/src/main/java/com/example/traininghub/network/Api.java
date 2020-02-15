@@ -27,6 +27,6 @@ public interface Api {
     Single<Response<CategoriesResponse>> getCategories(@Query("courses")String courses, @Query("limit")String limit);
 
     @GET("/api/reviews")
-    Single<Response<ReviewsResponse>> getReviews (@Query("page")String page,@Query("limit")String limit);
+    Single<Response<ReviewsResponse>> getReviews (@Query("course")String course,@Query("page")String page,@Query("limit")String limit);
 
 }
