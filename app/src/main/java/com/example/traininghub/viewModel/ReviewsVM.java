@@ -33,6 +33,7 @@ public class ReviewsVM extends AndroidViewModel {
 
     public MutableLiveData<ArrayList<Review>> getReviews(String course,String page,String limit){
         reviews=new MutableLiveData<>();
+        isReviewsLoading.setValue(true);
         ReviewsRepo
                 .getInstance()
                 .getReviews(course,page,limit)
@@ -57,6 +58,7 @@ public class ReviewsVM extends AndroidViewModel {
                                     .getString(R.string.server_error)
                             );
                         }
+                        isReviewsLoading.setValue(false);
                     }
 
                     @Override
@@ -66,6 +68,7 @@ public class ReviewsVM extends AndroidViewModel {
                                 getApplication().getApplicationContext()
                                         .getString(R.string.server_error)
                         );
+                        isReviewsLoading.setValue(false);
                     }
                 });
         return reviews;

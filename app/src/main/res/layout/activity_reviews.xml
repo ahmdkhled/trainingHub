@@ -26,10 +26,36 @@
                 />
         </androidx.constraintlayout.widget.ConstraintLayout>
 
+        <com.facebook.shimmer.ShimmerFrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:id="@+id/shimmer"
+            android:orientation="vertical">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                >
+
+            <include
+                layout="@layout/shimmer_reviews_layout"
+                />
+            <include layout="@layout/shimmer_reviews_layout"
+
+                />
+            <include layout="@layout/shimmer_reviews_layout"/>
+            <include layout="@layout/shimmer_reviews_layout" />
+            <include layout="@layout/shimmer_reviews_layout" />
+            <include layout="@layout/shimmer_reviews_layout" />
+            </LinearLayout>
+
+        </com.facebook.shimmer.ShimmerFrameLayout>
+
         <androidx.recyclerview.widget.RecyclerView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:id="@+id/reviews_recycler"
+            tools:visibility="gone"
             />
 
     </androidx.constraintlayout.widget.ConstraintLayout>

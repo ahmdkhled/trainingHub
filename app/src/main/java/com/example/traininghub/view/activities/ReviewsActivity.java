@@ -8,6 +8,7 @@ import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 
 import com.example.traininghub.R;
@@ -53,6 +54,27 @@ public class ReviewsActivity extends AppCompatActivity {
                     binding.emptyView.setVisibility(View.GONE);
 
                     reviewsAdapter.addReviews(reviews);
+                });
+        observeReviewsLoading(page);
+    }
+    private void observeReviewsLoading(String page){
+        reviewsVM.getIsReviewsLoading()
+                .observe(this, new Observer<Boolean>() {
+                    @Override
+                    public void onChanged(Boolean aBoolean) {
+                        Log.d("REVIEEEEEWW", "onChanged: "+aBoolean);
+                        if (aBoolean!=null&&aBoolean){
+                            if (page.equals("1")){
+                                binding.shimmer.setVisibility(View.VISIBLE);
+                                binding.shimmer.startShimmer();
+
+                            }
+                        }else {
+                            binding.shimmer.setVisibility(View.GONE);
+                            binding.shimmer.stopShimmer();
+                        }
+
+                    }
                 });
     }
 

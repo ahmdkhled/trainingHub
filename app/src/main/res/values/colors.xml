@@ -11,4 +11,5 @@
     <color name="yellow">#F1E840</color>
     <color name="navigation_bg">#F3F2F2</color>
     <color name="duskYellow" >#E6EB50</color>
+    <color name="shimmer" >#dddddd</color>
 </resources>

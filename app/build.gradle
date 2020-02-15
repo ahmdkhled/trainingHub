@@ -73,4 +73,7 @@ dependencies {
 
     //readmore TextView
     implementation 'com.borjabravo:readmoretextview:2.1.0'
+
+    //shimmer
+    implementation 'com.facebook.shimmer:shimmer:0.5.0'
 }
