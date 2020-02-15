@@ -22,6 +22,7 @@
 
             >
             <include
+                android:id="@+id/empty_layout"
                 layout="@layout/layout_empty_reviews"
                 />
         </androidx.constraintlayout.widget.ConstraintLayout>

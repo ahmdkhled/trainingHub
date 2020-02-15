@@ -56,6 +56,7 @@ public class ReviewsActivity extends AppCompatActivity {
                     reviewsAdapter.addReviews(reviews);
                 });
         observeReviewsLoading(page);
+        observeError();
     }
     private void observeReviewsLoading(String page){
         reviewsVM.getIsReviewsLoading()
@@ -73,6 +74,20 @@ public class ReviewsActivity extends AppCompatActivity {
                             binding.shimmer.setVisibility(View.GONE);
                             binding.shimmer.stopShimmer();
                         }
+
+                    }
+                });
+    }
+
+    private void observeError(){
+        reviewsVM
+                .getReviewsLoadingError()
+                .observe(this, new Observer<String>() {
+                    @Override
+                    public void onChanged(String s) {
+                        binding.emptyView.setVisibility(View.VISIBLE);
+                        binding.emptyLayout.message.setText(s);
+                        //todo handle retry button
 
                     }
                 });
