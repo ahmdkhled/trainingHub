@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+        <variable
+            name="content"
+            type="com.example.traininghub.models.Content" />
+    </data>
+
+    <androidx.cardview.widget.CardView
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="5dp"
+        app:cardElevation="3dp"
+        app:cardCornerRadius="3dp"
+        >
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <com.example.traininghub.helpers.GrostesqueTextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/name"
+                tools:text="Design Layouts"
+                android:text="@{content.name}"
+                app:layout_constraintTop_toTopOf="parent"
+                android:padding="10dp"
+                android:drawableEnd="@drawable/ic_expand_more_black_24dp"
+                android:drawableRight="@drawable/ic_expand_more_black_24dp" />
+
+            <com.example.traininghub.helpers.GrostesqueTextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/desc"
+                tools:text="@string/dummy_chapter_desc"
+                android:visibility="gone"
+                tools:visibility="visible"
+                android:text="@{content.description}"
+                app:layout_constraintTop_toBottomOf="@id/name"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                android:padding="10dp" />
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.cardview.widget.CardView>
+</layout>

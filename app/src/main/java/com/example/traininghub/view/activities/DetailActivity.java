@@ -2,6 +2,7 @@ package com.example.traininghub.view.activities;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.ImageView;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -13,12 +14,17 @@ import androidx.viewpager.widget.ViewPager;
 
 import com.bumptech.glide.Glide;
 import com.example.traininghub.R;
+import com.example.traininghub.adapters.ContentAdapter;
 import com.example.traininghub.adapters.CourseMediaAdapter;
 import com.example.traininghub.adapters.InstructorsAdapter;
 import com.example.traininghub.databinding.ActivityDetailBinding;
+import com.example.traininghub.helpers.ContentParser;
+import com.example.traininghub.models.Content;
 import com.example.traininghub.models.Course;
 import com.rd.PageIndicatorView;
 import com.rd.animation.type.AnimationType;
+
+import java.util.ArrayList;
 
 import butterknife.ButterKnife;
 
@@ -44,10 +50,17 @@ public class DetailActivity extends AppCompatActivity {
 
     private void populateUi(Course course){
 
+
         RecyclerView instructors_recycler=binding.instructorsRecycler;
         InstructorsAdapter instructorsAdapter=new InstructorsAdapter(this,course.getInstructors());
         instructors_recycler.setLayoutManager(new LinearLayoutManager(this,RecyclerView.HORIZONTAL,false));
         binding.instructorsRecycler.setAdapter(instructorsAdapter);
+
+
+        ArrayList<Content> content =ContentParser.getCourseContent(course.getContent());
+        ContentAdapter contentAdapter=new ContentAdapter(content);
+        binding.syllabusRecycler.setAdapter(contentAdapter);
+        binding.syllabusRecycler.setLayoutManager(new LinearLayoutManager(this));
 
 
         CourseMediaAdapter courseMediaAdapter=new CourseMediaAdapter(course.getMedia());
@@ -80,6 +93,8 @@ public class DetailActivity extends AppCompatActivity {
             intent.putExtra(EXTRA_COURSE,course);
             startActivity(intent);
         });
+
+
 
     }
 

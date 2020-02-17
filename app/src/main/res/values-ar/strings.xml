@@ -22,4 +22,6 @@
     <string name="see_course_reviews">See Course Reviews</string>
     <string name="back_to_course">Back to Course</string>
     <string name="retry" />
+    <string name="dummy_chapter_desc">in this chapter you will learn to design layouts using xml , we will discuss</string>
+    <string name="syllabus">syllabus</string>
 </resources>
