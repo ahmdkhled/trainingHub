@@ -61,7 +61,7 @@ private MutableLiveData<CategoriesResponse> categories;
                             courses.setValue(coursesResponse);
                         }else
                             coursesLoadingError.setValue("Error Loading Courses");
-                        isCoursesLoading.setValue(true);
+                        isCoursesLoading.setValue(false);
 
                     }
 
