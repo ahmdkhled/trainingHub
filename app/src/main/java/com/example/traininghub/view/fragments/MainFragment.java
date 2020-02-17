@@ -110,6 +110,19 @@ public class MainFragment extends Fragment {
                     CategoriesAdapter categoriesAdapter=new CategoriesAdapter(getContext(),categoriesResponse.getCategories());
                     categories_recycler.setAdapter(categoriesAdapter);
                 });
+
+        mainActivityVM
+                .getIsCategoriesLoading()
+                .observe(this, new Observer<Boolean>() {
+                    @Override
+                    public void onChanged(Boolean aBoolean) {
+                        if (aBoolean!=null&&aBoolean){
+                            binding.categoriesShimmer.setVisibility(View.VISIBLE);
+                        }else {
+                            binding.categoriesShimmer.setVisibility(View.GONE);
+                        }
+                    }
+                });
     }
 
     @Override
