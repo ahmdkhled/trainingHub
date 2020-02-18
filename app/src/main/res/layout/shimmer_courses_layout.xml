@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+
+    <androidx.cardview.widget.CardView
+        android:orientation="vertical"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="5dp"
+        app:cardElevation="5dp"
+        app:cardCornerRadius="10dp">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingBottom="5dp">
+
+            <View
+                android:layout_width="300dp"
+                android:layout_height="120dp"
+                android:id="@+id/course_thumbnail"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                android:background="@color/shimmer"
+
+                android:scaleType="fitXY" />
+
+            <View
+                android:layout_width="200dp"
+                android:layout_height="25dp"
+                android:id="@+id/course_name"
+                android:background="@color/shimmer"
+                app:layout_constraintStart_toStartOf="@+id/course_thumbnail"
+                app:layout_constraintTop_toBottomOf="@id/course_thumbnail"
+
+                android:layout_marginStart="5dp"
+                android:layout_marginEnd="5dp"
+                android:layout_marginTop="5dp"
+
+                />
+
+            <View
+                android:layout_width="80dp"
+                android:layout_height="25dp"
+                android:id="@+id/course_price"
+                tools:text="@string/dummy_price"
+                android:background="@color/shimmer"
+                app:layout_constraintStart_toStartOf="@+id/course_name"
+                app:layout_constraintTop_toBottomOf="@id/course_name"
+                android:layout_marginTop="5dp"
+                />
+
+            <androidx.appcompat.widget.AppCompatRatingBar
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/course_rating"
+                tools:rating="4"
+                android:rating="0"
+                style="@style/customRatingBar"
+                app:layout_constraintTop_toBottomOf="@id/course_name"
+                app:layout_constraintEnd_toEndOf="@id/course_thumbnail"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintHorizontal_bias="1"
+                android:layout_marginTop="10dp"
+                android:layout_marginEnd="5dp"
+                android:layout_marginRight="5dp" />
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.cardview.widget.CardView>
+</layout>
