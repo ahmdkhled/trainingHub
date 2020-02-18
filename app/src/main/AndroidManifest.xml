@@ -10,15 +10,19 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".view.activities.ReviewsActivity"
-            android:theme="@style/ReviewsActivityTheme"
-            android:exported="true"/>
+        <activity
+            android:name=".view.activities.AllCoursesActivity"
+            android:exported="true"
+            />
+        <activity
+            android:name=".view.activities.ReviewsActivity"
+            android:exported="true"
+            android:theme="@style/ReviewsActivityTheme" />
         <activity android:name=".view.activities.DetailActivity" />
         <activity android:name=".view.activities.MainActivity" />
         <activity
             android:name=".view.activities.SplashActivity"
             android:theme="@style/NoActionBarTheme">
-
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

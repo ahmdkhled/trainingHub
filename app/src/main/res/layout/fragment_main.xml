@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
 
     <data>
 
@@ -49,7 +50,8 @@
 
             <androidx.recyclerview.widget.RecyclerView
                 android:layout_width="match_parent"
-                android:layout_height="200dp"
+                tools:layout_height="200dp"
+                android:layout_height="wrap_content"
                 android:id="@+id/coursesForYouRecycler"
                 android:layoutAnimation="@anim/layout_animation"
                 android:layout_marginTop="5dp"
@@ -69,11 +71,20 @@
                     android:layout_height="match_parent"
                     >
 
-                    <include layout="@layout/shimmer_courses_layout" />
+                    <include
+                        android:layout_width="300dp"
+                        android:layout_height="match_parent"
+                        layout="@layout/shimmer_courses_layout" />
 
-                    <include layout="@layout/shimmer_courses_layout" />
+                    <include
+                        android:layout_width="300dp"
+                        android:layout_height="match_parent"
+                        layout="@layout/shimmer_courses_layout" />
 
-                    <include layout="@layout/shimmer_courses_layout" />
+                    <include
+                        android:layout_width="300dp"
+                        android:layout_height="match_parent"
+                        layout="@layout/shimmer_courses_layout" />
                 </LinearLayout>
 
             </com.facebook.shimmer.ShimmerFrameLayout>
@@ -180,11 +191,20 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent">
 
-                    <include layout="@layout/shimmer_courses_layout" />
+                    <include
+                        android:layout_width="300dp"
+                        android:layout_height="match_parent"
+                        layout="@layout/shimmer_courses_layout" />
 
-                    <include layout="@layout/shimmer_courses_layout" />
+                    <include
+                        android:layout_width="300dp"
+                        android:layout_height="match_parent"
+                        layout="@layout/shimmer_courses_layout" />
 
-                    <include layout="@layout/shimmer_courses_layout" />
+                    <include
+                        android:layout_width="300dp"
+                        android:layout_height="match_parent"
+                        layout="@layout/shimmer_courses_layout" />
                 </LinearLayout>
 
             </com.facebook.shimmer.ShimmerFrameLayout>

@@ -1,24 +1,17 @@
 package com.example.traininghub.viewModel;
 
-import android.app.Application;
 import android.util.Log;
 
-import androidx.annotation.NonNull;
-import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
 import com.example.traininghub.Repo.CategoriesRepo;
 import com.example.traininghub.Repo.CoursesRepo;
 import com.example.traininghub.models.CategoriesResponse;
-import com.example.traininghub.models.Category;
-import com.example.traininghub.models.Course;
 import com.example.traininghub.models.CoursesResponse;
 import com.example.traininghub.view.fragments.AccountFragment;
 import com.example.traininghub.view.fragments.MainFragment;
 import com.example.traininghub.view.fragments.MyCoursesFragment;
-
-import java.util.ArrayList;
 
 import io.reactivex.SingleObserver;
 import io.reactivex.android.schedulers.AndroidSchedulers;
@@ -40,12 +33,12 @@ private MutableLiveData<CategoriesResponse> categories;
     private MutableLiveData<String> categoriesLoadingError=new MutableLiveData<>();
 
 
-    public MutableLiveData<CoursesResponse> getCourses(String limit){
+    public MutableLiveData<CoursesResponse> getCourses(String page,String limit){
         isCoursesLoading.setValue(true);
         courses=new MutableLiveData<>();
         CoursesRepo
                 .getInstance()
-                .getCourses(limit)
+                .getCourses(page,limit)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new SingleObserver<Response<CoursesResponse>>() {

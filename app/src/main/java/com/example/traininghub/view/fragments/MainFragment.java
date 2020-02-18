@@ -1,5 +1,6 @@
 package com.example.traininghub.view.fragments;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -24,6 +25,7 @@ import com.example.traininghub.databinding.FragmentMainBinding;
 import com.example.traininghub.models.CategoriesResponse;
 import com.example.traininghub.models.Course;
 import com.example.traininghub.models.CoursesResponse;
+import com.example.traininghub.view.activities.AllCoursesActivity;
 import com.example.traininghub.view.activities.MainActivity;
 import com.example.traininghub.viewModel.MainActivityVM;
 
@@ -52,6 +54,15 @@ public class MainFragment extends Fragment {
         ButterKnife.bind(this,binding.getRoot());
         mainActivityVM= ViewModelProviders.of(this).get(MainActivityVM.class);
 
+        binding.seeAllRecentlyAdded.setOnClickListener(view->{
+            Intent intent=new Intent(getContext(), AllCoursesActivity.class);
+            getContext().startActivity(intent);
+        });
+
+        binding.seeAllRecentlyAdded.setOnClickListener(view->{
+            Intent intent=new Intent(getContext(), AllCoursesActivity.class);
+            getContext().startActivity(intent);
+        });
 
         getCourses();
         getCategories();
@@ -62,12 +73,12 @@ public class MainFragment extends Fragment {
     }
 
     private void getCourses(){
-        mainActivityVM.getCourses(null)
+        mainActivityVM.getCourses(null,null)
                 .observe(this, new Observer<CoursesResponse>() {
                     @Override
                     public void onChanged(CoursesResponse coursesResponse) {
                         Log.d("COURSES", "onChanged: size "+coursesResponse.getCourses().get(1).getInstructors().get(0).getImage());
-                        CoursesAdapter coursesAdapter=new CoursesAdapter(getContext(),coursesResponse.getCourses());
+                        CoursesAdapter coursesAdapter=new CoursesAdapter(getContext(),coursesResponse.getCourses(),true);
                         coursesForYouRecycler.setAdapter(coursesAdapter);
                         coursesForYouRecycler.setLayoutManager(new LinearLayoutManager(getContext(),RecyclerView.HORIZONTAL,false));
                         coursesForYouRecycler.startLayoutAnimation();

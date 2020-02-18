@@ -18,10 +18,10 @@ import retrofit2.http.Query;
 public interface Api {
 
     @GET("/api/instructors")
-    Call<ArrayList<Instructor>> getInstructors(@Query("limit")String limit);
+    Call<ArrayList<Instructor>> getInstructors(@Query("page")String page,@Query("limit")String limit);
 
     @GET("/api/courses")
-    Single<Response<CoursesResponse>> getCourses(@Query("limit")String limit);
+    Single<Response<CoursesResponse>> getCourses(@Query("page")String page,@Query("limit")String limit);
 
     @GET("/api/categories")
     Single<Response<CategoriesResponse>> getCategories(@Query("courses")String courses, @Query("limit")String limit);

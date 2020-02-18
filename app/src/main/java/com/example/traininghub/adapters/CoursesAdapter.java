@@ -2,45 +2,58 @@ package com.example.traininghub.adapters;
 
 import android.content.Context;
 import android.content.Intent;
+import android.os.Build;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
-import android.widget.TextView;
 
 import androidx.annotation.NonNull;
-import androidx.appcompat.widget.AppCompatRatingBar;
 import androidx.databinding.BindingAdapter;
 import androidx.databinding.DataBindingUtil;
-import androidx.databinding.ViewDataBinding;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
-import com.example.traininghub.databinding.LayoutCourseBinding;
-import com.example.traininghub.view.activities.DetailActivity;
 import com.example.traininghub.R;
+import com.example.traininghub.databinding.LayoutCourse2Binding;
+import com.example.traininghub.databinding.LayoutCourseBinding;
 import com.example.traininghub.models.Course;
+import com.example.traininghub.view.activities.DetailActivity;
 
 import java.util.ArrayList;
-
-import butterknife.BindView;
-import butterknife.ButterKnife;
 
 public class CoursesAdapter extends RecyclerView.Adapter<CoursesAdapter.CourseHolder> {
 
     private Context context;
     private ArrayList<Course> courses;
+    private boolean isMain;
 
     public CoursesAdapter(Context context, ArrayList<Course> courses) {
         this.context = context;
+        if (courses==null) courses=new ArrayList<>();
         this.courses = courses;
+    }
+
+    public CoursesAdapter(Context context, ArrayList<Course> courses, boolean isMain) {
+        this.context = context;
+        if (courses==null) courses=new ArrayList<>();
+        this.courses = courses;
+        this.isMain = isMain;
     }
 
     @NonNull
     @Override
     public CourseHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        LayoutCourseBinding binding= DataBindingUtil.inflate(LayoutInflater.from(context),R.layout.layout_course,parent,false);
-        return new CourseHolder(binding);
+        LayoutCourse2Binding binding= DataBindingUtil
+                .inflate(LayoutInflater.from(context),R.layout.layout_course2,parent,false);
+        View itemView=binding.getRoot();
+        if (isMain){
+            RecyclerView.LayoutParams params=new RecyclerView.LayoutParams(600, RecyclerView.LayoutParams.WRAP_CONTENT);
+                params.setMargins(5,5,5,5);
+            itemView.setLayoutParams(params);
+        }
+
+        return new CourseHolder(binding,itemView);
     }
 
 
@@ -56,6 +69,11 @@ public class CoursesAdapter extends RecyclerView.Adapter<CoursesAdapter.CourseHo
         return courses==null?0:courses.size();
     }
 
+    public void addCourses(ArrayList<Course> courses){
+        this.courses.addAll(courses);
+        notifyDataSetChanged();
+    }
+
     @BindingAdapter("android:src")
     public static void showImage(ImageView imageView,String url){
         Glide
@@ -65,9 +83,9 @@ public class CoursesAdapter extends RecyclerView.Adapter<CoursesAdapter.CourseHo
     }
 
     class CourseHolder extends RecyclerView.ViewHolder{
-        LayoutCourseBinding binding;
-        CourseHolder(LayoutCourseBinding binding) {
-            super(binding.getRoot());
+        LayoutCourse2Binding binding;
+        CourseHolder(LayoutCourse2Binding binding,View itemView) {
+            super(itemView);
             this.binding=binding;
             itemView.setOnClickListener(view -> {
                 Intent intent=new Intent(context, DetailActivity.class);

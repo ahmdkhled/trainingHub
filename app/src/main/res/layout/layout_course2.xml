@@ -14,8 +14,9 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="5dp"
-        app:cardElevation="5dp"
-        app:cardCornerRadius="10dp">
+        app:cardElevation="3dp"
+        app:cardCornerRadius="5dp"
+        >
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
@@ -33,15 +34,12 @@
                 android:scaleType="fitXY" />
 
             <com.example.traininghub.helpers.GrostesqueTextView
-                android:layout_width="0dp"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:id="@+id/course_name"
                 tools:text="@string/dummy_course_name"
-                android:textColor="@color/white"
                 android:text="@{course.name}"
-                app:layout_constraintStart_toStartOf="@+id/course_thumbnail"
-                app:layout_constraintEnd_toEndOf="@+id/course_thumbnail"
-                app:layout_constraintBottom_toTopOf="@id/course_price"
+                app:layout_constraintTop_toBottomOf="@+id/course_thumbnail"
                 android:maxLines="2"
                 android:ellipsize="marquee"
                 android:layout_marginStart="5dp"
@@ -56,7 +54,7 @@
                 tools:text="@string/dummy_price"
                 android:text="@{@string/dummy_price(course.price)}"
                 app:layout_constraintStart_toStartOf="@+id/course_name"
-                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/course_name"
                 android:textColor="@color/mainColor" />
 
             <androidx.appcompat.widget.AppCompatRatingBar
@@ -69,14 +67,7 @@
                 app:layout_constraintTop_toBottomOf="@id/course_name"
                 app:layout_constraintEnd_toEndOf="@id/course_name" />
 
-            <View
-                android:layout_width="0dp"
-                android:layout_height="0dp"
-                app:layout_constraintTop_toTopOf="@id/course_name"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                android:background="#16202020" />
+
 
 
         </androidx.constraintlayout.widget.ConstraintLayout>
