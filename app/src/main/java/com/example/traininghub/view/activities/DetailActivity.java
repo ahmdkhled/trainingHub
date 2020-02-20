@@ -100,9 +100,10 @@ public class DetailActivity extends AppCompatActivity {
 
     @BindingAdapter("android:src")
     public static void bindImage(ImageView imageView,String url){
+        Log.d("BINDDDD", "bindImage: "+url);
         Glide.with(imageView.getContext())
                 .load(url)
-                .placeholder(R.drawable.bg)
+                .placeholder(R.drawable.pl)
                 .into(imageView);
     }
 }

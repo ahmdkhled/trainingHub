@@ -14,6 +14,9 @@ public class Media implements Parcelable {
         url = in.readString();
     }
 
+    public Media() {
+    }
+
     public static final Creator<Media> CREATOR = new Creator<Media>() {
         @Override
         public Media createFromParcel(Parcel in) {

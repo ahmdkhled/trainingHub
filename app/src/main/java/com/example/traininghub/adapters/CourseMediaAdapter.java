@@ -34,7 +34,8 @@ public class CourseMediaAdapter extends PagerAdapter {
 
     @Override
     public int getCount() {
-        return mediaList==null?0:mediaList.size();
+        if (mediaList==null||mediaList.isEmpty())return 1;
+        return mediaList.size();
     }
 
     @Override
@@ -48,7 +49,10 @@ public class CourseMediaAdapter extends PagerAdapter {
         LayoutCourseMediaBinding binding=DataBindingUtil.inflate(
                 LayoutInflater.from(container.getContext())
                 ,R.layout.layout_course_media,container,false);
-
+        Media media=null;
+        if (mediaList.isEmpty())
+            binding.setMedia(new Media());
+        else
         binding.setMedia(mediaList.get(position));
         container.addView(binding.getRoot());
         Log.d("populateUi", "instantiateItem: ");
@@ -61,10 +65,11 @@ public class CourseMediaAdapter extends PagerAdapter {
         container.removeView((View) object);
     }
 
-    @BindingAdapter("android:src")
-    public static void setImage(ImageView imageView,String url){
-        Glide.with(imageView.getContext())
-                .load(url)
-                .into(imageView);
-    }
+//    @BindingAdapter("android:src")
+//    public static void setImage(ImageView imageView,String url){
+//        Glide.with(imageView.getContext())
+//                .load(url)
+//                .placeholder(R.drawable.pl)
+//                .into(imageView);
+//    }
 }

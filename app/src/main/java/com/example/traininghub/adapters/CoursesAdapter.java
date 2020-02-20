@@ -3,6 +3,7 @@ package com.example.traininghub.adapters;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Build;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -75,11 +76,12 @@ public class CoursesAdapter extends RecyclerView.Adapter<CoursesAdapter.CourseHo
     }
 
     @BindingAdapter("android:src")
-    public static void showImage(ImageView imageView,String url){
-        Glide
-             .with(imageView.getContext())
-             .load(url)
-             .into(imageView);
+    public static void bindImage(ImageView imageView,String url){
+        Log.d("BINDDDD", "bindImage: ");
+        Glide.with(imageView.getContext())
+                .load(url)
+                .placeholder(R.drawable.bg)
+                .into(imageView);
     }
 
     class CourseHolder extends RecyclerView.ViewHolder{
