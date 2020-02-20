@@ -11,12 +11,17 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.Toast;
 
 import com.example.traininghub.R;
 import com.example.traininghub.adapters.CoursesAdapter;
 import com.example.traininghub.databinding.ActivityAllCoursesBinding;
+import com.example.traininghub.models.Course;
 import com.example.traininghub.models.CoursesResponse;
+import com.example.traininghub.models.Error;
 import com.example.traininghub.viewModel.AllCoursesVM;
+
+import java.util.ArrayList;
 
 public class AllCoursesActivity extends AppCompatActivity {
 
@@ -51,7 +56,27 @@ public class AllCoursesActivity extends AppCompatActivity {
                 .observe(this, new Observer<CoursesResponse>() {
                     @Override
                     public void onChanged(CoursesResponse coursesResponse) {
-                        coursesAdapter.addCourses(coursesResponse.getCourses());
+
+                        ArrayList<Course> courses=coursesResponse.getCourses();
+
+                        if (courses!=null&&courses.isEmpty()){
+                            binding.emptyView.getRoot().setVisibility(View.VISIBLE);
+                            binding.emptyView.setError(new Error("there is no courses in this section"
+                                    ,"back to home",R.drawable.ic_sentiment_dissatisfied_black_24dp));
+                            binding.emptyView.action
+                                    .setOnClickListener(view -> {
+                                        onBackPressed();
+                                    });
+                        }else if (courses==null){
+                            binding.emptyView.getRoot().setVisibility(View.VISIBLE);
+                            binding.emptyView.setError(new Error(getString(R.string.server_error),getString(R.string.back_to_home)));
+
+                            binding.emptyView.action
+                                    .setOnClickListener(view -> {
+                                        getCourses("1");
+                                    });
+                        }
+                        coursesAdapter.addCourses(courses);
                     }
                 });
 

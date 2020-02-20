@@ -24,4 +24,5 @@
     <string name="retry" />
     <string name="dummy_chapter_desc">in this chapter you will learn to design layouts using xml , we will discuss</string>
     <string name="syllabus">syllabus</string>
+    <string name="back_to_home">back to home</string>
 </resources>

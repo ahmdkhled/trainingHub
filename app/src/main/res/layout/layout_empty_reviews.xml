@@ -5,11 +5,15 @@
 
     <data>
 
+        <variable
+            name="error"
+            type="com.example.traininghub.models.Error" />
+
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:orientation="vertical"
-        android:background="#FFFEFE"
+        android:background="#FAFAFA"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
@@ -22,14 +26,18 @@
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintVertical_bias=".4"
-            android:src="@drawable/ic_star_black_24dp" />
+            tools:src="@drawable/ic_star_black_24dp"
+            app:imageResource="@{error.image}"
+
+            />
 
         <com.example.traininghub.helpers.GrostesqueTextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/message"
             app:layout_constraintTop_toBottomOf="@id/image"
-            android:text="@string/no_reviews"
+            android:text="@{error.message}"
+            tools:text="@string/no_reviews"
             android:gravity="center"
             android:textSize="20sp"
             android:textStyle="bold" />
@@ -38,7 +46,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/action"
-            android:text="@string/back_to_course"
+            android:text="@{error.actionMessage}"
+            tools:text="@string/back_to_course"
             android:background="#302F2F"
             android:textColor="#fff"
             app:layout_constraintTop_toBottomOf="@id/message"

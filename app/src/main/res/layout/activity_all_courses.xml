@@ -16,6 +16,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:id="@+id/courses_recycler"
+
             />
 
         <com.facebook.shimmer.ShimmerFrameLayout
@@ -40,6 +41,11 @@
 
         </com.facebook.shimmer.ShimmerFrameLayout>
 
+
+        <include
+            android:id="@+id/empty_view"
+            android:visibility="gone"
+            layout="@layout/layout_empty_reviews"/>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

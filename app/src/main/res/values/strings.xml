@@ -31,4 +31,5 @@
         , we will discuss how deal with linear , relative ,frame,grid layouts , andfinally constraint layout ,
         we will benefit from the power of this layout</string>
     <string name="syllabus">syllabus</string>
+    <string name="back_to_home">back to home</string>
 </resources>
