@@ -1,17 +1,21 @@
 package com.example.traininghub.adapters;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 
 import androidx.annotation.NonNull;
+import androidx.databinding.DataBindingUtil;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.example.traininghub.R;
+import com.example.traininghub.databinding.LayoutCategoryBinding;
 import com.example.traininghub.models.Category;
+import com.example.traininghub.view.activities.AllCoursesActivity;
 
 import java.util.ArrayList;
 
@@ -21,11 +25,8 @@ import butterknife.ButterKnife;
 public class CategoriesAdapter extends RecyclerView.Adapter<CategoriesAdapter.CategoriesViewHolder> {
 
     private Context context;
-    ArrayList<Category> categories;
+    private ArrayList<Category> categories;
 
-    public CategoriesAdapter(Context context) {
-        this.context = context;
-    }
 
     public CategoriesAdapter(Context context, ArrayList<Category> categories) {
         this.context = context;
@@ -35,16 +36,19 @@ public class CategoriesAdapter extends RecyclerView.Adapter<CategoriesAdapter.Ca
     @NonNull
     @Override
     public CategoriesViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view=LayoutInflater.from(context).inflate(R.layout.layout_category,parent,false);
-        return new CategoriesViewHolder(view);
+        LayoutCategoryBinding binding= DataBindingUtil.inflate(LayoutInflater.from(context)
+                ,R.layout.layout_category,parent,false);
+        return new CategoriesViewHolder(binding);
     }
 
     @Override
     public void onBindViewHolder(@NonNull CategoriesViewHolder holder, int position) {
-        Glide
-                .with(context)
-                .load(categories.get(position).getImage())
-                .into(holder.category_image);
+        Category category=categories.get(position);
+        holder.binding.setCategory(category);
+//        Glide
+//                .with(context)
+//                .load(categories.get(position).getImage())
+//                .into(holder.category_image);
 
     }
 
@@ -54,11 +58,16 @@ public class CategoriesAdapter extends RecyclerView.Adapter<CategoriesAdapter.Ca
     }
 
     class CategoriesViewHolder extends RecyclerView.ViewHolder{
-        @BindView(R.id.category_image)
-        ImageView category_image;
-        public CategoriesViewHolder(@NonNull View itemView) {
-            super(itemView);
-            ButterKnife.bind(this,itemView);
+        LayoutCategoryBinding  binding;
+        public CategoriesViewHolder(@NonNull LayoutCategoryBinding  binding) {
+            super(binding.getRoot());
+            this.binding=binding;
+
+            binding.getRoot()
+                    .setOnClickListener(view->{
+                        Intent intent=new Intent(context, AllCoursesActivity.class);
+                        context.startActivity(intent);
+                    });
         }
     }
 }
