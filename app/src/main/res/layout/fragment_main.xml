@@ -75,17 +75,22 @@
                     <include
                         android:layout_width="300dp"
                         android:layout_height="match_parent"
-                        layout="@layout/shimmer_courses_layout" />
+                        layout="@layout/shimmer_courses_layout"
+                        android:layout_margin="5dp"
+                        />
 
                     <include
                         android:layout_width="300dp"
                         android:layout_height="match_parent"
-                        layout="@layout/shimmer_courses_layout" />
+                        layout="@layout/shimmer_courses_layout"
+                        android:layout_margin="5dp"
+                        />
 
                     <include
                         android:layout_width="300dp"
                         android:layout_height="match_parent"
-                        layout="@layout/shimmer_courses_layout" />
+                        layout="@layout/shimmer_courses_layout"
+                        android:layout_margin="5dp"/>
                 </LinearLayout>
 
             </com.facebook.shimmer.ShimmerFrameLayout>

@@ -10,6 +10,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
 
 import com.example.traininghub.R;
 import com.example.traininghub.adapters.CoursesAdapter;
@@ -59,7 +60,11 @@ public class AllCoursesActivity extends AppCompatActivity {
                 .observe(this, new Observer<Boolean>() {
                     @Override
                     public void onChanged(Boolean aBoolean) {
-
+                        if (aBoolean!=null&&aBoolean){
+                            binding.shimmer.setVisibility(View.VISIBLE);
+                        }else {
+                            binding.shimmer.setVisibility(View.GONE);
+                        }
                     }
                 });
         allCoursesVM
@@ -71,5 +76,17 @@ public class AllCoursesActivity extends AppCompatActivity {
                     }
                 });
 
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        binding.shimmer.startShimmer();
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        binding.shimmer.stopShimmer();
     }
 }
