@@ -33,12 +33,12 @@ private MutableLiveData<CategoriesResponse> categories;
     private MutableLiveData<String> categoriesLoadingError=new MutableLiveData<>();
 
 
-    public MutableLiveData<CoursesResponse> getCourses(String page,String limit){
+    public MutableLiveData<CoursesResponse> getCourses(String page,String limit,String category){
         isCoursesLoading.setValue(true);
         courses=new MutableLiveData<>();
         CoursesRepo
                 .getInstance()
-                .getCourses(page,limit)
+                .getCourses(page,limit,category)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new SingleObserver<Response<CoursesResponse>>() {

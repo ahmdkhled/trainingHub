@@ -22,11 +22,11 @@ public class CoursesRepo {
     }
 
 
-    public Single<Response<CoursesResponse>> getCourses(String page,String limit){
+    public Single<Response<CoursesResponse>> getCourses(String page,String limit,String category){
         return RetrofitClient
                 .getInstance()
                 .getApi()
-                .getCourses(page,limit);
+                .getCourses(page,limit,category);
 
     }
 }

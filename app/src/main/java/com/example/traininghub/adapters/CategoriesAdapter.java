@@ -59,13 +59,14 @@ public class CategoriesAdapter extends RecyclerView.Adapter<CategoriesAdapter.Ca
 
     class CategoriesViewHolder extends RecyclerView.ViewHolder{
         LayoutCategoryBinding  binding;
-        public CategoriesViewHolder(@NonNull LayoutCategoryBinding  binding) {
+        CategoriesViewHolder(@NonNull LayoutCategoryBinding binding) {
             super(binding.getRoot());
             this.binding=binding;
 
             binding.getRoot()
                     .setOnClickListener(view->{
                         Intent intent=new Intent(context, AllCoursesActivity.class);
+                        intent.putExtra(AllCoursesActivity.CATEGORY_ID,categories.get(getAdapterPosition()).getId());
                         context.startActivity(intent);
                     });
         }

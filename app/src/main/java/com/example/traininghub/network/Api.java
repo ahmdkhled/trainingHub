@@ -21,7 +21,8 @@ public interface Api {
     Call<ArrayList<Instructor>> getInstructors(@Query("page")String page,@Query("limit")String limit);
 
     @GET("/api/courses")
-    Single<Response<CoursesResponse>> getCourses(@Query("page")String page,@Query("limit")String limit);
+    Single<Response<CoursesResponse>> getCourses(@Query("page")String page,@Query("limit")String limit
+            ,@Query("category")String category);
 
     @GET("/api/categories")
     Single<Response<CategoriesResponse>> getCategories(@Query("courses")String courses, @Query("limit")String limit);

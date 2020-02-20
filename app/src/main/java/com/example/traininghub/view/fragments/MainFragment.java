@@ -73,7 +73,7 @@ public class MainFragment extends Fragment {
     }
 
     private void getCourses(){
-        mainActivityVM.getCourses(null,null)
+        mainActivityVM.getCourses(null,null,null)
                 .observe(this, new Observer<CoursesResponse>() {
                     @Override
                     public void onChanged(CoursesResponse coursesResponse) {
