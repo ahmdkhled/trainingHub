@@ -4,6 +4,7 @@ import android.app.Application;
 
 import com.example.traininghub.dagger.AppComponent;
 import com.example.traininghub.Repo.LoginRepository;
+import com.example.traininghub.dagger.DaggerAppComponent;
 import com.example.traininghub.helpers.TokenManager;
 
 public class App extends Application {

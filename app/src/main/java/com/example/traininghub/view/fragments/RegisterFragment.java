@@ -17,7 +17,7 @@ import android.view.ViewGroup;
 import android.widget.Toast;
 
 import com.example.traininghub.R;
-import com.example.traininghub.databinding.ActivityRegisterBinding;
+import com.example.traininghub.databinding.FragmentRegisterBinding;
 import com.example.traininghub.models.APIResponse;
 import com.example.traininghub.models.User;
 import com.example.traininghub.view.activities.RegistrationActivity;
@@ -28,7 +28,7 @@ public class RegisterFragment extends Fragment {
 
 
     private static final String TAG = RegistrationActivity.TAG;
-    private ActivityRegisterBinding mBinding;
+    private FragmentRegisterBinding mBinding;
     private LoginViewModel mViewModel;
     private LoginListener listener;
 
@@ -38,7 +38,7 @@ public class RegisterFragment extends Fragment {
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        mBinding = DataBindingUtil.inflate(inflater, R.layout.activity_register, container, false);
+        mBinding = DataBindingUtil.inflate(inflater, R.layout.fragment_register, container, false);
 
         View view = mBinding.getRoot();
         mViewModel = new ViewModelProvider(getActivity()).get(LoginViewModel.class);

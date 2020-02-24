@@ -33,7 +33,6 @@
             android:layout_marginStart="32dp"
             android:layout_marginLeft="32dp"
             android:layout_marginTop="36dp"
-            android:fontFamily="@fonts/bold"
             android:text="@string/hello_there"
             android:textColor="@color/grey"
             android:textSize="28sp"
