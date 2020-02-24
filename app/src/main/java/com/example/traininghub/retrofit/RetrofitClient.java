@@ -47,7 +47,6 @@ public class RetrofitClient {
         return new OkHttpClient()
                 .newBuilder()
                 .addInterceptor(retrofitInterceptor)
-//                .addInterceptor(new RefreshTokenInterceptor(tokenManager))
                 .build();
 
     }

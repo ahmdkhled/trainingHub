@@ -1,4 +1,4 @@
-package com.example.traininghub.ui.registeration;
+package com.example.traininghub.ui;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.DataBindingUtil;

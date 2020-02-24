@@ -1,4 +1,4 @@
-package com.example.traininghub;
+package com.example.traininghub.dagger;
 
 
 import android.content.Context;
