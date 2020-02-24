@@ -1,10 +1,8 @@
 package com.example.traininghub.retrofit.interceptor;
 
-import android.content.Context;
 import android.util.Log;
 
-import com.example.traininghub.retrofit.RetrofitClient;
-import com.example.traininghub.utils.TokenManager;
+import com.example.traininghub.helpers.TokenManager;
 
 import java.io.IOException;
 

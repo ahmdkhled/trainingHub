@@ -1,9 +1,7 @@
 package com.example.traininghub.dagger;
 
 
-import android.content.Context;
-
-import com.example.traininghub.utils.TokenManager;
+import com.example.traininghub.helpers.TokenManager;
 
 import dagger.Binds;
 import dagger.Module;

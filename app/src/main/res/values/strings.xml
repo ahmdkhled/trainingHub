@@ -11,4 +11,22 @@
     <string name="register_title">Create a new account</string>
     <string name="have_an_account">Already have an account?</string>
     <string name="name">Username</string>
+    <string name="categories">Categories</string>
+    <string name="for_you">For you</string>
+    <string name="RecentlyAdded">Recently Added</string>
+    <string name="dummy_course_name" translatable="false">The Complete Web Developer Course 2.0</string>
+    <string name="dummy_course_desc" translatable="false">The Complete Web Developer Course is great course where you will learn a lot of web techologies like Html ,Css ,javascript ,Jquery ,Angular and Saas also backEnd Technology like php laravel </string>
+    <string name="home">home</string>
+    <string name="my_courses">my courses</string>
+    <string name="account">Account</string>
+    <string name="instructors">instructors</string>
+    <string name="dummy_instructor_name">Ahmed Khaled</string>
+    <string name="dummy_course_duration">70h</string>
+    <string name="center">center</string>
+    <string name="dummy_center_bio">itc is a traiing center established in 1990 , itc offers training courses in all fields with well trained instructors</string>
+    <string name="dummy_center_name">ITC</string>
+    <string name="description">description</string>
+    <string name="course_hours">%1$s hours</string>
+    <string name="course_duration">%s h</string>
+    <string name="take_this_course">take this course</string>
 </resources>

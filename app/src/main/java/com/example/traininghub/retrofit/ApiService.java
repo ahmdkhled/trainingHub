@@ -1,8 +1,8 @@
 package com.example.traininghub.retrofit;
 
-import com.example.traininghub.model.APIResponse;
-import com.example.traininghub.model.LoginResponse;
-import com.example.traininghub.model.User;
+import com.example.traininghub.models.APIResponse;
+import com.example.traininghub.models.LoginResponse;
+import com.example.traininghub.models.User;
 
 import io.reactivex.Single;
 import retrofit2.http.Body;

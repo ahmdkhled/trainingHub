@@ -3,8 +3,8 @@ package com.example.traininghub;
 import android.app.Application;
 
 import com.example.traininghub.dagger.AppComponent;
-import com.example.traininghub.remote.LoginRepository;
-import com.example.traininghub.utils.TokenManager;
+import com.example.traininghub.Repo.LoginRepository;
+import com.example.traininghub.helpers.TokenManager;
 
 public class App extends Application {
 
