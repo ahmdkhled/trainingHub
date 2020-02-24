@@ -2,20 +2,31 @@ package com.example.traininghub.Repo;
 
 import com.example.traininghub.models.Course;
 import com.example.traininghub.models.CoursesResponse;
-import com.example.traininghub.network.RetrofitClient;
+import com.example.traininghub.retrofit.RetrofitClient;
 
 import java.util.ArrayList;
+
+import javax.inject.Inject;
+import javax.inject.Singleton;
 
 import io.reactivex.Single;
 import retrofit2.Response;
 
+@Singleton
 public class CoursesRepo {
 
-    private static CoursesRepo coursesRepo;
+    private RetrofitClient retrofitClient;
 
-    public static CoursesRepo getInstance() {
-        return coursesRepo == null ? coursesRepo = new CoursesRepo() : coursesRepo;
+
+    @Inject
+    public CoursesRepo(RetrofitClient retrofitClient) {
+        this.retrofitClient = retrofitClient;
     }
+
+
+
+
+
 
     private CoursesRepo() {
 
@@ -23,10 +34,7 @@ public class CoursesRepo {
 
 
     public Single<Response<CoursesResponse>> getCourses(String limit){
-        return RetrofitClient
-                .getInstance()
-                .getApi()
-                .getCourses(limit);
+        return retrofitClient.getApiService().getCourses(limit);
 
     }
 }

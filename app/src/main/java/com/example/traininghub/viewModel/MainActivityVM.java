@@ -8,6 +8,7 @@ import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
+import com.example.traininghub.App;
 import com.example.traininghub.Repo.CategoriesRepo;
 import com.example.traininghub.Repo.CoursesRepo;
 import com.example.traininghub.models.CategoriesResponse;
@@ -26,7 +27,7 @@ import io.reactivex.disposables.Disposable;
 import io.reactivex.schedulers.Schedulers;
 import retrofit2.Response;
 
-public class MainActivityVM extends ViewModel {
+public class MainActivityVM extends AndroidViewModel {
     private MainFragment mainFragment;
     private MyCoursesFragment myCoursesFragment;
     private AccountFragment accountFragment;
@@ -40,11 +41,14 @@ private MutableLiveData<CategoriesResponse> categories;
     private MutableLiveData<String> categoriesLoadingError=new MutableLiveData<>();
 
 
+    public MainActivityVM(@NonNull Application application) {
+        super(application);
+    }
+
     public MutableLiveData<CoursesResponse> getCourses(String limit){
         isCoursesLoading.setValue(true);
         courses=new MutableLiveData<>();
-        CoursesRepo
-                .getInstance()
+        ((App) getApplication()).getCoursesRepo()
                 .getCourses(limit)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
@@ -88,8 +92,7 @@ private MutableLiveData<CategoriesResponse> categories;
     public MutableLiveData<CategoriesResponse> getCategories(String page, String limit){
         isCategoriesLoading.setValue(true);
         categories=new MutableLiveData<>();
-        CategoriesRepo
-                .getInstance()
+        ((App)getApplication()).getCategoriesRepo()
                 .getCategories(page,limit)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())

@@ -7,6 +7,7 @@ import androidx.annotation.NonNull;
 import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.MutableLiveData;
 
+import com.example.traininghub.App;
 import com.example.traininghub.R;
 import com.example.traininghub.Repo.ReviewsRepo;
 import com.example.traininghub.models.Review;
@@ -34,8 +35,7 @@ public class ReviewsVM extends AndroidViewModel {
     public MutableLiveData<ArrayList<Review>> getReviews(String course,String page,String limit){
         reviews=new MutableLiveData<>();
         isReviewsLoading.setValue(true);
-        ReviewsRepo
-                .getInstance()
+        ((App) getApplication()).getReviewsRepo()
                 .getReviews(course,page,limit)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
