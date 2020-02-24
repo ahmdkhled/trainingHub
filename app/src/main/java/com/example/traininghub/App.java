@@ -2,7 +2,7 @@ package com.example.traininghub;
 
 import android.app.Application;
 
-import com.example.traininghub.login.LoginRepository;
+import com.example.traininghub.remote.LoginRepository;
 import com.example.traininghub.utils.TokenManager;
 
 public class App extends Application {

@@ -3,7 +3,7 @@ package com.example.traininghub;
 
 import android.content.Context;
 
-import com.example.traininghub.login.LoginRepository;
+import com.example.traininghub.remote.LoginRepository;
 import com.example.traininghub.utils.TokenManager;
 
 import javax.inject.Singleton;

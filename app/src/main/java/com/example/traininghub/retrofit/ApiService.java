@@ -1,5 +1,6 @@
 package com.example.traininghub.retrofit;
 
+import com.example.traininghub.model.APIResponse;
 import com.example.traininghub.model.Authorization;
 import com.example.traininghub.model.LoginResponse;
 import com.example.traininghub.model.Student;
@@ -18,8 +19,10 @@ public interface ApiService {
 
 
     @POST("auth/login")
+    Single<LoginResponse> login(@Body User user);
 
-   Single<LoginResponse> login(@Body User user);
+    @POST("register")
+    Single<APIResponse> register(@Body User user);
 
 //    @POST("auth/login")
 //    Call<LoginResponse> login(@Body User user);

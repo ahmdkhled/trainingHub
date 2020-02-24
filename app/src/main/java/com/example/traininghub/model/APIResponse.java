@@ -1,6 +1,6 @@
 package com.example.traininghub.model;
 
-public class APIError {
+public class APIResponse {
 
     private String message;
 
