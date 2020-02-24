@@ -1,19 +1,15 @@
 package com.example.traininghub.view.activities;
 
+import android.content.Intent;
+import android.os.Bundle;
+import android.widget.ImageView;
+
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.BindingAdapter;
 import androidx.databinding.DataBindingUtil;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.viewpager.widget.ViewPager;
-
-import android.content.Intent;
-import android.os.Bundle;
-import android.util.Log;
-import android.widget.ImageView;
-import android.widget.RatingBar;
-import android.widget.TextView;
-import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.example.traininghub.R;
@@ -24,27 +20,21 @@ import com.example.traininghub.models.Course;
 import com.rd.PageIndicatorView;
 import com.rd.animation.type.AnimationType;
 
-import butterknife.BindView;
 import butterknife.ButterKnife;
-import de.hdodenhof.circleimageview.CircleImageView;
 
 public class DetailActivity extends AppCompatActivity {
 
     public static String  EXTRA_COURSE="extra_course";
 
     ActivityDetailBinding binding;
-
-
-
-
+    Course course;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         binding= DataBindingUtil.setContentView(this,R.layout.activity_detail);
         ButterKnife.bind(this);
-
-        Course course=getIntent().getParcelableExtra(EXTRA_COURSE);
+        course=getIntent().getParcelableExtra(EXTRA_COURSE);
 
 
         binding.setCourse(course);
@@ -83,6 +73,12 @@ public class DetailActivity extends AppCompatActivity {
             public void onPageScrollStateChanged(int state) {
 
             }
+        });
+
+        binding.seeAllReviews.setOnClickListener(view ->{
+            Intent intent=new Intent(this,ReviewsActivity.class);
+            intent.putExtra(EXTRA_COURSE,course);
+            startActivity(intent);
         });
 
     }

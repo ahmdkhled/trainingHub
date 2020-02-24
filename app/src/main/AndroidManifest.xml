@@ -4,6 +4,7 @@
 
     <uses-permission android:name="android.permission.INTERNET" />
 
+
     <application
         android:name=".App"
         android:allowBackup="true"
@@ -16,7 +17,11 @@
 
         <activity android:name=".view.activities.RegistrationActivity"/>
 
-        <activity android:name=".view.activities.DetailActivity"></activity>
+
+        <activity android:name=".view.activities.ReviewsActivity"
+            android:theme="@style/ReviewsActivityTheme"
+            android:exported="true"/>
+        <activity android:name=".view.activities.DetailActivity" />
         <activity android:name=".view.activities.MainActivity" />
         <activity
             android:name=".view.activities.SplashActivity"
@@ -28,5 +33,7 @@
             </intent-filter>
         </activity>
     </application>
+
+    <uses-permission android:name="android.permission.INTERNET" />
 
 </manifest>

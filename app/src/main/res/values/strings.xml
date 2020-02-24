@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">training hub</string>
+    <string name="app_name" translatable="false">training hub</string>
     <string name="email">Email</string>
     <string name="password">Password</string>
     <string name="login">Login</string>
@@ -29,4 +29,12 @@
     <string name="course_hours">%1$s hours</string>
     <string name="course_duration">%s h</string>
     <string name="take_this_course">take this course</string>
+    <string name="dummy_name">Ahmed Khaled</string>
+    <string name="Lorem_Ipsum">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</string>
+    <string name="server_error">something went wrong, try again</string>
+    <string name="no_reviews">There is no Reviews for this course</string>
+    <string name="reviews">reviews</string>
+    <string name="see_course_reviews">See Course Reviews</string>
+    <string name="back_to_course">Back to Course</string>
+    <string name="retry" >retry</string>
 </resources>
