@@ -4,11 +4,22 @@ import android.app.Application;
 import android.util.Log;
 
 import androidx.annotation.NonNull;
+import androidx.arch.core.util.Function;
 import androidx.lifecycle.AndroidViewModel;
+import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
+import androidx.lifecycle.Transformations;
+import androidx.paging.LivePagedListBuilder;
+import androidx.paging.PagedList;
 
+import com.example.traininghub.CoursesDataFactory;
+import com.example.traininghub.CoursesDataSource;
 import com.example.traininghub.Repo.CoursesRepo;
+import com.example.traininghub.models.Course;
 import com.example.traininghub.models.CoursesResponse;
+
+import java.util.concurrent.Executor;
+import java.util.concurrent.Executors;
 
 import io.reactivex.SingleObserver;
 import io.reactivex.android.schedulers.AndroidSchedulers;
@@ -24,6 +35,7 @@ public class AllCoursesVM extends AndroidViewModel {
 
     public AllCoursesVM(@NonNull Application application) {
         super(application);
+        init();
     }
 
     public MutableLiveData<CoursesResponse> getCourses(String page,String limit,String category){
@@ -67,5 +79,29 @@ public class AllCoursesVM extends AndroidViewModel {
 
     public MutableLiveData<String> getCoursesLoadingError() {
         return coursesLoadingError;
+    }
+
+
+    private LiveData<PagedList<Course>> coursesPagedList;
+    private void init(){
+        Executor executor= Executors.newFixedThreadPool(5);
+        CoursesDataFactory coursesDataFactory=new CoursesDataFactory(null,null);
+
+
+        PagedList.Config pagedListConfig =
+                (new PagedList.Config.Builder())
+                        .setEnablePlaceholders(false)
+                        .setInitialLoadSizeHint(10)
+                        .setPageSize(10)
+                        .build();
+
+        coursesPagedList=new LivePagedListBuilder(coursesDataFactory,pagedListConfig)
+                .setFetchExecutor(executor)
+                .build();
+
+    }
+
+    public LiveData<PagedList<Course>> getCoursesPagedList() {
+        return coursesPagedList;
     }
 }

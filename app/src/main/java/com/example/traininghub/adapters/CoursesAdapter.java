@@ -22,6 +22,7 @@ import com.example.traininghub.models.Course;
 import com.example.traininghub.view.activities.DetailActivity;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class CoursesAdapter extends RecyclerView.Adapter<CoursesAdapter.CourseHolder> {
 
@@ -71,6 +72,10 @@ public class CoursesAdapter extends RecyclerView.Adapter<CoursesAdapter.CourseHo
     }
 
     public void addCourses(ArrayList<Course> courses){
+        this.courses.addAll(courses);
+        notifyDataSetChanged();
+    }
+    public void addCourses(List<Course> courses){
         this.courses.addAll(courses);
         notifyDataSetChanged();
     }

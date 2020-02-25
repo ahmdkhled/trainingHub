@@ -3,6 +3,10 @@ package com.example.traininghub.models;
 import android.os.Parcel;
 import android.os.Parcelable;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.recyclerview.widget.DiffUtil;
+
 import java.util.ArrayList;
 
 public class Course implements Parcelable {
@@ -30,6 +34,13 @@ public class Course implements Parcelable {
         instructors = in.createTypedArrayList(Instructor.CREATOR);
         center = in.readParcelable(Center.class.getClassLoader());
         media = in.createTypedArrayList(Media.CREATOR);
+    }
+
+    public Course(int id, String name, String price, float rating) {
+        this.id = id;
+        this.name = name;
+        this.price = price;
+        this.rating = rating;
     }
 
     @Override
@@ -62,6 +73,20 @@ public class Course implements Parcelable {
             return new Course[size];
         }
     };
+
+    public static DiffUtil.ItemCallback<Course> DIFF_CALLBACK = new DiffUtil.ItemCallback<Course>(){
+
+        @Override
+        public boolean areItemsTheSame(@NonNull Course oldItem, @NonNull Course newItem) {
+            return oldItem.id==newItem.id;
+        }
+
+        @Override
+        public boolean areContentsTheSame(@NonNull Course oldItem, @NonNull Course newItem) {
+            return oldItem.equals(newItem);
+        }
+    };
+
 
     public int getId() {
         return id;
@@ -101,5 +126,13 @@ public class Course implements Parcelable {
 
     public ArrayList<Media> getMedia() {
         return media;
+    }
+
+    @Override
+    public boolean equals(@Nullable Object obj) {
+        if (obj==null) return false;
+        if (!(obj instanceof Course))return false;
+        Course course= (Course) obj;
+        return course.id==this.id;
     }
 }

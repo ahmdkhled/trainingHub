@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.DataBindingUtil;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
+import androidx.paging.PagedList;
 import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -15,6 +16,7 @@ import android.widget.Toast;
 
 import com.example.traininghub.R;
 import com.example.traininghub.adapters.CoursesAdapter;
+import com.example.traininghub.adapters.CoursesPagedAdapter;
 import com.example.traininghub.databinding.ActivityAllCoursesBinding;
 import com.example.traininghub.models.Course;
 import com.example.traininghub.models.CoursesResponse;
@@ -43,9 +45,21 @@ public class AllCoursesActivity extends AppCompatActivity {
         allCoursesVM= ViewModelProviders.of(this).get(AllCoursesVM.class);
         coursesAdapter=new CoursesAdapter(this,null,false);
         LinearLayoutManager layoutManager=new LinearLayoutManager(this);
-        binding.coursesRecycler.setAdapter(coursesAdapter);
         binding.coursesRecycler.setLayoutManager(layoutManager);
-        getCourses(null);
+        //getCourses(null);
+        CoursesPagedAdapter coursesPagedAdapter=new CoursesPagedAdapter();
+        binding.coursesRecycler.setAdapter(coursesPagedAdapter);
+
+
+        allCoursesVM.getCoursesPagedList()
+                .observe(this, new Observer<PagedList<Course>>() {
+                    @Override
+                    public void onChanged(PagedList<Course> courses) {
+                        Log.d("CoursesDataSource", "onChanged: ");
+                        coursesPagedAdapter.submitList(courses);
+
+                    }
+                });
 
 
     }
