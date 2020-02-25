@@ -29,4 +29,11 @@ public class TokenManager {
     }
 
 
+    public void deleteToken(){
+        sharedPreferences.edit().putString(TOKEN_value,"null").apply();
+    }
+
+    public boolean isLogin() {
+        return ! sharedPreferences.getString(TOKEN_value,"null").equals("null");
+    }
 }

@@ -5,6 +5,7 @@ import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import com.example.traininghub.R;
@@ -40,6 +41,13 @@ public class RegistrationActivity extends AppCompatActivity {
                 @Override
                 public void onRegisterButtonClicked() {
                     replaceFragment(registerFragment);
+                }
+
+                @Override
+                public void onSuccessfulLogin() {
+                    Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+                    startActivity(intent);
+                    finish();
                 }
             });
 

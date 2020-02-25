@@ -43,7 +43,9 @@ public class LoginFragment extends Fragment {
         mLoginViewModel.getLoginResponse().observe(getViewLifecycleOwner(), new Observer<LoginResponse>() {
             @Override
             public void onChanged(LoginResponse loginResponse) {
-                Toast.makeText(getContext(), "successful login", Toast.LENGTH_SHORT).show();
+//                Toast.makeText(getContext(), "successful login", Toast.LENGTH_SHORT).show();
+                mBinding.loginProgressBar.setVisibility(View.INVISIBLE);
+                listener.onSuccessfulLogin();
             }
         });
 
@@ -51,6 +53,7 @@ public class LoginFragment extends Fragment {
         mLoginViewModel.getLoginError().observe(getViewLifecycleOwner(), new Observer<APIResponse>() {
             @Override
             public void onChanged(APIResponse apiResponse) {
+                mBinding.loginProgressBar.setVisibility(View.INVISIBLE);
                 Toast.makeText(getContext(), apiResponse.getMessage(), Toast.LENGTH_SHORT).show();
             }
         });
@@ -63,6 +66,7 @@ public class LoginFragment extends Fragment {
                             mBinding.loginPass.getText().toString());
 
                     mLoginViewModel.login(user);
+                    mBinding.loginProgressBar.setVisibility(View.VISIBLE);
                 }
             }
         });
@@ -115,6 +119,8 @@ public class LoginFragment extends Fragment {
 
     public interface RegisterListener {
         void onRegisterButtonClicked();
+        void onSuccessfulLogin();
     }
+
 
 }

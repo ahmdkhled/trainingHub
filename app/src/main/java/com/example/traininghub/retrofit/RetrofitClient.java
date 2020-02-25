@@ -1,21 +1,26 @@
 package com.example.traininghub.retrofit;
 
+import android.util.Log;
+
 import com.example.traininghub.retrofit.interceptor.RetrofitInterceptor;
 
 import javax.inject.Inject;
+import javax.inject.Singleton;
 
 import okhttp3.OkHttpClient;
+import okhttp3.logging.HttpLoggingInterceptor;
 import retrofit2.Retrofit;
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 import static com.example.traininghub.helpers.Constants.BASE_URL;
 
-
+@Singleton
 public class RetrofitClient {
 
-    private static Retrofit instance;
-    private static ApiService iRemoteInterface;
+    private static final String TAG = RetrofitClient.class.getSimpleName();
+    private static Retrofit retrofit;
+    private static ApiService apiService;
     private RetrofitInterceptor retrofitInterceptor;
 
     @Inject
@@ -24,15 +29,16 @@ public class RetrofitClient {
     }
 
     public  ApiService getApiService(){
-        if(iRemoteInterface == null)
-            iRemoteInterface = getRetrofitInstance().create(ApiService.class);
-        return iRemoteInterface;
+        Log.d(TAG, "retrofit client object: "+this);
+        if(apiService == null)
+            apiService = getRetrofitInstance().create(ApiService.class);
+        return apiService;
 
     }
 
     public Retrofit getRetrofitInstance() {
-        if(instance == null) {
-            instance = new Retrofit.Builder()
+        if(retrofit == null) {
+            retrofit = new Retrofit.Builder()
                     .baseUrl(BASE_URL)
                     .client(getOkHttpClient())
                     .addConverterFactory(GsonConverterFactory.create())
@@ -40,12 +46,13 @@ public class RetrofitClient {
                     .build();
         }
 
-        return instance;
+        return retrofit;
     }
 
     private OkHttpClient getOkHttpClient(){
         return new OkHttpClient()
                 .newBuilder()
+                .addInterceptor(new HttpLoggingInterceptor().setLevel(HttpLoggingInterceptor.Level.BODY))
                 .addInterceptor(retrofitInterceptor)
                 .build();
 
