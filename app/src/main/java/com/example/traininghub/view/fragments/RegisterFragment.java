@@ -21,7 +21,7 @@ import com.example.traininghub.databinding.FragmentRegisterBinding;
 import com.example.traininghub.models.APIResponse;
 import com.example.traininghub.models.User;
 import com.example.traininghub.view.activities.RegistrationActivity;
-import com.example.traininghub.viewModel.LoginViewModel;
+import com.example.traininghub.viewModel.RegistrationViewModel;
 import com.example.traininghub.helpers.PasswordValidation;
 
 public class RegisterFragment extends Fragment {
@@ -29,11 +29,14 @@ public class RegisterFragment extends Fragment {
 
     private static final String TAG = RegistrationActivity.TAG;
     private FragmentRegisterBinding mBinding;
-    private LoginViewModel mViewModel;
+    private RegistrationViewModel mRegistrationViewModel;
     private LoginListener listener;
 
 
-
+    @Override
+    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
+    }
 
     @Nullable
     @Override
@@ -41,18 +44,20 @@ public class RegisterFragment extends Fragment {
         mBinding = DataBindingUtil.inflate(inflater, R.layout.fragment_register, container, false);
 
         View view = mBinding.getRoot();
-        mViewModel = new ViewModelProvider(getActivity()).get(LoginViewModel.class);
-        mViewModel.getRegisterResponse().observe(getViewLifecycleOwner(), new Observer<APIResponse>() {
+        mRegistrationViewModel = new ViewModelProvider(getActivity()).get(RegistrationViewModel.class);
+        mRegistrationViewModel.getRegisterResponse().observe(getViewLifecycleOwner(), new Observer<APIResponse>() {
             @Override
             public void onChanged(APIResponse apiResponse) {
                 Log.d(TAG, "onChanged: register response: "+apiResponse.getMessage());
+                mBinding.ProgressBar.setVisibility(View.INVISIBLE);
                 Toast.makeText(getContext(), apiResponse.getMessage(), Toast.LENGTH_SHORT).show();
             }
         });
 
-        mViewModel.getRegisterError().observe(getViewLifecycleOwner(), new Observer<APIResponse>() {
+        mRegistrationViewModel.getRegisterError().observe(getViewLifecycleOwner(), new Observer<APIResponse>() {
             @Override
             public void onChanged(APIResponse apiResponse) {
+                mBinding.ProgressBar.setVisibility(View.INVISIBLE);
                 Toast.makeText(getContext(), apiResponse.getMessage(), Toast.LENGTH_SHORT).show();
             }
         });
@@ -65,7 +70,8 @@ public class RegisterFragment extends Fragment {
                     String username = mBinding.registerName.getText().toString();
                     String email = mBinding.registerEmail.getText().toString();
                     String password = mBinding.registerPassword.getText().toString();
-                    mViewModel.register(new User(username, email, password));
+                    mRegistrationViewModel.register(new User(username, email, password));
+                    mBinding.ProgressBar.setVisibility(View.VISIBLE);
                 }
             }
         });
