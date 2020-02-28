@@ -1,6 +1,5 @@
 package com.example.traininghub;
 
-import android.bluetooth.BluetoothGattCharacteristic;
 import android.util.Log;
 
 import androidx.annotation.NonNull;
@@ -10,6 +9,7 @@ import androidx.paging.PageKeyedDataSource;
 import com.example.traininghub.Repo.CoursesRepo;
 import com.example.traininghub.models.Course;
 import com.example.traininghub.models.CoursesResponse;
+import com.example.traininghub.models.NetworkState;
 
 import java.net.HttpCookie;
 import java.util.ArrayList;
@@ -24,13 +24,13 @@ import retrofit2.Response;
 public class CoursesDataSource extends PageKeyedDataSource <Integer, Course>{
 
     public static final String TAG= CoursesDataSource.class.getSimpleName();
-    private MutableLiveData<Boolean> isCoursesLoading=new MutableLiveData<>();
-    private MutableLiveData<String> coursesLoadingError=new MutableLiveData<>();
+    private MutableLiveData<NetworkState> networkState=new MutableLiveData<>();
 
-    String limit;
-    String category;
 
-    public CoursesDataSource(String limit, String category) {
+    private String limit;
+    private String category;
+
+    CoursesDataSource(String limit, String category) {
         this.limit = limit;
         this.category = category;
     }
@@ -67,6 +67,7 @@ public class CoursesDataSource extends PageKeyedDataSource <Integer, Course>{
 
     private void getCourses(String page,String limit,String category
             ,LoadInitialCallback loadInitialCallback,LoadCallback loadCallback){
+        networkState.postValue(new NetworkState(true,null,page));
         CoursesRepo
                 .getInstance()
                 .getCourses(page,limit,category)
@@ -80,27 +81,33 @@ public class CoursesDataSource extends PageKeyedDataSource <Integer, Course>{
 
                     @Override
                     public void onSuccess(Response<CoursesResponse> response) {
+                        networkState.postValue(new NetworkState(false,null,page));
                         CoursesResponse coursesResponse=response.body();
+                        Log.d("CoursesDataSource", "onSuccess: "+coursesResponse.getCourses().size());
                         if (response.isSuccessful()&&coursesResponse!=null){
                             if (loadInitialCallback!=null)
-                                loadInitialCallback.onResult(coursesResponse.getCourses(),0,2);
+                                loadInitialCallback.onResult(coursesResponse.getCourses(),null,2);
                             if (loadCallback!=null)
                                 loadCallback.onResult(coursesResponse.getCourses(),page);
 
 
                         }else
-                            coursesLoadingError.setValue("Error Loading Courses");
-                        isCoursesLoading.setValue(false);
+                            networkState.postValue(new NetworkState(false,"Error loading Courses",page));
+
 
                     }
 
                     @Override
                     public void onError(Throwable e) {
-                        isCoursesLoading.setValue(false);
-                        coursesLoadingError.setValue("Error Loading Courses");
+                        networkState.postValue(new NetworkState(false,"Error Loading Courses",page));
+
                         Log.d("COURSESS", "onError: "+e.getMessage());
                     }
                 });
 
+    }
+
+    public MutableLiveData<NetworkState> getNetworkState() {
+        return networkState;
     }
 }

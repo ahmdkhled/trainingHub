@@ -21,6 +21,7 @@ import com.example.traininghub.databinding.ActivityAllCoursesBinding;
 import com.example.traininghub.models.Course;
 import com.example.traininghub.models.CoursesResponse;
 import com.example.traininghub.models.Error;
+import com.example.traininghub.models.NetworkState;
 import com.example.traininghub.viewModel.AllCoursesVM;
 
 import java.util.ArrayList;
@@ -50,72 +51,42 @@ public class AllCoursesActivity extends AppCompatActivity {
         CoursesPagedAdapter coursesPagedAdapter=new CoursesPagedAdapter();
         binding.coursesRecycler.setAdapter(coursesPagedAdapter);
 
+        //todo check for intenrnet connection before making any request
 
+        if (!allCoursesVM.getCoursesPagedList().hasObservers())
         allCoursesVM.getCoursesPagedList()
                 .observe(this, new Observer<PagedList<Course>>() {
                     @Override
                     public void onChanged(PagedList<Course> courses) {
-                        Log.d("CoursesDataSource", "onChanged: ");
+                        Log.d("CoursesDataSource", "get courses: "+courses.size());
                         coursesPagedAdapter.submitList(courses);
 
                     }
                 });
 
+        if (!allCoursesVM.getNetworkState().hasObservers())
+        allCoursesVM.getNetworkState()
+                .observe(this, networkState -> {
+                    //Log.d("CoursesDataSource", "onChanged: "+networkState);
+
+                    binding.shimmer.setVisibility(networkState.getVisibility());
+                    if (networkState.getErrorMessage()==null){
+                        binding.emptyView.getRoot().setVisibility(View.GONE);
+                        return;
+                    }
+                    binding.emptyView.getRoot().setVisibility(View.VISIBLE);
+                    binding.emptyView.setError(new Error(networkState.getErrorMessage(),getString(R.string.retry),R.drawable.empty));
+
+                    binding.emptyView.action
+                            .setOnClickListener(view -> {
+                                allCoursesVM.invalidate();
+                            });
+                });
+
+
 
     }
 
-    void getCourses(String page){
-        allCoursesVM
-                .getCourses(page,null,category_id)
-                .observe(this, new Observer<CoursesResponse>() {
-                    @Override
-                    public void onChanged(CoursesResponse coursesResponse) {
-
-                        ArrayList<Course> courses=coursesResponse.getCourses();
-
-                        if (courses!=null&&courses.isEmpty()){
-                            binding.emptyView.getRoot().setVisibility(View.VISIBLE);
-                            binding.emptyView.setError(new Error("there is no courses in this section"
-                                    ,"back to home",R.drawable.ic_sentiment_dissatisfied_black_24dp));
-                            binding.emptyView.action
-                                    .setOnClickListener(view -> {
-                                        onBackPressed();
-                                    });
-                        }else if (courses==null){
-                            binding.emptyView.getRoot().setVisibility(View.VISIBLE);
-                            binding.emptyView.setError(new Error(getString(R.string.server_error),getString(R.string.back_to_home)));
-
-                            binding.emptyView.action
-                                    .setOnClickListener(view -> {
-                                        getCourses("1");
-                                    });
-                        }
-                        coursesAdapter.addCourses(courses);
-                    }
-                });
-
-        allCoursesVM
-                .getIsCoursesLoading()
-                .observe(this, new Observer<Boolean>() {
-                    @Override
-                    public void onChanged(Boolean aBoolean) {
-                        if (aBoolean!=null&&aBoolean){
-                            binding.shimmer.setVisibility(View.VISIBLE);
-                        }else {
-                            binding.shimmer.setVisibility(View.GONE);
-                        }
-                    }
-                });
-        allCoursesVM
-                .getCoursesLoadingError()
-                .observe(this, new Observer<String>() {
-                    @Override
-                    public void onChanged(String s) {
-
-                    }
-                });
-
-    }
 
     @Override
     protected void onResume() {

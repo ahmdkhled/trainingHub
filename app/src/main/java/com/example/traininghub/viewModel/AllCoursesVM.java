@@ -8,6 +8,7 @@ import androidx.arch.core.util.Function;
 import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
+import androidx.lifecycle.Observer;
 import androidx.lifecycle.Transformations;
 import androidx.paging.LivePagedListBuilder;
 import androidx.paging.PagedList;
@@ -17,6 +18,7 @@ import com.example.traininghub.CoursesDataSource;
 import com.example.traininghub.Repo.CoursesRepo;
 import com.example.traininghub.models.Course;
 import com.example.traininghub.models.CoursesResponse;
+import com.example.traininghub.models.NetworkState;
 
 import java.util.concurrent.Executor;
 import java.util.concurrent.Executors;
@@ -32,6 +34,9 @@ public class AllCoursesVM extends AndroidViewModel {
     private MutableLiveData<CoursesResponse> courses;
     private MutableLiveData<Boolean> isCoursesLoading=new MutableLiveData<>();
     private MutableLiveData<String> coursesLoadingError=new MutableLiveData<>();
+    private LiveData<NetworkState> networkState=new MutableLiveData<>();
+
+    private CoursesDataFactory coursesDataFactory;
 
     public AllCoursesVM(@NonNull Application application) {
         super(application);
@@ -83,9 +88,15 @@ public class AllCoursesVM extends AndroidViewModel {
 
 
     private LiveData<PagedList<Course>> coursesPagedList;
-    private void init(){
+    public void init(){
         Executor executor= Executors.newFixedThreadPool(5);
-        CoursesDataFactory coursesDataFactory=new CoursesDataFactory(null,null);
+        coursesDataFactory=new CoursesDataFactory(null,null);
+        networkState=Transformations.switchMap(coursesDataFactory.getCoursesDataSource(),
+                (dataSource ->dataSource.getNetworkState())
+
+        );
+
+
 
 
         PagedList.Config pagedListConfig =
@@ -101,7 +112,16 @@ public class AllCoursesVM extends AndroidViewModel {
 
     }
 
+    public void invalidate(){
+        coursesDataFactory.getCoursesDataSource().getValue().invalidate();
+
+    }
+
     public LiveData<PagedList<Course>> getCoursesPagedList() {
         return coursesPagedList;
+    }
+
+    public LiveData<NetworkState> getNetworkState() {
+        return networkState;
     }
 }

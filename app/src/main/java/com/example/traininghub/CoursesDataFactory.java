@@ -22,6 +22,10 @@ public class CoursesDataFactory extends DataSource.Factory {
 
     }
 
+    public void invalidate(){
+        dataSource.invalidate();
+    }
+
     @NonNull
     @Override
     public DataSource create() {
