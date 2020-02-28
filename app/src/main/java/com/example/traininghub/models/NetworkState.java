@@ -6,14 +6,34 @@ import androidx.annotation.NonNull;
 
 public class NetworkState {
 
+    public static final int BACK=1;
+    public static final int RETRY=2;
+
     private boolean loading;
     private String errorMessage;
+    private String actionMessage;
     private String page;
+    private int action;
 
     public NetworkState(boolean loading, String errorMessage, String page) {
         this.loading = loading;
         this.errorMessage = errorMessage;
         this.page = page;
+    }
+
+    public NetworkState(boolean loading, String errorMessage, String actionMessage, String page) {
+        this.loading = loading;
+        this.errorMessage = errorMessage;
+        this.actionMessage = actionMessage;
+        this.page = page;
+    }
+
+    public NetworkState(boolean loading, String errorMessage, int action, String actionMessage, String page) {
+        this.loading = loading;
+        this.errorMessage = errorMessage;
+        this.actionMessage = actionMessage;
+        this.page = page;
+        this.action = action;
     }
 
     public boolean isLoading() {
@@ -30,6 +50,22 @@ public class NetworkState {
 
     public void setErrorMessage(String errorMessage) {
         this.errorMessage = errorMessage;
+    }
+
+    public int getAction() {
+        return action;
+    }
+
+    public void setAction(int action) {
+        this.action = action;
+    }
+
+    public String getActionMessage() {
+        return actionMessage;
+    }
+
+    public void setActionMessage(String actionMessage) {
+        this.actionMessage = actionMessage;
     }
 
     public String getPage() {

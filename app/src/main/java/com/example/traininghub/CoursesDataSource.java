@@ -37,7 +37,7 @@ public class CoursesDataSource extends PageKeyedDataSource <Integer, Course>{
 
     @Override
     public void loadInitial(@NonNull LoadInitialParams<Integer> params, @NonNull LoadInitialCallback<Integer, Course> callback) {
-        Log.d(TAG, "loadInitial: ");
+        Log.d(TAG, "loadInitial: "+category);
         List<Course> courses=new ArrayList<>();
         for (int i = 0; i < 10; i++) {
             Course course=new Course(i,"course "+i,"100",5);
@@ -83,8 +83,14 @@ public class CoursesDataSource extends PageKeyedDataSource <Integer, Course>{
                     public void onSuccess(Response<CoursesResponse> response) {
                         networkState.postValue(new NetworkState(false,null,page));
                         CoursesResponse coursesResponse=response.body();
-                        Log.d("CoursesDataSource", "onSuccess: "+coursesResponse.getCourses().size());
-                        if (response.isSuccessful()&&coursesResponse!=null){
+                        if (response.isSuccessful()&&coursesResponse!=null&&coursesResponse.getCourses()!=null){
+                            if (coursesResponse.getCourses().isEmpty()&&page.equals("1")){
+                                networkState.postValue(new NetworkState(false,"there is no courses"
+                                        ,NetworkState.BACK,"back",page));
+                                return;
+                            }
+
+
                             if (loadInitialCallback!=null)
                                 loadInitialCallback.onResult(coursesResponse.getCourses(),null,2);
                             if (loadCallback!=null)
@@ -92,14 +98,16 @@ public class CoursesDataSource extends PageKeyedDataSource <Integer, Course>{
 
 
                         }else
-                            networkState.postValue(new NetworkState(false,"Error loading Courses",page));
+                            networkState.postValue(new NetworkState(false,"Error loading Courses"
+                                    ,NetworkState.BACK,"retry",page));
 
 
                     }
 
                     @Override
                     public void onError(Throwable e) {
-                        networkState.postValue(new NetworkState(false,"Error Loading Courses",page));
+                        networkState.postValue(new NetworkState(false,"Error loading Courses"
+                                ,NetworkState.BACK,"retry",page));
 
                         Log.d("COURSESS", "onError: "+e.getMessage());
                     }

@@ -37,68 +37,22 @@ public class AllCoursesVM extends AndroidViewModel {
     private LiveData<NetworkState> networkState=new MutableLiveData<>();
 
     private CoursesDataFactory coursesDataFactory;
+    private LiveData<PagedList<Course>> coursesPagedList;
+
 
     public AllCoursesVM(@NonNull Application application) {
         super(application);
-        init();
-    }
-
-    public MutableLiveData<CoursesResponse> getCourses(String page,String limit,String category){
-        isCoursesLoading.setValue(true);
-        courses=new MutableLiveData<>();
-        CoursesRepo
-                .getInstance()
-                .getCourses(page,limit,category)
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new SingleObserver<Response<CoursesResponse>>() {
-                    @Override
-                    public void onSubscribe(Disposable d) {
-
-                    }
-
-                    @Override
-                    public void onSuccess(Response<CoursesResponse> response) {
-                        CoursesResponse coursesResponse=response.body();
-                        if (response.isSuccessful()&&coursesResponse!=null){
-                            courses.setValue(coursesResponse);
-                        }else
-                            coursesLoadingError.setValue("Error Loading Courses");
-                        isCoursesLoading.setValue(false);
-
-                    }
-
-                    @Override
-                    public void onError(Throwable e) {
-                        isCoursesLoading.setValue(false);
-                        coursesLoadingError.setValue("Error Loading Courses");
-                        Log.d("COURSESS", "onError: "+e.getMessage());
-                    }
-                });
-        return courses;
-    }
-
-    public MutableLiveData<Boolean> getIsCoursesLoading() {
-        return isCoursesLoading;
-    }
-
-    public MutableLiveData<String> getCoursesLoadingError() {
-        return coursesLoadingError;
     }
 
 
-    private LiveData<PagedList<Course>> coursesPagedList;
-    public void init(){
+
+    public void init(String limit,String category){
         Executor executor= Executors.newFixedThreadPool(5);
-        coursesDataFactory=new CoursesDataFactory(null,null);
+        coursesDataFactory=new CoursesDataFactory(limit,category);
         networkState=Transformations.switchMap(coursesDataFactory.getCoursesDataSource(),
                 (dataSource ->dataSource.getNetworkState())
 
         );
-
-
-
-
         PagedList.Config pagedListConfig =
                 (new PagedList.Config.Builder())
                         .setEnablePlaceholders(false)

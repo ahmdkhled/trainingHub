@@ -11,9 +11,6 @@ public class CoursesDataFactory extends DataSource.Factory {
     private String limit;
     private String category;
 
-    public CoursesDataFactory() {
-        this.coursesDataSource = new MutableLiveData<>();
-    }
 
     public CoursesDataFactory(String limit, String category) {
         this.limit = limit;

@@ -53,6 +53,8 @@ public class AllCoursesActivity extends AppCompatActivity {
 
         //todo check for intenrnet connection before making any request
 
+        allCoursesVM.init(null,category_id);
+
         if (!allCoursesVM.getCoursesPagedList().hasObservers())
         allCoursesVM.getCoursesPagedList()
                 .observe(this, new Observer<PagedList<Course>>() {
@@ -75,11 +77,14 @@ public class AllCoursesActivity extends AppCompatActivity {
                         return;
                     }
                     binding.emptyView.getRoot().setVisibility(View.VISIBLE);
-                    binding.emptyView.setError(new Error(networkState.getErrorMessage(),getString(R.string.retry),R.drawable.empty));
+                    binding.emptyView.setError(new Error(networkState.getErrorMessage(),networkState.getActionMessage(),R.drawable.empty));
 
                     binding.emptyView.action
                             .setOnClickListener(view -> {
-                                allCoursesVM.invalidate();
+                                if (networkState.getAction()==NetworkState.RETRY)
+                                    allCoursesVM.invalidate();
+                                else
+                                    onBackPressed();
                             });
                 });
 
