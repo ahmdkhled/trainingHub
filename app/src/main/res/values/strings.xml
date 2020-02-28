@@ -32,4 +32,5 @@
         we will benefit from the power of this layout</string>
     <string name="syllabus">syllabus</string>
     <string name="back_to_home">back to home</string>
+    <string name="no_connection">There Is No Internet Connection</string>
 </resources>
