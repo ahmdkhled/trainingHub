@@ -1,11 +1,21 @@
 <resources>
-    <string name="app_name">training hub</string>
+    <string name="app_name" translatable="false">training hub</string>
+    <string name="email">Email</string>
+    <string name="password">Password</string>
+    <string name="login">Login</string>
+    <string name="forgot_your_password">forgot your password</string>
+    <string name="create_new_account">create new account</string>
+    <string name="hello_there">Login to your account</string>
+    <string name="don_t_have_an_account_yet">Don\'t have an account yet?</string>
+    <string name="register">Register Now</string>
+    <string name="register_title">Create a new account</string>
+    <string name="have_an_account">Already have an account?</string>
+    <string name="name">Username</string>
     <string name="categories">Categories</string>
     <string name="for_you">For you</string>
     <string name="RecentlyAdded">Recently Added</string>
-    <string name="dummy_course_name">The Complete Web Developer Course 2.0</string>
-    <string name="dummy_course_desc">The Complete Web Developer Course is great course where you will learn a lot of web techologies like Html ,Css ,javascript ,Jquery ,Angular and Saas also backEnd Technology like php laravel </string>
-    <string name="dummy_price">550 EG</string>
+    <string name="dummy_course_name" translatable="false">The Complete Web Developer Course 2.0</string>
+    <string name="dummy_course_desc" translatable="false">The Complete Web Developer Course is great course where you will learn a lot of web techologies like Html ,Css ,javascript ,Jquery ,Angular and Saas also backEnd Technology like php laravel </string>
     <string name="home">home</string>
     <string name="my_courses">my courses</string>
     <string name="account">Account</string>
@@ -20,6 +30,7 @@
     <string name="course_duration">%s h</string>
     <string name="take_this_course">take this course</string>
     <string name="dummy_name">Ahmed Khaled</string>
+    <string name="dummy_price">Ahmed Khaled</string>
     <string name="Lorem_Ipsum">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</string>
     <string name="server_error">something went wrong, try again</string>
     <string name="no_reviews">There is no Reviews for this course</string>

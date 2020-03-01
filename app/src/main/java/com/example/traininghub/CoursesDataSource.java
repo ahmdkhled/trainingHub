@@ -7,6 +7,8 @@ import androidx.lifecycle.MutableLiveData;
 import androidx.paging.PageKeyedDataSource;
 
 import com.example.traininghub.Repo.CoursesRepo;
+import com.example.traininghub.dagger.AppComponent;
+import com.example.traininghub.dagger.DaggerAppComponent;
 import com.example.traininghub.models.Course;
 import com.example.traininghub.models.CoursesResponse;
 import com.example.traininghub.models.NetworkState;
@@ -68,8 +70,11 @@ public class CoursesDataSource extends PageKeyedDataSource <Integer, Course>{
     private void getCourses(String page,String limit,String category
             ,LoadInitialCallback loadInitialCallback,LoadCallback loadCallback){
         networkState.postValue(new NetworkState(true,null,page));
-        CoursesRepo
-                .getInstance()
+
+        AppComponent appComponent=DaggerAppComponent.builder()
+                .build();
+
+        appComponent.getCoursesRepo()
                 .getCourses(page,limit,category)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
