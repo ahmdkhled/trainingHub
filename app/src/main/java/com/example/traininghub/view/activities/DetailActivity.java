@@ -21,6 +21,7 @@ import com.example.traininghub.databinding.ActivityDetailBinding;
 import com.example.traininghub.helpers.ContentParser;
 import com.example.traininghub.models.Content;
 import com.example.traininghub.models.Course;
+import com.example.traininghub.view.CourseGroupsBS;
 import com.rd.PageIndicatorView;
 import com.rd.animation.type.AnimationType;
 
@@ -61,6 +62,12 @@ public class DetailActivity extends AppCompatActivity {
         ContentAdapter contentAdapter=new ContentAdapter(content);
         binding.syllabusRecycler.setAdapter(contentAdapter);
         binding.syllabusRecycler.setLayoutManager(new LinearLayoutManager(this));
+
+        binding.takeCourse
+                .setOnClickListener(view -> {
+                    CourseGroupsBS courseGroupsBS=new CourseGroupsBS();
+                    courseGroupsBS.show(getSupportFragmentManager(),"");
+                });
 
 
         CourseMediaAdapter courseMediaAdapter=new CourseMediaAdapter(course.getMedia());

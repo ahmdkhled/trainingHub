@@ -19,6 +19,7 @@
         android:usesCleartextTraffic="true">
 
         <activity android:name=".view.activities.RegistrationActivity"/>
+        <activity android:name=".view.activities.AllCoursesActivity"/>
 
 
         <activity android:name=".view.activities.ReviewsActivity"
