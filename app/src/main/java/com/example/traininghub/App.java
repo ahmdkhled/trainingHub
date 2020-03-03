@@ -4,6 +4,7 @@ import android.app.Application;
 
 import com.example.traininghub.Repo.CategoriesRepo;
 import com.example.traininghub.Repo.CoursesRepo;
+import com.example.traininghub.Repo.GroupsRepo;
 import com.example.traininghub.Repo.ReviewsRepo;
 import com.example.traininghub.dagger.AppComponent;
 import com.example.traininghub.Repo.LoginRepository;
@@ -17,6 +18,7 @@ public class App extends Application {
     private CategoriesRepo categoriesRepo;
     private CoursesRepo coursesRepo;
     private ReviewsRepo reviewsRepo;
+    private GroupsRepo groupsRepo;
 
     @Override
     public void onCreate() {
@@ -30,6 +32,8 @@ public class App extends Application {
         categoriesRepo = appComponent.getCategoriesRepo();
         coursesRepo = appComponent.getCoursesRepo();
         reviewsRepo = appComponent.getReviewsRepo();
+        groupsRepo=appComponent.getGroupsRepo();
+
     }
 
     public TokenManager getTokenManager(){
@@ -49,5 +53,9 @@ public class App extends Application {
 
     public ReviewsRepo getReviewsRepo() {
         return reviewsRepo;
+    }
+
+    public GroupsRepo getGroupsRepo() {
+        return groupsRepo;
     }
 }

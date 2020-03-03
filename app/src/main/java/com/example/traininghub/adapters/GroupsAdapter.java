@@ -5,6 +5,8 @@ import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
 import androidx.databinding.DataBindingUtil;
+import androidx.paging.PagedListAdapter;
+import androidx.recyclerview.widget.DiffUtil;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.traininghub.R;
@@ -13,12 +15,11 @@ import com.example.traininghub.models.Group;
 
 import java.util.ArrayList;
 
-public class GroupsAdapter extends RecyclerView.Adapter<GroupsAdapter.GroupHolder> {
+public class GroupsAdapter extends PagedListAdapter<Group, GroupsAdapter.GroupHolder> {
 
-    private ArrayList<Group> groups;
 
-    public GroupsAdapter(ArrayList<Group> groups) {
-        this.groups = groups;
+     public GroupsAdapter() {
+        super(Group.DIFF_CALLBACK);
     }
 
     @NonNull
@@ -31,19 +32,13 @@ public class GroupsAdapter extends RecyclerView.Adapter<GroupsAdapter.GroupHolde
 
     @Override
     public void onBindViewHolder(@NonNull GroupHolder holder, int position) {
-        holder.binding.setGroup(groups.get(position));
+        Group group=getItem(position);
+        holder.binding.setGroup(group);
     }
-
-    @Override
-    public int getItemCount() {
-        return groups==null?0:groups.size();
-    }
-
 
 
      class GroupHolder extends RecyclerView.ViewHolder{
-
-         LayoutGroupItemBinding binding;
+        LayoutGroupItemBinding binding;
         public GroupHolder(@NonNull LayoutGroupItemBinding binding) {
             super(binding.getRoot());
             this.binding=binding;

@@ -5,6 +5,7 @@ import android.content.Context;
 
 import com.example.traininghub.Repo.CategoriesRepo;
 import com.example.traininghub.Repo.CoursesRepo;
+import com.example.traininghub.Repo.GroupsRepo;
 import com.example.traininghub.Repo.LoginRepository;
 import com.example.traininghub.Repo.ReviewsRepo;
 import com.example.traininghub.helpers.TokenManager;
@@ -22,6 +23,7 @@ public interface AppComponent {
     CategoriesRepo getCategoriesRepo();
     CoursesRepo getCoursesRepo();
     ReviewsRepo getReviewsRepo();
+    GroupsRepo getGroupsRepo();
 
     @Component.Builder
     interface Builder{

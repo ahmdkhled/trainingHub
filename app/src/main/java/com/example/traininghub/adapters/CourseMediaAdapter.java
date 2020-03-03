@@ -50,12 +50,14 @@ public class CourseMediaAdapter extends PagerAdapter {
                 LayoutInflater.from(container.getContext())
                 ,R.layout.layout_course_media,container,false);
         Media media=null;
-        if (mediaList.isEmpty())
-            binding.setMedia(new Media());
-        else
-        binding.setMedia(mediaList.get(position));
-        container.addView(binding.getRoot());
+        if (mediaList!=null&&!mediaList.isEmpty()){
+            binding.setMedia(mediaList.get(position));
+            container.addView(binding.getRoot());
+
+        }else
+        binding.setMedia(new Media());
         Log.d("populateUi", "instantiateItem: ");
+
         return binding.getRoot();
     }
 

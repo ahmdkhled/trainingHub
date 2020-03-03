@@ -8,12 +8,14 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.databinding.DataBindingUtil;
+import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.GridLayoutManager;
 
 import com.example.traininghub.R;
 import com.example.traininghub.adapters.GroupsAdapter;
 import com.example.traininghub.databinding.LayoutCourseGroupsBinding;
 import com.example.traininghub.models.Group;
+import com.example.traininghub.viewModel.GroupsBottomSheetVM;
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment;
 
 import java.util.ArrayList;
@@ -21,20 +23,29 @@ import java.util.ArrayList;
 public class CourseGroupsBS extends BottomSheetDialogFragment {
 
     private LayoutCourseGroupsBinding binding;
+    private GroupsBottomSheetVM groupsBottomSheetVM;
+    private GroupsAdapter adapter;
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         binding= DataBindingUtil.inflate(inflater, R.layout.layout_course_groups,container,false);
-
-        GroupsAdapter adapter=new GroupsAdapter(getGroups());
+        groupsBottomSheetVM= new ViewModelProvider(getActivity()).get(GroupsBottomSheetVM.class);
+        adapter=new GroupsAdapter();
         binding.groupsRecycler.setAdapter(adapter);
-        GridLayoutManager gridLayoutManager=new GridLayoutManager(getContext(),2);
+        GridLayoutManager gridLayoutManager=new GridLayoutManager(getContext(),3);
         binding.groupsRecycler.setLayoutManager(gridLayoutManager);
 
         return binding.getRoot();
     }
 
-    ArrayList<Group> getGroups(){
+    private void getGroups(){
+        groupsBottomSheetVM.getGroups()
+                .observe(this, groups -> {
+                    adapter.submitList(groups);
+                });
+    }
+
+    ArrayList<Group> getGroupss(){
         ArrayList<Group> groups=new ArrayList<>();
         for (int i = 0; i < 5; i++) {
             groups.add(new Group("php course ","21/12/2020"));

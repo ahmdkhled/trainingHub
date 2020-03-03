@@ -1,4 +1,4 @@
-package com.example.traininghub;
+package com.example.traininghub.DataSource;
 
 import android.util.Log;
 
@@ -6,14 +6,12 @@ import androidx.annotation.NonNull;
 import androidx.lifecycle.MutableLiveData;
 import androidx.paging.PageKeyedDataSource;
 
-import com.example.traininghub.Repo.CoursesRepo;
 import com.example.traininghub.dagger.AppComponent;
 import com.example.traininghub.dagger.DaggerAppComponent;
 import com.example.traininghub.models.Course;
 import com.example.traininghub.models.CoursesResponse;
 import com.example.traininghub.models.NetworkState;
 
-import java.net.HttpCookie;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -23,7 +21,7 @@ import io.reactivex.disposables.Disposable;
 import io.reactivex.schedulers.Schedulers;
 import retrofit2.Response;
 
-public class CoursesDataSource extends PageKeyedDataSource <Integer, Course>{
+public  class CoursesDataSource extends PageKeyedDataSource <Integer, Course>{
 
     public static final String TAG= CoursesDataSource.class.getSimpleName();
     private MutableLiveData<NetworkState> networkState=new MutableLiveData<>();
@@ -123,4 +121,5 @@ public class CoursesDataSource extends PageKeyedDataSource <Integer, Course>{
     public MutableLiveData<NetworkState> getNetworkState() {
         return networkState;
     }
+
 }

@@ -74,6 +74,7 @@ public class DetailActivity extends AppCompatActivity {
 
         binding.courseMedia.setAdapter(courseMediaAdapter);
         PageIndicatorView pageIndicatorView=binding.courseMediaIndicator;
+        if (course.getMedia()!=null)
         pageIndicatorView.setCount(course.getMedia().size());
         pageIndicatorView.setAnimationType(AnimationType.DROP);
         pageIndicatorView.setAnimationDuration(1500);

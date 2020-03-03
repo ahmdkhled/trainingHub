@@ -5,6 +5,7 @@ import com.example.traininghub.retrofit.interceptor.RetrofitInterceptor;
 import javax.inject.Inject;
 
 import okhttp3.OkHttpClient;
+import okhttp3.logging.HttpLoggingInterceptor;
 import retrofit2.Retrofit;
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
 import retrofit2.converter.gson.GsonConverterFactory;
@@ -35,6 +36,7 @@ public class RetrofitClient {
             instance = new Retrofit.Builder()
                     .baseUrl(BASE_URL)
                     .client(getOkHttpClient())
+                    .client(getClient())
                     .addConverterFactory(GsonConverterFactory.create())
                     .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
                     .build();
@@ -49,6 +51,12 @@ public class RetrofitClient {
                 .addInterceptor(retrofitInterceptor)
                 .build();
 
+    }
+
+    private OkHttpClient getClient(){
+        HttpLoggingInterceptor interceptor = new HttpLoggingInterceptor();
+        interceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
+        return new OkHttpClient.Builder().addInterceptor(interceptor).build();
     }
 
 

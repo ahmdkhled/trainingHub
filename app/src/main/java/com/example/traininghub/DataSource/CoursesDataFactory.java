@@ -1,4 +1,4 @@
-package com.example.traininghub;
+package com.example.traininghub.DataSource;
 
 import androidx.annotation.NonNull;
 import androidx.lifecycle.MutableLiveData;

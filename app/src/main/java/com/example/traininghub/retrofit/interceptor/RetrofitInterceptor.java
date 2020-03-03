@@ -30,7 +30,9 @@ public class RetrofitInterceptor implements Interceptor {
         Request request = chain.request();
         Request.Builder builder = request.newBuilder()
                 .header("Authorization", tokenManager.getToken());
-
+        Log.d(TAG, "intercept: "+chain.request().toString());
         return chain.proceed(builder.build());
     }
+
+
 }
