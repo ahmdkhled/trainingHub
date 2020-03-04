@@ -18,11 +18,20 @@ public class GroupsRepo {
     private static final String TAG = "GroupsRepo";
 
     private RetrofitClient retrofitClient;
+    private static GroupsRepo groupsRepo;
 
     @Inject
     public GroupsRepo(RetrofitClient retrofitClient) {
         this.retrofitClient = retrofitClient;
         Log.d(TAG, "GroupsRepo: ");
+    }
+
+    public static GroupsRepo getInstance() {
+        return groupsRepo==null?groupsRepo=new GroupsRepo():groupsRepo;
+    }
+
+    private GroupsRepo(){
+
     }
 
 

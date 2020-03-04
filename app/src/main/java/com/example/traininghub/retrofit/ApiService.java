@@ -41,7 +41,7 @@ public interface ApiService {
     @GET("/api/reviews")
     Single<Response<ReviewsResponse>> getReviews (@Query("course")String course, @Query("page")String page, @Query("limit")String limit);
 
-    @GET("api/course_groups")
+    @GET("course_groups")
     Single<Response<ArrayList<Group>>> getGroups (@Query("course_id")String course, @Query("page")String page, @Query("limit")String limit);
 
 

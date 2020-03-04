@@ -65,7 +65,7 @@ public class DetailActivity extends AppCompatActivity {
 
         binding.takeCourse
                 .setOnClickListener(view -> {
-                    CourseGroupsBS courseGroupsBS=new CourseGroupsBS();
+                    CourseGroupsBS courseGroupsBS=new CourseGroupsBS(course.getId());
                     courseGroupsBS.show(getSupportFragmentManager(),"");
                 });
 

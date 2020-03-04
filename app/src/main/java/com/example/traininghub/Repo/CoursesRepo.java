@@ -17,7 +17,7 @@ import retrofit2.Response;
 public class CoursesRepo {
 
     private RetrofitClient retrofitClient;
-
+    private static CoursesRepo coursesRepo;
 
     @Inject
     public CoursesRepo(RetrofitClient retrofitClient) {
@@ -25,8 +25,9 @@ public class CoursesRepo {
     }
 
 
-
-
+    public static CoursesRepo getInstance() {
+        return coursesRepo == null ?coursesRepo=new CoursesRepo():coursesRepo;
+    }
 
 
     private CoursesRepo() {

@@ -9,6 +9,7 @@ import androidx.lifecycle.Transformations;
 import androidx.paging.LivePagedListBuilder;
 import androidx.paging.PagedList;
 
+import com.example.traininghub.App;
 import com.example.traininghub.DataSource.GroupsDataFactory;
 import com.example.traininghub.models.Group;
 import com.example.traininghub.models.NetworkState;
@@ -27,9 +28,9 @@ public class GroupsBottomSheetVM extends AndroidViewModel {
         super(application);
     }
 
-    public void init(String course,String limit){
+    public void init(int course, String limit){
         Executor executor= Executors.newFixedThreadPool(5);
-        groupsDataFactory=new GroupsDataFactory(course,limit);
+        groupsDataFactory=new GroupsDataFactory(String.valueOf(course),limit,((App) getApplication()).getGroupsRepo());
         networkState= Transformations.switchMap(groupsDataFactory.getGroupDataSource(),
                 (dataSource ->dataSource.getNetworkState())
 

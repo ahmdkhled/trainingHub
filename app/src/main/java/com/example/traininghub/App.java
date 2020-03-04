@@ -1,6 +1,7 @@
 package com.example.traininghub;
 
 import android.app.Application;
+import android.util.Log;
 
 import com.example.traininghub.Repo.CategoriesRepo;
 import com.example.traininghub.Repo.CoursesRepo;
@@ -12,7 +13,7 @@ import com.example.traininghub.dagger.DaggerAppComponent;
 import com.example.traininghub.helpers.TokenManager;
 
 public class App extends Application {
-
+    private static final String TAG = "AppPPP";
     private TokenManager tokenManager;
     private LoginRepository loginRepository;
     private CategoriesRepo categoriesRepo;
@@ -20,10 +21,11 @@ public class App extends Application {
     private ReviewsRepo reviewsRepo;
     private GroupsRepo groupsRepo;
 
+
     @Override
     public void onCreate() {
         super.onCreate();
-
+        Log.d(TAG, "onCreate: ");
         AppComponent appComponent = DaggerAppComponent.builder().context(getApplicationContext())
                                     .build();
 

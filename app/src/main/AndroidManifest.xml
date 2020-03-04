@@ -18,7 +18,8 @@
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
 
-        <activity android:name=".view.activities.RegistrationActivity"/>
+        <activity android:name=".view.activities.RegistrationActivity"
+            android:exported="true"/>
         <activity android:name=".view.activities.AllCoursesActivity"/>
 
 

@@ -1,11 +1,15 @@
 package com.example.traininghub.DataSource;
 
+import android.app.Activity;
+import android.content.Context;
 import android.util.Log;
 
 import androidx.annotation.NonNull;
 import androidx.lifecycle.MutableLiveData;
 import androidx.paging.PageKeyedDataSource;
 
+import com.example.traininghub.App;
+import com.example.traininghub.Repo.GroupsRepo;
 import com.example.traininghub.dagger.AppComponent;
 import com.example.traininghub.dagger.DaggerAppComponent;
 import com.example.traininghub.models.Course;
@@ -29,10 +33,18 @@ public class GroupsDataSource extends PageKeyedDataSource<Integer, Group> {
 
     private String limit;
     private String category;
+    private GroupsRepo groupsRepo;
+
 
     GroupsDataSource(String limit, String category) {
         this.limit = limit;
         this.category = category;
+    }
+
+    public GroupsDataSource(String limit, String category, GroupsRepo groupsRepo) {
+        this.limit = limit;
+        this.category = category;
+        this.groupsRepo = groupsRepo;
     }
 
     @Override
@@ -58,9 +70,9 @@ public class GroupsDataSource extends PageKeyedDataSource<Integer, Group> {
 
     private void getGroups(String page, String limit, String course,
                            LoadInitialCallback loadInitialCallback, LoadCallback<Integer, Group> loadCallback) {
-        AppComponent appComponent= DaggerAppComponent.builder().build();
 
-        appComponent.getGroupsRepo()
+
+        groupsRepo
                 .getGroups(course,page,limit)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
@@ -95,7 +107,7 @@ public class GroupsDataSource extends PageKeyedDataSource<Integer, Group> {
 
                     @Override
                     public void onError(Throwable e) {
-
+                        Log.d(TAG, "onError: "+e.getMessage());
                     }
                 });
     }

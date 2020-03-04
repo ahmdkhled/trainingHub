@@ -25,6 +25,12 @@ public class CourseGroupsBS extends BottomSheetDialogFragment {
     private LayoutCourseGroupsBinding binding;
     private GroupsBottomSheetVM groupsBottomSheetVM;
     private GroupsAdapter adapter;
+    private int id;
+    public CourseGroupsBS(int id) {
+        this.id=id;
+    }
+
+
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -35,12 +41,15 @@ public class CourseGroupsBS extends BottomSheetDialogFragment {
         GridLayoutManager gridLayoutManager=new GridLayoutManager(getContext(),3);
         binding.groupsRecycler.setLayoutManager(gridLayoutManager);
 
+        groupsBottomSheetVM.init(id,null);
+        getGroups();
+
         return binding.getRoot();
     }
 
     private void getGroups(){
         groupsBottomSheetVM.getGroups()
-                .observe(this, groups -> {
+                .observe(getActivity(), groups -> {
                     adapter.submitList(groups);
                 });
     }
