@@ -50,6 +50,7 @@ public class GroupsBottomSheetVM extends AndroidViewModel {
 
     public void validate(){
         groupsDataFactory.getGroupDataSource().getValue().invalidate();
+        groupsDataFactory.getGroupDataSource().getValue().getNetworkState().setValue(new NetworkState(true,null,null));
     }
 
     public LiveData<NetworkState> getNetworkState() {

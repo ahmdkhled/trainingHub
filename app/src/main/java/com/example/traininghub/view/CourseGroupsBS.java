@@ -1,6 +1,7 @@
 package com.example.traininghub.view;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,7 +15,9 @@ import androidx.recyclerview.widget.GridLayoutManager;
 import com.example.traininghub.R;
 import com.example.traininghub.adapters.GroupsAdapter;
 import com.example.traininghub.databinding.LayoutCourseGroupsBinding;
+import com.example.traininghub.models.Error;
 import com.example.traininghub.models.Group;
+import com.example.traininghub.models.NetworkState;
 import com.example.traininghub.viewModel.GroupsBottomSheetVM;
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment;
 
@@ -51,6 +54,29 @@ public class CourseGroupsBS extends BottomSheetDialogFragment {
         groupsBottomSheetVM.getGroups()
                 .observe(getActivity(), groups -> {
                     adapter.submitList(groups);
+                });
+
+        groupsBottomSheetVM
+                .getNetworkState()
+                .observe(getActivity(),networkState -> {
+                    binding.progressbar
+                            .setVisibility(networkState.getVisibility());
+                    Log.d("LOADINGG", "getGroups: "+networkState.getErrorMessage());
+                    binding.emptyView.getRoot().setVisibility(networkState.getErrorViewVisibility());
+
+                    if (networkState.getErrorMessage()==null)return;
+                        binding.emptyView.setError(new Error(
+                                networkState.getErrorMessage(),
+                                networkState.getActionMessage(),R.drawable.empty));
+
+                        binding.emptyView.action
+                                .setOnClickListener(view -> {
+                                    if (networkState.getAction()== NetworkState.BACK)
+                                        dismiss();
+                                    else
+                                        groupsBottomSheetVM.validate();
+                                });
+
                 });
     }
 

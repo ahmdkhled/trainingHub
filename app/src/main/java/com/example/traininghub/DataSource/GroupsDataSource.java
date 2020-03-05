@@ -101,12 +101,14 @@ public class GroupsDataSource extends PageKeyedDataSource<Integer, Group> {
 
 
                         }else
-                            networkState.postValue(new NetworkState(false,"Error loading Courses"
-                                    ,NetworkState.BACK,"retry",page));
+                            networkState.postValue(new NetworkState(false,"Error loading groups"
+                                    ,NetworkState.RETRY,"retry",page));
                     }
 
                     @Override
                     public void onError(Throwable e) {
+                        networkState.postValue(new NetworkState(false,"Error loading groups"
+                                ,NetworkState.RETRY,"retry",page));
                         Log.d(TAG, "onError: "+e.getMessage());
                     }
                 });

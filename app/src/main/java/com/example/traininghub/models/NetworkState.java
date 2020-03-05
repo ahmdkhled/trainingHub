@@ -80,6 +80,11 @@ public class NetworkState {
         return loading? View.VISIBLE:View.GONE;
     }
 
+    public int getErrorViewVisibility(){
+        return errorMessage==null? View.GONE:View.VISIBLE;
+    }
+
+
     @NonNull
     @Override
     public String toString() {

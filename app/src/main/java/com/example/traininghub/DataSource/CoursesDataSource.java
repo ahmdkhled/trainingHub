@@ -87,7 +87,7 @@ public  class CoursesDataSource extends PageKeyedDataSource <Integer, Course>{
                         CoursesResponse coursesResponse=response.body();
                         if (response.isSuccessful()&&coursesResponse!=null&&coursesResponse.getCourses()!=null){
                             if (coursesResponse.getCourses().isEmpty()&&page.equals("1")){
-                                networkState.postValue(new NetworkState(false,"there is no courses"
+                                networkState.postValue(new NetworkState(false,"there is no groups available"
                                         ,NetworkState.BACK,"back",page));
                                 return;
                             }
@@ -101,7 +101,7 @@ public  class CoursesDataSource extends PageKeyedDataSource <Integer, Course>{
 
                         }else
                             networkState.postValue(new NetworkState(false,"Error loading Courses"
-                                    ,NetworkState.BACK,"retry",page));
+                                    ,NetworkState.RETRY,"retry",page));
 
 
                     }
@@ -109,7 +109,7 @@ public  class CoursesDataSource extends PageKeyedDataSource <Integer, Course>{
                     @Override
                     public void onError(Throwable e) {
                         networkState.postValue(new NetworkState(false,"Error loading Courses"
-                                ,NetworkState.BACK,"retry",page));
+                                ,NetworkState.RETRY,"retry",page));
 
                         Log.d("COURSESS", "onError: "+e.getMessage());
                     }
