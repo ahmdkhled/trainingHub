@@ -25,7 +25,7 @@ public interface ApiService {
     Single<LoginResponse> login(@Body User user);
 
     @POST("register")
-    Single<APIResponse> register(@Body User user);
+    Single<LoginResponse> register(@Body User user);
 
     @GET("/api/instructors")
     Call<ArrayList<Instructor>> getInstructors(@Query("limit")String limit);

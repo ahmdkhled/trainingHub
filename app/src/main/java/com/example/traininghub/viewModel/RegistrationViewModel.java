@@ -17,7 +17,7 @@ public class RegistrationViewModel extends AndroidViewModel {
 
     private LoginRepository loginRepository;
     private MutableLiveData<LoginResponse> loginResponse;
-    private MutableLiveData<APIResponse> registerResponse;
+    private MutableLiveData<LoginResponse> registerResponse;
     private MutableLiveData<APIResponse> loginError;
     private MutableLiveData<APIResponse> registerError;
 
@@ -48,7 +48,7 @@ public class RegistrationViewModel extends AndroidViewModel {
         return loginError;
     }
 
-    public MutableLiveData<APIResponse> getRegisterResponse() {
+    public MutableLiveData<LoginResponse> getRegisterResponse() {
         return registerResponse;
     }
 

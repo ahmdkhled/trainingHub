@@ -28,7 +28,7 @@ public class LoginRepository {
     private static final String TAG = "LoginRepositoryTags";
     private MutableLiveData<LoginResponse> loginResponse =  new MutableLiveData<>();
     private MutableLiveData<APIResponse> loginError =  new MutableLiveData<>();
-    private MutableLiveData<APIResponse> registerResponse =  new MutableLiveData<>();
+    private MutableLiveData<LoginResponse> registerResponse =  new MutableLiveData<>();
     private MutableLiveData<APIResponse> registerError =  new MutableLiveData<>();
     private RetrofitClient retrofitClient;
     private TokenManager tokenManager;
@@ -53,6 +53,7 @@ public class LoginRepository {
                 .subscribe(response-> {
                     Log.d(TAG, "onResponseSuccessful: token : "+response.getAccessToken());
                     tokenManager.saveToken(response.getAccessToken());
+                    loginResponse.setValue(response);
                 }, error->{
                     if(error instanceof HttpException) {
                         APIResponse apiResponse = APIErrorUtil.parseError(retrofitClient, ((HttpException) error).response());
@@ -71,13 +72,14 @@ public class LoginRepository {
     }
 
     @SuppressLint("CheckResult")
-    public MutableLiveData<APIResponse> register(User user){
+    public MutableLiveData<LoginResponse> register(User user){
 
         retrofitClient.getApiService().register(user)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(response-> {
-                    Log.d(TAG, "register: "+response.getMessage());
+                    Log.d(TAG, "register: "+response.getAccessToken());
+                    tokenManager.saveToken(response.getAccessToken());
                     registerResponse.setValue(response);
                 }, error->{
                     if(error instanceof HttpException) {
@@ -85,7 +87,7 @@ public class LoginRepository {
                         registerError.setValue(apiResponse);
                         Log.d(TAG, "register: error: " + apiResponse.getMessage());
                     }else{
-                        registerError.setValue(new APIResponse(.getString(R.string.error_message)));
+                        registerError.setValue(new APIResponse(context.getString(R.string.error_message)));
                     }
 
                 });
@@ -94,7 +96,7 @@ public class LoginRepository {
         return registerResponse;
     }
 
-    public MutableLiveData<APIResponse> getRegisterResponse() {
+    public MutableLiveData<LoginResponse> getRegisterResponse() {
         return registerResponse;
     }
     public MutableLiveData<LoginResponse> getLoginResponse(){

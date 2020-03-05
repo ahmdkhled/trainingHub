@@ -19,6 +19,7 @@ import android.widget.Toast;
 import com.example.traininghub.R;
 import com.example.traininghub.databinding.FragmentRegisterBinding;
 import com.example.traininghub.models.APIResponse;
+import com.example.traininghub.models.LoginResponse;
 import com.example.traininghub.models.User;
 import com.example.traininghub.view.activities.RegistrationActivity;
 import com.example.traininghub.viewModel.RegistrationViewModel;
@@ -45,12 +46,12 @@ public class RegisterFragment extends Fragment {
 
         View view = mBinding.getRoot();
         mRegistrationViewModel = new ViewModelProvider(getActivity()).get(RegistrationViewModel.class);
-        mRegistrationViewModel.getRegisterResponse().observe(getViewLifecycleOwner(), new Observer<APIResponse>() {
+        mRegistrationViewModel.getRegisterResponse().observe(getViewLifecycleOwner(), new Observer<LoginResponse>() {
             @Override
-            public void onChanged(APIResponse apiResponse) {
-                Log.d(TAG, "onChanged: register response: "+apiResponse.getMessage());
+            public void onChanged(LoginResponse response) {
+                Log.d(TAG, "onChanged: register response: "+response.getAccessToken());
                 mBinding.ProgressBar.setVisibility(View.INVISIBLE);
-                Toast.makeText(getContext(), apiResponse.getMessage(), Toast.LENGTH_SHORT).show();
+                Toast.makeText(getContext(), getString(R.string.successful_registration), Toast.LENGTH_SHORT).show();
             }
         });
 
