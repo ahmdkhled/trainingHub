@@ -22,7 +22,7 @@ import com.example.traininghub.models.Course;
 import com.example.traininghub.models.CoursesResponse;
 import com.example.traininghub.models.Error;
 import com.example.traininghub.models.NetworkState;
-import com.example.traininghub.network.Network;
+import com.example.traininghub.retrofit.Network;
 import com.example.traininghub.viewModel.AllCoursesVM;
 
 import java.util.ArrayList;

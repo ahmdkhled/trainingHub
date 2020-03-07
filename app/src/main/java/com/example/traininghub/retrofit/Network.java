@@ -1,4 +1,4 @@
-package com.example.traininghub.network;
+package com.example.traininghub.retrofit;
 
 import android.content.Context;
 import android.net.ConnectivityManager;

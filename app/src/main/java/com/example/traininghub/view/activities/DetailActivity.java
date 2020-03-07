@@ -19,9 +19,12 @@ import com.example.traininghub.adapters.CourseMediaAdapter;
 import com.example.traininghub.adapters.InstructorsAdapter;
 import com.example.traininghub.databinding.ActivityDetailBinding;
 import com.example.traininghub.helpers.ContentParser;
+import com.example.traininghub.helpers.SnackBarHelper;
 import com.example.traininghub.models.Content;
 import com.example.traininghub.models.Course;
+import com.example.traininghub.retrofit.Network;
 import com.example.traininghub.view.CourseGroupsBS;
+import com.google.android.material.snackbar.Snackbar;
 import com.rd.PageIndicatorView;
 import com.rd.animation.type.AnimationType;
 
@@ -65,8 +68,7 @@ public class DetailActivity extends AppCompatActivity {
 
         binding.takeCourse
                 .setOnClickListener(view -> {
-                    CourseGroupsBS courseGroupsBS=new CourseGroupsBS(course.getId());
-                    courseGroupsBS.show(getSupportFragmentManager(),"");
+                    openBottomSheet();
                 });
 
 
@@ -104,6 +106,18 @@ public class DetailActivity extends AppCompatActivity {
 
 
 
+    }
+
+    private void openBottomSheet(){
+        if (Network.isNetworkAvailable(this)){
+            CourseGroupsBS courseGroupsBS=new CourseGroupsBS(course.getId());
+            courseGroupsBS.show(getSupportFragmentManager(),"");
+        }else {
+            SnackBarHelper.showSnackBar(binding.getRoot(),R.string.no_connection, Snackbar.LENGTH_LONG
+                    ,R.string.retry,view1 -> {
+                        openBottomSheet();
+                    });
+        }
     }
 
     @BindingAdapter("android:src")
