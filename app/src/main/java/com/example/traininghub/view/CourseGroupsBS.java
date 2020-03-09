@@ -1,5 +1,6 @@
 package com.example.traininghub.view;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -16,16 +17,19 @@ import androidx.recyclerview.widget.GridLayoutManager;
 import com.example.traininghub.R;
 import com.example.traininghub.adapters.GroupsAdapter;
 import com.example.traininghub.databinding.LayoutCourseGroupsBinding;
+import com.example.traininghub.helpers.SnackBarHelper;
 import com.example.traininghub.models.Error;
 import com.example.traininghub.models.Group;
 import com.example.traininghub.models.NetworkState;
 import com.example.traininghub.viewModel.GroupsBottomSheetVM;
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment;
+import com.google.android.material.snackbar.Snackbar;
 
 import java.util.ArrayList;
 
 public class CourseGroupsBS extends BottomSheetDialogFragment implements GroupsAdapter.OnGroupClicked{
 
+    private static final String TAG = "CourseGroupsBS";
     private LayoutCourseGroupsBinding binding;
     private GroupsBottomSheetVM groupsBottomSheetVM;
     private GroupsAdapter adapter;
@@ -33,6 +37,7 @@ public class CourseGroupsBS extends BottomSheetDialogFragment implements GroupsA
     public CourseGroupsBS(int id) {
         this.id=id;
     }
+    private Context context;
 
 
     @Nullable
@@ -91,7 +96,26 @@ public class CourseGroupsBS extends BottomSheetDialogFragment implements GroupsA
 
     @Override
     public void onGroupClicked(int groupId) {
-        groupsBottomSheetVM.enrollToCourse("1", String.valueOf(groupId));
 
+        groupsBottomSheetVM.enrollToCourse("10", String.valueOf(groupId))
+        .observe(getActivity(), courseEnrollRes -> {
+            Log.d(TAG, "onGroupClicked: "+courseEnrollRes.getMessage());
+            //todo add snackBar instead of Toast
+            Toast.makeText(context, ""+courseEnrollRes.getMessage(), Toast.LENGTH_SHORT).show();
+        });
+        groupsBottomSheetVM
+                .getEnrollingError()
+                .observe(getActivity(),error->{
+                    Toast.makeText(context, error, Toast.LENGTH_SHORT).show();
+                });
+
+        dismiss();
+
+    }
+
+    @Override
+    public void onAttach(@NonNull Context context) {
+        super.onAttach(context);
+        this.context=context;
     }
 }

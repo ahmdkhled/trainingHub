@@ -1,6 +1,7 @@
 package com.example.traininghub.Repo;
 
 import com.example.traininghub.models.Course;
+import com.example.traininghub.models.CourseEnrollRes;
 import com.example.traininghub.models.CoursesResponse;
 import com.example.traininghub.retrofit.RetrofitClient;
 
@@ -34,7 +35,7 @@ public class CoursesRepo {
 
     }
 
-    public Single<Response<ResponseBody>> enrollToCourse(String student_id,String group_id){
+    public Single<Response<CourseEnrollRes>> enrollToCourse(String student_id, String group_id){
         return retrofitClient
                 .getApiService()
                 .enrollToCourse(student_id,group_id);

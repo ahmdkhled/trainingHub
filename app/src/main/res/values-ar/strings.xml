@@ -39,4 +39,5 @@
     <string name="syllabus">syllabus</string>
     <string name="back_to_home">back to home</string>
     <string name="no_connection">There Is No Internet Connection</string>
+    <string name="error_enrolling_to_course">Error happened while Enrolling to tis course</string>
 </resources>

@@ -8,6 +8,7 @@ import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.MutableLiveData;
 
 import com.example.traininghub.App;
+import com.example.traininghub.models.CourseEnrollRes;
 
 import io.reactivex.SingleObserver;
 import io.reactivex.android.schedulers.AndroidSchedulers;
@@ -31,14 +32,14 @@ public class DetailActivityVM extends AndroidViewModel {
                 .enrollToCourse(student_id,group_id)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new SingleObserver<Response<ResponseBody>>() {
+                .subscribe(new SingleObserver<Response<CourseEnrollRes>>() {
                     @Override
                     public void onSubscribe(Disposable d) {
 
                     }
 
                     @Override
-                    public void onSuccess(Response<ResponseBody> response) {
+                    public void onSuccess(Response<CourseEnrollRes> response) {
                         Log.d(TAG, "onSuccess: ");
                     }
 

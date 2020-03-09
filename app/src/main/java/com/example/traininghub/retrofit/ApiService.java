@@ -2,6 +2,7 @@ package com.example.traininghub.retrofit;
 
 import com.example.traininghub.models.APIResponse;
 import com.example.traininghub.models.CategoriesResponse;
+import com.example.traininghub.models.CourseEnrollRes;
 import com.example.traininghub.models.CoursesResponse;
 import com.example.traininghub.models.Group;
 import com.example.traininghub.models.Instructor;
@@ -49,7 +50,7 @@ public interface ApiService {
 
     @FormUrlEncoded
     @POST("course_enrollments")
-    Single<Response<ResponseBody>> enrollToCourse(@Field("student_id") String student_id,@Field("group_id") String group_id);
+    Single<Response<CourseEnrollRes>> enrollToCourse(@Field("student_id") String student_id, @Field("group_id") String group_id);
 
 
 }

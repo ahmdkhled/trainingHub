@@ -13,10 +13,13 @@ import androidx.paging.PagedList;
 
 import com.example.traininghub.App;
 import com.example.traininghub.DataSource.GroupsDataFactory;
+import com.example.traininghub.R;
+import com.example.traininghub.helpers.APIErrorUtil;
+import com.example.traininghub.models.APIResponse;
+import com.example.traininghub.models.CourseEnrollRes;
 import com.example.traininghub.models.Group;
 import com.example.traininghub.models.NetworkState;
 
-import java.util.ArrayList;
 import java.util.concurrent.Executor;
 import java.util.concurrent.Executors;
 
@@ -24,7 +27,7 @@ import io.reactivex.SingleObserver;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.Disposable;
 import io.reactivex.schedulers.Schedulers;
-import okhttp3.ResponseBody;
+import retrofit2.HttpException;
 import retrofit2.Response;
 
 public class GroupsBottomSheetVM extends AndroidViewModel {
@@ -38,6 +41,7 @@ public class GroupsBottomSheetVM extends AndroidViewModel {
 
     //course enrollment
     MutableLiveData<Boolean> isEnrolling=new MutableLiveData<>();
+    MutableLiveData<String> enrollingError=new MutableLiveData<>();
 
 
     public GroupsBottomSheetVM(@NonNull Application application) {
@@ -78,26 +82,40 @@ public class GroupsBottomSheetVM extends AndroidViewModel {
     }
 
     //----------course enrollment -------------
-    public MutableLiveData<ResponseBody> enrollToCourse(String student_id, String group_id){
-        MutableLiveData<ResponseBody> enrollToCourse = new MutableLiveData<>();
+    public MutableLiveData<CourseEnrollRes> enrollToCourse(String student_id, String group_id){
+        MutableLiveData<CourseEnrollRes> enrollToCourse = new MutableLiveData<>();
         isEnrolling.setValue(true);
         ((App)getApplication()).getCoursesRepo()
                 .enrollToCourse(student_id,group_id)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new SingleObserver<Response<ResponseBody>>() {
+                .subscribe(new SingleObserver<Response<CourseEnrollRes>>() {
                     @Override
                     public void onSubscribe(Disposable d) {
 
                     }
 
                     @Override
-                    public void onSuccess(Response<ResponseBody> response) {
-                        Log.d(TAG, "onSuccess: ");
+                    public void onSuccess(Response<CourseEnrollRes> response) {
+                        CourseEnrollRes courseEnrollRes=response.body();
+                        if (response.isSuccessful()&&courseEnrollRes!=null){
+                            enrollToCourse.setValue(courseEnrollRes);
+                            Log.d(TAG, "onSuccess: "+courseEnrollRes.getMessage());
+                        }
+
+                        else {
+                            enrollingError.setValue(getApplication().getApplicationContext()
+                                    .getString(R.string.error_enrolling_to_course));
+                        }
+
                     }
 
                     @Override
                     public void onError(Throwable e) {
+                        Log.d(TAG, "onError: "+e.getMessage());
+                        enrollingError.setValue(getApplication().getApplicationContext()
+                        .getString(R.string.error_enrolling_to_course));
+
 
                     }
                 });
@@ -105,4 +123,7 @@ public class GroupsBottomSheetVM extends AndroidViewModel {
 
     }
 
+    public MutableLiveData<String> getEnrollingError() {
+        return enrollingError;
+    }
 }

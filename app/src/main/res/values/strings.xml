@@ -46,4 +46,5 @@
     <string name="no_connection">There Is No Internet Connection</string>
     <string name="dummy_group_name">Group 15</string>
     <string name="dummy_group_startdate">12/2/1996</string>
+    <string name="error_enrolling_to_course">Error happened while Enrolling to tis course</string>
 </resources>
