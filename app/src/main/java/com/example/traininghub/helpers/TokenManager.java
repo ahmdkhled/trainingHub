@@ -20,7 +20,7 @@ public class TokenManager {
     }
 
     public void saveToken(String token){
-        sharedPreferences.edit().putString(TOKEN_value, token).apply();
+        sharedPreferences.edit().putString("Bearer "+TOKEN_value, token).apply();
     }
 
     public String getToken(){

@@ -8,6 +8,7 @@ import android.widget.ImageView;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.BindingAdapter;
 import androidx.databinding.DataBindingUtil;
+import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.viewpager.widget.ViewPager;
@@ -24,18 +25,18 @@ import com.example.traininghub.models.Content;
 import com.example.traininghub.models.Course;
 import com.example.traininghub.retrofit.Network;
 import com.example.traininghub.view.CourseGroupsBS;
+import com.example.traininghub.viewModel.DetailActivityVM;
 import com.google.android.material.snackbar.Snackbar;
 import com.rd.PageIndicatorView;
 import com.rd.animation.type.AnimationType;
 
 import java.util.ArrayList;
 
-import butterknife.ButterKnife;
-
 public class DetailActivity extends AppCompatActivity {
 
     public static String  EXTRA_COURSE="extra_course";
 
+    DetailActivityVM detailActivityVM;
     ActivityDetailBinding binding;
     Course course;
 
@@ -43,8 +44,10 @@ public class DetailActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         binding= DataBindingUtil.setContentView(this,R.layout.activity_detail);
-        ButterKnife.bind(this);
+        detailActivityVM=new  ViewModelProvider(this).get(DetailActivityVM.class);
         course=getIntent().getParcelableExtra(EXTRA_COURSE);
+
+
 
 
         binding.setCourse(course);

@@ -5,6 +5,7 @@ import androidx.annotation.Nullable;
 import androidx.recyclerview.widget.DiffUtil;
 
 public class Group {
+    private int id;
     private String title;
     private String start;
     private String end;
@@ -12,6 +13,10 @@ public class Group {
     public Group(String title, String start) {
         this.title = title;
         this.start = start;
+    }
+
+    public int getId() {
+        return id;
     }
 
     public String getTitle() {
@@ -30,7 +35,7 @@ public class Group {
     public static DiffUtil.ItemCallback<Group> DIFF_CALLBACK=new DiffUtil.ItemCallback<Group>() {
         @Override
         public boolean areItemsTheSame(@NonNull Group oldItem, @NonNull Group newItem) {
-            return oldItem.equals(newItem);
+            return oldItem.id==newItem.id;
         }
 
         @Override

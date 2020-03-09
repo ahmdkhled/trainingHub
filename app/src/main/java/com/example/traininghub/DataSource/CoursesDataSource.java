@@ -30,10 +30,16 @@ public  class CoursesDataSource extends PageKeyedDataSource <Integer, Course>{
 
     private String limit;
     private String category;
+    private CoursesRepo coursesRepo;
 
-    CoursesDataSource(String limit, String category) {
+
+
+
+    CoursesDataSource(String limit, String category,CoursesRepo coursesRepo) {
         this.limit = limit;
         this.category = category;
+        this.coursesRepo=coursesRepo;
+
     }
 
     @Override
@@ -71,7 +77,7 @@ public  class CoursesDataSource extends PageKeyedDataSource <Integer, Course>{
         networkState.postValue(new NetworkState(true,null,page));
 
 
-                CoursesRepo.getInstance()
+                coursesRepo
                 .getCourses(page,limit,category)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())

@@ -12,9 +12,12 @@ import com.example.traininghub.models.User;
 import java.util.ArrayList;
 
 import io.reactivex.Single;
+import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.Response;
 import retrofit2.http.Body;
+import retrofit2.http.Field;
+import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
 import retrofit2.http.POST;
 import retrofit2.http.Query;
@@ -44,6 +47,9 @@ public interface ApiService {
     @GET("course_groups")
     Single<Response<ArrayList<Group>>> getGroups (@Query("course_id")String course, @Query("page")String page, @Query("limit")String limit);
 
+    @FormUrlEncoded
+    @POST("course_enrollments")
+    Single<Response<ResponseBody>> enrollToCourse(@Field("student_id") String student_id,@Field("group_id") String group_id);
 
 
 }

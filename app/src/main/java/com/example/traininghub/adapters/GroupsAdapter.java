@@ -13,13 +13,14 @@ import com.example.traininghub.R;
 import com.example.traininghub.databinding.LayoutGroupItemBinding;
 import com.example.traininghub.models.Group;
 
-import java.util.ArrayList;
-
 public class GroupsAdapter extends PagedListAdapter<Group, GroupsAdapter.GroupHolder> {
 
+    private OnGroupClicked onGroupClicked;
 
-     public GroupsAdapter() {
+
+    public GroupsAdapter( OnGroupClicked onGroupClicked) {
         super(Group.DIFF_CALLBACK);
+        this.onGroupClicked = onGroupClicked;
     }
 
     @NonNull
@@ -42,6 +43,15 @@ public class GroupsAdapter extends PagedListAdapter<Group, GroupsAdapter.GroupHo
         public GroupHolder(@NonNull LayoutGroupItemBinding binding) {
             super(binding.getRoot());
             this.binding=binding;
+
+            binding.getRoot().setOnClickListener(view -> {
+                onGroupClicked.onGroupClicked(getItem(getAdapterPosition()).getId());
+
+            } );
         }
+    }
+
+    public interface OnGroupClicked{
+         void onGroupClicked(int groupId);
     }
 }

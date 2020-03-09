@@ -5,6 +5,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -23,7 +24,7 @@ import com.google.android.material.bottomsheet.BottomSheetDialogFragment;
 
 import java.util.ArrayList;
 
-public class CourseGroupsBS extends BottomSheetDialogFragment {
+public class CourseGroupsBS extends BottomSheetDialogFragment implements GroupsAdapter.OnGroupClicked{
 
     private LayoutCourseGroupsBinding binding;
     private GroupsBottomSheetVM groupsBottomSheetVM;
@@ -39,7 +40,7 @@ public class CourseGroupsBS extends BottomSheetDialogFragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         binding= DataBindingUtil.inflate(inflater, R.layout.layout_course_groups,container,false);
         groupsBottomSheetVM= new ViewModelProvider(getActivity()).get(GroupsBottomSheetVM.class);
-        adapter=new GroupsAdapter();
+        adapter=new GroupsAdapter(this);
         binding.groupsRecycler.setAdapter(adapter);
         GridLayoutManager gridLayoutManager=new GridLayoutManager(getContext(),3);
         binding.groupsRecycler.setLayoutManager(gridLayoutManager);
@@ -86,5 +87,11 @@ public class CourseGroupsBS extends BottomSheetDialogFragment {
             groups.add(new Group("php course ","21/12/2020"));
         }
         return groups;
+    }
+
+    @Override
+    public void onGroupClicked(int groupId) {
+        groupsBottomSheetVM.enrollToCourse("1", String.valueOf(groupId));
+
     }
 }

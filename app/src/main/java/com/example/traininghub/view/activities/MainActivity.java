@@ -9,6 +9,7 @@ import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.MenuItem;
@@ -54,6 +55,8 @@ public class MainActivity extends AppCompatActivity {
 
             } else if (menuItem.getItemId()==R.id.account){
                 showFragment(mainActivityVM.getAccountFragment(),false);
+                Intent intent=new Intent(this,RegistrationActivity.class);
+                startActivity(intent);
             }
             return true;
         });

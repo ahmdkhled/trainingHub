@@ -11,27 +11,18 @@ import javax.inject.Inject;
 import javax.inject.Singleton;
 
 import io.reactivex.Single;
+import okhttp3.ResponseBody;
 import retrofit2.Response;
+import retrofit2.http.Field;
 
 @Singleton
 public class CoursesRepo {
 
     private RetrofitClient retrofitClient;
-    private static CoursesRepo coursesRepo;
 
     @Inject
     public CoursesRepo(RetrofitClient retrofitClient) {
         this.retrofitClient = retrofitClient;
-    }
-
-
-    public static CoursesRepo getInstance() {
-        return coursesRepo == null ?coursesRepo=new CoursesRepo():coursesRepo;
-    }
-
-
-    private CoursesRepo() {
-
     }
 
 
@@ -42,4 +33,11 @@ public class CoursesRepo {
 
 
     }
+
+    public Single<Response<ResponseBody>> enrollToCourse(String student_id,String group_id){
+        return retrofitClient
+                .getApiService()
+                .enrollToCourse(student_id,group_id);
+    }
+
 }

@@ -10,6 +10,7 @@ import androidx.lifecycle.Transformations;
 import androidx.paging.LivePagedListBuilder;
 import androidx.paging.PagedList;
 
+import com.example.traininghub.App;
 import com.example.traininghub.DataSource.CoursesDataFactory;
 import com.example.traininghub.models.Course;
 import com.example.traininghub.models.CoursesResponse;
@@ -37,7 +38,7 @@ public class AllCoursesVM extends AndroidViewModel {
 
     public void init(String limit,String category){
         Executor executor= Executors.newFixedThreadPool(5);
-        coursesDataFactory=new CoursesDataFactory(limit,category);
+        coursesDataFactory=new CoursesDataFactory(limit,category,((App)getApplication()).getCoursesRepo());
         networkState=Transformations.switchMap(coursesDataFactory.getCoursesDataSource(),
                 (dataSource ->dataSource.getNetworkState())
 
