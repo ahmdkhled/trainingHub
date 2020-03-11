@@ -30,7 +30,7 @@ public interface ApiService {
     Single<LoginResponse> login(@Body User user);
 
     @POST("register")
-    Single<APIResponse> register(@Body User user);
+    Single<LoginResponse> register(@Body User user);
 
     @GET("/api/instructors")
     Call<ArrayList<Instructor>> getInstructors(@Query("page")String page,@Query("limit")String limit);

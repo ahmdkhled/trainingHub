@@ -9,6 +9,7 @@ import androidx.lifecycle.ViewModelProvider;
 
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -19,38 +20,49 @@ import com.example.traininghub.databinding.FragmentLoginBinding;
 import com.example.traininghub.models.APIResponse;
 import com.example.traininghub.models.LoginResponse;
 import com.example.traininghub.models.User;
-import com.example.traininghub.viewModel.LoginViewModel;
+import com.example.traininghub.viewModel.RegistrationViewModel;
+
+import java.util.Objects;
 
 public class LoginFragment extends Fragment {
 
     private static final String TAG = "LoginActivityTags";
 
-    private LoginViewModel mLoginViewModel;
+    private RegistrationViewModel mRegistrationViewModel;
     private FragmentLoginBinding mBinding;
     private RegisterListener listener;
 
 
+    @Override
+    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
+        Log.d(TAG, "onActivityCreated: ");
+    }
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-
+        Log.d(TAG, "onCreateView: ");
         mBinding = DataBindingUtil.inflate(inflater, R.layout.fragment_login, container, false);
 
         View view = mBinding.getRoot();
 
-        mLoginViewModel = new ViewModelProvider(getActivity()).get(LoginViewModel.class);
-        mLoginViewModel.getLoginResponse().observe(getViewLifecycleOwner(), new Observer<LoginResponse>() {
+        mRegistrationViewModel = new ViewModelProvider(getActivity()).get(RegistrationViewModel.class);
+
+        mRegistrationViewModel.getLoginResponse().observe(getViewLifecycleOwner(), new Observer<LoginResponse>() {
             @Override
             public void onChanged(LoginResponse loginResponse) {
-                Toast.makeText(getContext(), "successful login", Toast.LENGTH_SHORT).show();
+//                Toast.makeText(getContext(), "successful login", Toast.LENGTH_SHORT).show();
+                mBinding.loginProgressBar.setVisibility(View.INVISIBLE);
+                listener.onSuccessfulLogin();
             }
         });
 
 
-        mLoginViewModel.getLoginError().observe(getViewLifecycleOwner(), new Observer<APIResponse>() {
+        mRegistrationViewModel.getLoginError().observe(getViewLifecycleOwner(), new Observer<APIResponse>() {
             @Override
             public void onChanged(APIResponse apiResponse) {
+                mBinding.loginProgressBar.setVisibility(View.INVISIBLE);
                 Toast.makeText(getContext(), apiResponse.getMessage(), Toast.LENGTH_SHORT).show();
             }
         });
@@ -59,10 +71,11 @@ public class LoginFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 if(isEmailValid() && isPasswordValid()){
-                    User user = new User(mBinding.loginEmail.getText().toString(),
-                            mBinding.loginPass.getText().toString());
+                    User user = new User(Objects.requireNonNull(mBinding.loginEmail.getText()).toString(),
+                            Objects.requireNonNull(mBinding.loginPass.getText()).toString());
 
-                    mLoginViewModel.login(user);
+                    mRegistrationViewModel.login(user);
+                    mBinding.loginProgressBar.setVisibility(View.VISIBLE);
                 }
             }
         });
@@ -82,7 +95,7 @@ public class LoginFragment extends Fragment {
 
 
     private boolean isEmailValid(){
-        String email = mBinding.loginEmail.getText().toString();
+        String email = Objects.requireNonNull(mBinding.loginEmail.getText()).toString();
         if(TextUtils.isEmpty(email)){
             mBinding.loginEmailIL.setError("Email can't be empty");
             return false;
@@ -95,7 +108,7 @@ public class LoginFragment extends Fragment {
     }
 
     private boolean isPasswordValid(){
-        String password = mBinding.loginPass.getText().toString();
+        String password = Objects.requireNonNull(mBinding.loginPass.getText()).toString();
         if(TextUtils.isEmpty(password)){
             mBinding.loginPassIL.setError("Password can't be empty");
             return false;
@@ -115,6 +128,8 @@ public class LoginFragment extends Fragment {
 
     public interface RegisterListener {
         void onRegisterButtonClicked();
+        void onSuccessfulLogin();
     }
+
 
 }

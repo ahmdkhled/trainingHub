@@ -4,13 +4,16 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
+import androidx.lifecycle.ViewModelProvider;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import com.example.traininghub.R;
 import com.example.traininghub.databinding.ActivityRegisterationActivtyBinding;
 import com.example.traininghub.view.fragments.LoginFragment;
 import com.example.traininghub.view.fragments.RegisterFragment;
+import com.example.traininghub.viewModel.RegistrationViewModel;
 
 public class RegistrationActivity extends AppCompatActivity {
 
@@ -27,6 +30,9 @@ public class RegistrationActivity extends AppCompatActivity {
 
         mBinding = DataBindingUtil.setContentView(this, R.layout.activity_registeration_activty);
 
+        // init view model
+        RegistrationViewModel mRegistrationViewModel = new ViewModelProvider(this).get(RegistrationViewModel.class);
+
         mFragmentManager = getSupportFragmentManager();
 
         if(savedInstanceState == null) {
@@ -40,6 +46,13 @@ public class RegistrationActivity extends AppCompatActivity {
                 @Override
                 public void onRegisterButtonClicked() {
                     replaceFragment(registerFragment);
+                }
+
+                @Override
+                public void onSuccessfulLogin() {
+                    Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+                    startActivity(intent);
+                    finish();
                 }
             });
 

@@ -12,16 +12,16 @@ import com.example.traininghub.models.APIResponse;
 import com.example.traininghub.models.LoginResponse;
 import com.example.traininghub.models.User;
 
-public class LoginViewModel extends AndroidViewModel {
+public class RegistrationViewModel extends AndroidViewModel {
 
 
     private LoginRepository loginRepository;
     private MutableLiveData<LoginResponse> loginResponse;
-    private MutableLiveData<APIResponse> registerResponse;
+    private MutableLiveData<LoginResponse> registerResponse;
     private MutableLiveData<APIResponse> loginError;
     private MutableLiveData<APIResponse> registerError;
 
-    public LoginViewModel(@NonNull Application application) {
+    public RegistrationViewModel(@NonNull Application application) {
         super(application);
         loginRepository = ((App)getApplication()).getLoginRepository();
         loginResponse = loginRepository.getLoginResponse();
@@ -48,7 +48,7 @@ public class LoginViewModel extends AndroidViewModel {
         return loginError;
     }
 
-    public MutableLiveData<APIResponse> getRegisterResponse() {
+    public MutableLiveData<LoginResponse> getRegisterResponse() {
         return registerResponse;
     }
 

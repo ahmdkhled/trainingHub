@@ -1,10 +1,12 @@
 package com.example.traininghub.Repo;
 
 import android.annotation.SuppressLint;
+import android.content.Context;
 import android.util.Log;
 
 import androidx.lifecycle.MutableLiveData;
 
+import com.example.traininghub.R;
 import com.example.traininghub.models.APIResponse;
 import com.example.traininghub.models.LoginResponse;
 import com.example.traininghub.models.User;
@@ -26,17 +28,17 @@ public class LoginRepository {
     private static final String TAG = "LoginRepositoryTags";
     private MutableLiveData<LoginResponse> loginResponse =  new MutableLiveData<>();
     private MutableLiveData<APIResponse> loginError =  new MutableLiveData<>();
-    private MutableLiveData<APIResponse> registerResponse =  new MutableLiveData<>();
+    private MutableLiveData<LoginResponse> registerResponse =  new MutableLiveData<>();
     private MutableLiveData<APIResponse> registerError =  new MutableLiveData<>();
-    private MutableLiveData<Boolean> loggingIn =  new MutableLiveData<>();
-    private MutableLiveData<Boolean> registering =  new MutableLiveData<>();
     private RetrofitClient retrofitClient;
     private TokenManager tokenManager;
+    private Context context;
 
 
     @Inject
-    public LoginRepository(RetrofitClient retrofitClient, TokenManager tokenManager)
+    public LoginRepository(Context context, RetrofitClient retrofitClient, TokenManager tokenManager)
     {
+        this.context = context;
         this.retrofitClient = retrofitClient;
         this.tokenManager = tokenManager;
     }
@@ -45,21 +47,22 @@ public class LoginRepository {
     @SuppressLint("CheckResult")
     public MutableLiveData<LoginResponse> login(User user){
 
-        loggingIn.setValue(true);
         retrofitClient.getApiService().login(user)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(response-> {
-                    loggingIn.setValue(false);
                     Log.d(TAG, "onResponseSuccessful: token : "+response.getAccessToken());
                     tokenManager.saveToken(response.getAccessToken());
                     loginResponse.setValue(response);
                 }, error->{
-                    loggingIn.setValue(false);
-                    APIResponse apiResponse = APIErrorUtil.parseError(retrofitClient, ((HttpException) error).response());
-                    Log.d(TAG, "onResponse: response is not successful "
-                            + apiResponse.getMessage());
-                    loginError.setValue(apiResponse);
+                    if(error instanceof HttpException) {
+                        APIResponse apiResponse = APIErrorUtil.parseError(retrofitClient, ((HttpException) error).response());
+                        Log.d(TAG, "onResponse: response is not successful "
+                                + apiResponse.getMessage());
+                        loginError.setValue(apiResponse);
+                    }else{
+                        loginError.setValue(new APIResponse(context.getString(R.string.error_message)));
+                    }
 
 
                 });
@@ -69,21 +72,23 @@ public class LoginRepository {
     }
 
     @SuppressLint("CheckResult")
-    public MutableLiveData<APIResponse> register(User user){
+    public MutableLiveData<LoginResponse> register(User user){
 
-        registering.setValue(true);
         retrofitClient.getApiService().register(user)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(response-> {
-                    Log.d(TAG, "register: "+response.getMessage());
+                    Log.d(TAG, "register: "+response.getAccessToken());
+                    tokenManager.saveToken(response.getAccessToken());
                     registerResponse.setValue(response);
-                    registering.setValue(false);
                 }, error->{
-                   registering.setValue(false);
-                    APIResponse apiResponse = APIErrorUtil.parseError(retrofitClient, ((HttpException) error).response());
-                    registerError.setValue(apiResponse);
-                    Log.d(TAG, "register: error: "+apiResponse.getMessage());
+                    if(error instanceof HttpException) {
+                        APIResponse apiResponse = APIErrorUtil.parseError(retrofitClient, ((HttpException) error).response());
+                        registerError.setValue(apiResponse);
+                        Log.d(TAG, "register: error: " + apiResponse.getMessage());
+                    }else{
+                        registerError.setValue(new APIResponse(context.getString(R.string.error_message)));
+                    }
 
                 });
 
@@ -91,7 +96,7 @@ public class LoginRepository {
         return registerResponse;
     }
 
-    public MutableLiveData<APIResponse> getRegisterResponse() {
+    public MutableLiveData<LoginResponse> getRegisterResponse() {
         return registerResponse;
     }
     public MutableLiveData<LoginResponse> getLoginResponse(){
@@ -102,13 +107,7 @@ public class LoginRepository {
         return loginError;
     }
 
-    public MutableLiveData<Boolean> getLoggingIn() {
-        return loggingIn;
-    }
 
-    public MutableLiveData<Boolean> getRegistering() {
-        return registering;
-    }
 
     public MutableLiveData<APIResponse> getRegisterError() {
         return registerError;
