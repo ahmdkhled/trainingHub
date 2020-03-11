@@ -2,6 +2,7 @@ package com.example.traininghub.helpers;
 
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.util.Log;
 
 import javax.inject.Inject;
 import javax.inject.Singleton;
@@ -20,10 +21,12 @@ public class TokenManager {
     }
 
     public void saveToken(String token){
-        sharedPreferences.edit().putString("Bearer "+TOKEN_value, token).apply();
+        Log.d("MainActivityTags", "saveToken: "+token);
+        sharedPreferences.edit().putString(TOKEN_value, "Bearer "+token).apply();
     }
 
     public String getToken(){
+        Log.d("MainActivityTags", "getToken: "+sharedPreferences.getString(TOKEN_value, "null"));
         return sharedPreferences.getString(TOKEN_value, "null");
 
     }

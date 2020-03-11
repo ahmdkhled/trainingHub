@@ -41,7 +41,6 @@ public class RetrofitClient {
             retrofit = new Retrofit.Builder()
                     .baseUrl(BASE_URL)
                     .client(getOkHttpClient())
-                    .client(getClient())
                     .addConverterFactory(GsonConverterFactory.create())
                     .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
                     .build();
@@ -53,8 +52,8 @@ public class RetrofitClient {
     private OkHttpClient getOkHttpClient(){
         return new OkHttpClient()
                 .newBuilder()
-                .addInterceptor(new HttpLoggingInterceptor().setLevel(HttpLoggingInterceptor.Level.BODY))
                 .addInterceptor(retrofitInterceptor)
+                .addInterceptor(new HttpLoggingInterceptor().setLevel(HttpLoggingInterceptor.Level.BODY))
                 .build();
 
     }
