@@ -49,4 +49,5 @@
     <string name="retry" >retry</string>
     <string name="error_message">something went wrong. Please try again</string>
     <string name="successful_registration">Now you have a new account</string>
+    <string name="dummy_instructor_bio">Ahmed khaled is an android developer with 2 years experience</string>
 </resources>

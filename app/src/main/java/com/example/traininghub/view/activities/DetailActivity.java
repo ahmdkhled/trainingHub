@@ -60,7 +60,7 @@ public class DetailActivity extends AppCompatActivity {
 
         RecyclerView instructors_recycler=binding.instructorsRecycler;
         InstructorsAdapter instructorsAdapter=new InstructorsAdapter(this,course.getInstructors());
-        instructors_recycler.setLayoutManager(new LinearLayoutManager(this,RecyclerView.HORIZONTAL,false));
+        instructors_recycler.setLayoutManager(new LinearLayoutManager(this));
         binding.instructorsRecycler.setAdapter(instructorsAdapter);
 
 
