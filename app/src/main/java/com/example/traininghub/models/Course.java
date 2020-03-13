@@ -16,7 +16,7 @@ public class Course implements Parcelable {
     private String duration;
     private String price;
     private String description;
-    private String content;
+    private ArrayList<Content> content;
     private float rating;
     private ArrayList<Instructor> instructors;
     private Center center;
@@ -29,7 +29,7 @@ public class Course implements Parcelable {
         duration = in.readString();
         price = in.readString();
         description = in.readString();
-        content = in.readString();
+        content = in.createTypedArrayList(Content.CREATOR);
         rating = in.readFloat();
         instructors = in.createTypedArrayList(Instructor.CREATOR);
         center = in.readParcelable(Center.class.getClassLoader());
@@ -50,7 +50,7 @@ public class Course implements Parcelable {
         dest.writeString(duration);
         dest.writeString(price);
         dest.writeString(description);
-        dest.writeString(content);
+        dest.writeTypedList(content);
         dest.writeFloat(rating);
         dest.writeTypedList(instructors);
         dest.writeParcelable(center, flags);
@@ -108,7 +108,7 @@ public class Course implements Parcelable {
         return description;
     }
 
-    public String getContent() {
+    public ArrayList<Content> getContent() {
         return content;
     }
 
