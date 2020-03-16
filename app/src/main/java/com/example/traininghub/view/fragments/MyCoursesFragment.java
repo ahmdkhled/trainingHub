@@ -19,6 +19,7 @@ import com.example.traininghub.adapters.StudentCoursesAdapter;
 import com.example.traininghub.databinding.FragmentMycoursesBinding;
 import com.example.traininghub.models.Error;
 import com.example.traininghub.models.NetworkState;
+import com.example.traininghub.retrofit.Network;
 import com.example.traininghub.viewModel.MyCoursesVM;
 
 public class MyCoursesFragment extends Fragment {
@@ -45,6 +46,22 @@ public class MyCoursesFragment extends Fragment {
     }
 
     public void getStudentCourse(String student_id, String limit){
+
+        if (!Network.isNetworkAvailable(getContext())){
+
+            binding.emptyView.getRoot().setVisibility(View.VISIBLE);
+            binding.emptyView.setError(new Error(getString(R.string.no_connection)
+                    ,getString(R.string.retry),R.drawable.heart_no));
+            binding.emptyView.action
+                    .setOnClickListener(view -> {
+                        getStudentCourse(student_id,limit);
+
+
+                    });
+            return;
+
+        }
+
         myCoursesVM.init(student_id,limit);
         if (!myCoursesVM.getStudentCourses().hasObservers())
             myCoursesVM.getStudentCourses()
