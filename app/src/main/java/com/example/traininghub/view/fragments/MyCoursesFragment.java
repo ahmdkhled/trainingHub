@@ -1,41 +1,54 @@
 package com.example.traininghub.view.fragments;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.GridLayoutManager;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.traininghub.R;
-import com.example.traininghub.adapters.CoursesAdapter;
-
-import java.util.ArrayList;
-
-import butterknife.BindView;
-import butterknife.ButterKnife;
+import com.example.traininghub.adapters.StudentCoursesAdapter;
+import com.example.traininghub.databinding.FragmentMycoursesBinding;
+import com.example.traininghub.viewModel.MyCoursesVM;
 
 public class MyCoursesFragment extends Fragment {
 
-    @BindView(R.id.courses_recycler)
-    RecyclerView courses_recycler;
+    MyCoursesVM myCoursesVM;
+    StudentCoursesAdapter adapter;
+    
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View v=inflater.inflate(R.layout.fragment_mycourses,container,false);
+        FragmentMycoursesBinding binding = DataBindingUtil.inflate(inflater, R.layout.fragment_mycourses, container, false);
 
-        ButterKnife.bind(this,v);
+        myCoursesVM=new ViewModelProvider(getActivity()).get(MyCoursesVM.class);
+        adapter=new StudentCoursesAdapter();
 
-        courses_recycler.setLayoutManager(new GridLayoutManager(
+        binding.coursesRecycler.setLayoutManager(new GridLayoutManager(
                 getContext(), 2));
-        CoursesAdapter coursesAdapter=new CoursesAdapter(getContext(),null);
-        courses_recycler.setAdapter(coursesAdapter);
+        binding.coursesRecycler.setAdapter(adapter);
 
-        return v;
+        getStudentCourse("12",null);
+
+        return binding.getRoot();
     }
+
+    public void getStudentCourse(String student_id, String limit){
+        myCoursesVM.init(student_id,limit);
+        myCoursesVM.getStudentCourses()
+                .observe(getActivity(), studentCourses -> {
+                    //coursesAdapter.addCourses(studentCourses);
+                    adapter.submitList(studentCourses);
+                    Log.d("GROUPSSS", "getStudentCourse: "+studentCourses.size());
+                });
+    }
+
 }
+

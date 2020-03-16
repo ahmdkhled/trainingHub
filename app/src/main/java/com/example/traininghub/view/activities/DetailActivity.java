@@ -19,9 +19,7 @@ import com.example.traininghub.adapters.ContentAdapter;
 import com.example.traininghub.adapters.CourseMediaAdapter;
 import com.example.traininghub.adapters.InstructorsAdapter;
 import com.example.traininghub.databinding.ActivityDetailBinding;
-import com.example.traininghub.helpers.ContentParser;
 import com.example.traininghub.helpers.SnackBarHelper;
-import com.example.traininghub.models.Content;
 import com.example.traininghub.models.Course;
 import com.example.traininghub.retrofit.Network;
 import com.example.traininghub.view.CourseGroupsBS;
@@ -29,8 +27,6 @@ import com.example.traininghub.viewModel.DetailActivityVM;
 import com.google.android.material.snackbar.Snackbar;
 import com.rd.PageIndicatorView;
 import com.rd.animation.type.AnimationType;
-
-import java.util.ArrayList;
 
 public class DetailActivity extends AppCompatActivity {
 
@@ -64,8 +60,7 @@ public class DetailActivity extends AppCompatActivity {
         binding.instructorsRecycler.setAdapter(instructorsAdapter);
 
 
-        ArrayList<Content> content =ContentParser.getCourseContent(course.getContent());
-        ContentAdapter contentAdapter=new ContentAdapter(content);
+        ContentAdapter contentAdapter=new ContentAdapter(course.getContent());
         binding.syllabusRecycler.setAdapter(contentAdapter);
         binding.syllabusRecycler.setLayoutManager(new LinearLayoutManager(this));
 

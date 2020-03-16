@@ -1,6 +1,5 @@
 package com.example.traininghub.retrofit;
 
-import com.example.traininghub.models.APIResponse;
 import com.example.traininghub.models.CategoriesResponse;
 import com.example.traininghub.models.CourseEnrollRes;
 import com.example.traininghub.models.CoursesResponse;
@@ -8,12 +7,12 @@ import com.example.traininghub.models.Group;
 import com.example.traininghub.models.Instructor;
 import com.example.traininghub.models.LoginResponse;
 import com.example.traininghub.models.ReviewsResponse;
+import com.example.traininghub.models.StudentCourseRes;
 import com.example.traininghub.models.User;
 
 import java.util.ArrayList;
 
 import io.reactivex.Single;
-import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.Response;
 import retrofit2.http.Body;
@@ -47,6 +46,10 @@ public interface ApiService {
 
     @GET("course_groups")
     Single<Response<ArrayList<Group>>> getGroups (@Query("course_id")String course, @Query("page")String page, @Query("limit")String limit);
+
+    @GET("course_enrollments")
+    Single<Response<StudentCourseRes>> getStudentCourses (@Query("student")String student, @Query("page")String page, @Query("limit")String limit);
+
 
     @FormUrlEncoded
     @POST("course_enrollments")

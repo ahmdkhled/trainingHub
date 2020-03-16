@@ -60,8 +60,13 @@ private MutableLiveData<CategoriesResponse> categories;
                         CoursesResponse coursesResponse=response.body();
                         if (response.isSuccessful()&&coursesResponse!=null){
                             courses.setValue(coursesResponse);
-                        }else
+                            Log.d("COURSESS", " loaded courses: ");
+
+                        }else{
                             coursesLoadingError.setValue("Error Loading Courses");
+                            Log.d("COURSESS", "error loading courses: ");
+
+                        }
                         isCoursesLoading.setValue(false);
 
                     }

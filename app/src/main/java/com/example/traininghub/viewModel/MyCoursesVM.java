@@ -12,35 +12,29 @@ import androidx.paging.LivePagedListBuilder;
 import androidx.paging.PagedList;
 
 import com.example.traininghub.App;
-import com.example.traininghub.DataSource.CoursesDataFactory;
-import com.example.traininghub.models.Course;
-import com.example.traininghub.models.CoursesResponse;
+import com.example.traininghub.DataSource.StudentCoursesDataFactory;
 import com.example.traininghub.models.NetworkState;
+import com.example.traininghub.models.StudentCourse;
+import com.example.traininghub.models.StudentCourseRes;
 
 import java.util.concurrent.Executor;
 import java.util.concurrent.Executors;
 
-public class AllCoursesVM extends AndroidViewModel {
+public class MyCoursesVM extends AndroidViewModel {
 
-    private MutableLiveData<CoursesResponse> courses;
-    private MutableLiveData<Boolean> isCoursesLoading=new MutableLiveData<>();
-    private MutableLiveData<String> coursesLoadingError=new MutableLiveData<>();
+    private static final String TAG = "MyCoursesVM";
+    private StudentCoursesDataFactory studentCoursesDataFactory;
     private LiveData<NetworkState> networkState=new MutableLiveData<>();
+    private LiveData<PagedList<StudentCourse>> studentCourses;
 
-    private CoursesDataFactory coursesDataFactory;
-    private LiveData<PagedList<Course>> coursesPagedList;
-
-
-    public AllCoursesVM(@NonNull Application application) {
+    public MyCoursesVM(@NonNull Application application) {
         super(application);
     }
 
-
-
-    public void init(String limit,String category){
+    public void init(String student_id,String limit){
         Executor executor= Executors.newFixedThreadPool(5);
-        coursesDataFactory=new CoursesDataFactory(limit,category,((App)getApplication()).getCoursesRepo());
-        networkState=Transformations.switchMap(coursesDataFactory.getCoursesDataSource(),
+        studentCoursesDataFactory =new StudentCoursesDataFactory(student_id,limit,((App)getApplication()).getCoursesRepo());
+        networkState= Transformations.switchMap(studentCoursesDataFactory.getStudentCoursesDataSource(),
                 (dataSource ->dataSource.getNetworkState())
 
         );
@@ -51,21 +45,16 @@ public class AllCoursesVM extends AndroidViewModel {
                         .setPageSize(10)
                         .build();
 
-        coursesPagedList=new LivePagedListBuilder(coursesDataFactory,pagedListConfig)
+        studentCourses =new LivePagedListBuilder(studentCoursesDataFactory,pagedListConfig)
                 .setFetchExecutor(executor)
                 .build();
 
-        Log.d("CoursesDataSource", "init: "+coursesPagedList.getValue());
 
+        Log.d("GROUPSSS", "init VM: "+studentCourses.getValue());
     }
 
-    public void invalidate(){
-        coursesDataFactory.getCoursesDataSource().getValue().invalidate();
-
-    }
-
-    public LiveData<PagedList<Course>> getCoursesPagedList() {
-        return coursesPagedList;
+    public LiveData<PagedList<StudentCourse>> getStudentCourses() {
+        return studentCourses;
     }
 
     public LiveData<NetworkState> getNetworkState() {

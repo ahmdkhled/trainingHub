@@ -92,6 +92,7 @@ public  class CoursesDataSource extends PageKeyedDataSource <Integer, Course>{
                         networkState.postValue(new NetworkState(false,null,page));
                         CoursesResponse coursesResponse=response.body();
                         if (response.isSuccessful()&&coursesResponse!=null&&coursesResponse.getCourses()!=null){
+                            Log.d(TAG, "onSuccess:>>> "+coursesResponse.getCourses().size());
                             if (coursesResponse.getCourses().isEmpty()&&page.equals("1")){
                                 networkState.postValue(new NetworkState(false,"there is no groups available"
                                         ,NetworkState.BACK,"back",page));
