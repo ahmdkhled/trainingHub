@@ -60,4 +60,9 @@ public class MyCoursesVM extends AndroidViewModel {
     public LiveData<NetworkState> getNetworkState() {
         return networkState;
     }
+
+    public void invalidate() {
+        studentCoursesDataFactory.getStudentCoursesDataSource().getValue()
+                .invalidate();
+    }
 }
