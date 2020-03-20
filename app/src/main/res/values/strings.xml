@@ -50,4 +50,9 @@
     <string name="error_message">something went wrong. Please try again</string>
     <string name="successful_registration">Now you have a new account</string>
     <string name="dummy_instructor_bio">Ahmed khaled is an android developer with 2 years experience</string>
+    <string name="change_password">change password</string>
+    <string name="wishlist">wishlist</string>
+    <string name="about">about</string>
+    <string name="signout">sign out</string>
+    <string name="profile">profile</string>
 </resources>

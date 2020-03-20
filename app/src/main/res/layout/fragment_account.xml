@@ -1,47 +1,145 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    >
+    <data>
 
-    <androidx.cardview.widget.CardView
-        android:layout_width="100dp"
-        android:layout_height="100dp"
-        app:cardCornerRadius="50dp"
-        android:id="@+id/profile_img_container"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        android:layout_margin="10dp"
-        app:cardElevation="5dp"
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+
         >
 
+
         <de.hdodenhof.circleimageview.CircleImageView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_width="75dp"
+            android:layout_height="75dp"
             android:id="@+id/profile_img"
             android:src="@drawable/bg"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent" />
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:id="@+id/instructor_name"
+            android:text="@string/dummy_instructor_name"
+            android:textStyle="bold"
+            android:gravity="center"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/profile_img" />
+
+        <com.example.traininghub.helpers.GrostesqueTextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/profile"
+            android:text="@string/profile"
+            app:layout_constraintTop_toBottomOf="@id/instructor_name"
+            android:layout_marginTop="10dp"
+            style="@style/setting_textview" />
+
+        <com.example.traininghub.helpers.GrostesqueTextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/change_password"
+            android:text="@string/change_password"
+            app:layout_constraintTop_toBottomOf="@id/profile"
+            android:layout_marginTop="10dp"
+            style="@style/setting_textview" />
+
+        <com.example.traininghub.helpers.GrostesqueTextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/wishList"
+            android:text="@string/wishlist"
+            app:layout_constraintTop_toBottomOf="@id/change_password"
+            android:layout_marginTop="10dp"
+            style="@style/setting_textview" />
+
+        <com.example.traininghub.helpers.GrostesqueTextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/about_label"
+            android:text="@string/about"
+            android:textColor="#818180"
+            app:layout_constraintTop_toBottomOf="@id/wishList"
+            app:layout_constraintStart_toStartOf="parent"
+            android:layout_marginTop="5dp"
+            android:layout_marginStart="5dp" />
+
+        <com.example.traininghub.helpers.GrostesqueTextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/about"
+            android:text="@string/about"
+            app:layout_constraintTop_toBottomOf="@id/about_label"
+            android:layout_marginTop="10dp"
+            style="@style/setting_textview" />
+
+        <com.example.traininghub.helpers.GrostesqueTextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/account_label"
+            android:text="@string/account"
+            android:textColor="#818180"
+            app:layout_constraintTop_toBottomOf="@id/about"
+            app:layout_constraintStart_toStartOf="parent"
+            android:layout_marginTop="5dp"
+            android:layout_marginStart="5dp" />
+
+        <com.example.traininghub.helpers.GrostesqueTextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/sign_out"
+            android:text="@string/signout"
+            app:layout_constraintTop_toBottomOf="@id/account_label"
+            android:layout_marginTop="10dp"
+            style="@style/setting_textview" />
+
+
+        <ImageView
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:id="@+id/facebook"
+            app:layout_constraintTop_toBottomOf="@id/sign_out"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/instagram"
+            android:src="@drawable/facebook"
+            android:layout_marginTop="15dp"
+            app:layout_constraintHorizontal_chainStyle="packed"
+
+            />
+
+        <ImageView
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:id="@+id/instagram"
+            android:src="@drawable/instagram"
+            android:scaleType="fitXY"
+            app:layout_constraintTop_toTopOf="@id/facebook"
+            app:layout_constraintStart_toEndOf="@id/facebook"
+            app:layout_constraintEnd_toStartOf="@id/email"
+            android:layout_marginStart="5dp"
+            app:layout_constraintHorizontal_chainStyle="packed" />
+
+        <ImageView
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:id="@+id/email"
+            android:src="@drawable/email"
+            android:scaleType="fitXY"
+            app:layout_constraintTop_toTopOf="@id/facebook"
+            app:layout_constraintStart_toEndOf="@id/instagram"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginStart="5dp"
+            app:layout_constraintHorizontal_chainStyle="packed"
 
             />
 
 
-
-    </androidx.cardview.widget.CardView>
-
-    <TextView
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:id="@+id/instructor_name"
-        android:text="@string/dummy_instructor_name"
-        android:textStyle="bold"
-        android:gravity="center"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/profile_img_container"
-        />
-
-
-</androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

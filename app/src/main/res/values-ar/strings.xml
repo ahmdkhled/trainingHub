@@ -41,4 +41,8 @@
     <string name="no_connection">There Is No Internet Connection</string>
     <string name="error_enrolling_to_course">Error happened while Enrolling to tis course</string>
     <string name="dummy_instructor_bio">Ahmed khaled is an android developer with 2 years experience</string>
+    <string name="change_password">change password</string>
+    <string name="about">about</string>
+    <string name="signout">sign out</string>
+    <string name="profile">profile</string>
 </resources>
