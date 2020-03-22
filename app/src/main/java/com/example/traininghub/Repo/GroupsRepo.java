@@ -3,6 +3,7 @@ package com.example.traininghub.Repo;
 import android.util.Log;
 
 import com.example.traininghub.models.Group;
+import com.example.traininghub.models.GroupsRes;
 import com.example.traininghub.retrofit.RetrofitClient;
 
 import java.util.ArrayList;
@@ -35,7 +36,7 @@ public class GroupsRepo {
     }
 
 
-    public Single<Response<ArrayList<Group>>> getGroups (String course, String page, String limit){
+    public Single<Response<GroupsRes>> getGroups (String course, String page, String limit){
         return retrofitClient
                 .getApiService()
                 .getGroups(course,page,limit);

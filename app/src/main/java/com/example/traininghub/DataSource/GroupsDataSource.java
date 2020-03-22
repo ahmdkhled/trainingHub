@@ -14,6 +14,7 @@ import com.example.traininghub.dagger.AppComponent;
 import com.example.traininghub.dagger.DaggerAppComponent;
 import com.example.traininghub.models.Course;
 import com.example.traininghub.models.Group;
+import com.example.traininghub.models.GroupsRes;
 import com.example.traininghub.models.NetworkState;
 
 import java.util.ArrayList;
@@ -76,18 +77,20 @@ public class GroupsDataSource extends PageKeyedDataSource<Integer, Group> {
                 .getGroups(course,page,limit)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new SingleObserver<Response<ArrayList<Group>>>() {
+                .subscribe(new SingleObserver<Response<GroupsRes>>() {
                     @Override
                     public void onSubscribe(Disposable d) {
 
                     }
 
                     @Override
-                    public void onSuccess(Response<ArrayList<Group>> response) {
+                    public void onSuccess(Response<GroupsRes> response) {
                         networkState.postValue(new NetworkState(false,null,page));
-                        ArrayList<Group> groups=response.body();
-                        if (response.isSuccessful()&&groups!=null){
-                            if (groups.isEmpty()&&page.equals("1")){
+                        GroupsRes groupsRes=response.body();
+                        if (response.isSuccessful()&&groupsRes!=null){
+                            ArrayList<Group> groups=groupsRes.getGroups();
+
+                            if (groups!=null&&groups.isEmpty()&&page.equals("1")){
                                 networkState.postValue(new NetworkState(false,"there is no courses"
                                         ,NetworkState.BACK,"back",page));
                                 return;

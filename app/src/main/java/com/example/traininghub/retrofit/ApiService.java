@@ -4,6 +4,7 @@ import com.example.traininghub.models.CategoriesResponse;
 import com.example.traininghub.models.CourseEnrollRes;
 import com.example.traininghub.models.CoursesResponse;
 import com.example.traininghub.models.Group;
+import com.example.traininghub.models.GroupsRes;
 import com.example.traininghub.models.Instructor;
 import com.example.traininghub.models.LoginResponse;
 import com.example.traininghub.models.ReviewsResponse;
@@ -45,7 +46,7 @@ public interface ApiService {
     Single<Response<ReviewsResponse>> getReviews (@Query("course")String course, @Query("page")String page, @Query("limit")String limit);
 
     @GET("course_groups")
-    Single<Response<ArrayList<Group>>> getGroups (@Query("course_id")String course, @Query("page")String page, @Query("limit")String limit);
+    Single<Response<GroupsRes>> getGroups (@Query("course_id")String course, @Query("page")String page, @Query("limit")String limit);
 
     @GET("course_enrollments")
     Single<Response<StudentCourseRes>> getStudentCourses (@Query("student")String student, @Query("page")String page, @Query("limit")String limit);
