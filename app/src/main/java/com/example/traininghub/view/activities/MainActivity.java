@@ -55,8 +55,8 @@ public class MainActivity extends AppCompatActivity {
 
             } else if (menuItem.getItemId()==R.id.account){
                 showFragment(mainActivityVM.getAccountFragment(),false);
-                Intent intent=new Intent(this,RegistrationActivity.class);
-                startActivity(intent);
+//                Intent intent=new Intent(this,RegistrationActivity.class);
+//                startActivity(intent);
             }
             return true;
         });

@@ -1,5 +1,6 @@
 package com.example.traininghub.view.activities;
 
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.Fragment;
@@ -8,6 +9,7 @@ import androidx.lifecycle.ViewModelProvider;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.widget.Toast;
 
 import com.example.traininghub.R;
 import com.example.traininghub.databinding.ActivityRegisterationActivtyBinding;
@@ -64,6 +66,7 @@ public class RegistrationActivity extends AppCompatActivity {
                 }
             });
         }
+
     }
 
     private void replaceFragment(Fragment fragment) {
@@ -72,4 +75,6 @@ public class RegistrationActivity extends AppCompatActivity {
                 .addToBackStack(null)
                 .commit();
     }
+
+
 }

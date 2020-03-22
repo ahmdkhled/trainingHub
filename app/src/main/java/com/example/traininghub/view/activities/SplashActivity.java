@@ -23,11 +23,8 @@ public class SplashActivity extends AppCompatActivity {
             @Override
             public void run() {
                 Intent intent;
-                if(((App) getApplication()).getTokenManager().isLogin()){
                     intent=new Intent(SplashActivity.this,MainActivity.class);
-                }else{
-                    intent=new Intent(SplashActivity.this,RegistrationActivity.class);
-                }
+
                 startActivity(intent);
                 finish();
             }

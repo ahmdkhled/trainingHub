@@ -26,7 +26,7 @@ import retrofit2.HttpException;
 public class LoginRepository {
 
     private static final String TAG = "LoginRepositoryTags";
-    private MutableLiveData<LoginResponse> loginResponse =  new MutableLiveData<>();
+    private MutableLiveData<LoginResponse> loginResponse=new MutableLiveData<>();
     private MutableLiveData<APIResponse> loginError =  new MutableLiveData<>();
     private MutableLiveData<LoginResponse> registerResponse =  new MutableLiveData<>();
     private MutableLiveData<APIResponse> registerError =  new MutableLiveData<>();
@@ -46,7 +46,6 @@ public class LoginRepository {
 
     @SuppressLint("CheckResult")
     public MutableLiveData<LoginResponse> login(User user){
-
         retrofitClient.getApiService().login(user)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())

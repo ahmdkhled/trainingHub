@@ -39,4 +39,9 @@ public class TokenManager {
     public boolean isLogin() {
         return ! sharedPreferences.getString(TOKEN_value,"null").equals("null");
     }
+
+    //todo get student name
+    public String getName(){
+        return "Ahmed Khaled";
+    }
 }

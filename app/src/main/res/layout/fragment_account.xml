@@ -1,9 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
 
     <data>
-
+        <variable
+            name="tokenManager"
+            type="com.example.traininghub.helpers.TokenManager" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -20,13 +23,16 @@
             android:src="@drawable/bg"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent" />
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginTop="10dp"
+            />
 
         <TextView
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:id="@+id/instructor_name"
-            android:text="@string/dummy_instructor_name"
+            android:id="@+id/name"
+            android:text="@{tokenManager.login?tokenManager.name:@string/login}"
+            tools:text="@string/dummy_instructor_name"
             android:textStyle="bold"
             android:gravity="center"
             app:layout_constraintStart_toStartOf="parent"
@@ -38,7 +44,7 @@
             android:layout_height="wrap_content"
             android:id="@+id/profile"
             android:text="@string/profile"
-            app:layout_constraintTop_toBottomOf="@id/instructor_name"
+            app:layout_constraintTop_toBottomOf="@+id/name"
             android:layout_marginTop="10dp"
             style="@style/setting_textview" />
 
@@ -95,7 +101,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/sign_out"
-            android:text="@string/signout"
+            android:text="@{tokenManager.login?@string/signout:@string/signin}"
+            tools:text="@string/signin"
             app:layout_constraintTop_toBottomOf="@id/account_label"
             android:layout_marginTop="10dp"
             style="@style/setting_textview" />

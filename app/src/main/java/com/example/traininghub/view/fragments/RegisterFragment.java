@@ -7,6 +7,7 @@ import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 
+import android.app.Activity;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.Log;
@@ -52,6 +53,11 @@ public class RegisterFragment extends Fragment {
                 Log.d(TAG, "onChanged: register response: "+response.getAccessToken());
                 mBinding.ProgressBar.setVisibility(View.INVISIBLE);
                 Toast.makeText(getContext(), getString(R.string.successful_registration), Toast.LENGTH_SHORT).show();
+                if (getActivity().getIntent().hasExtra(AccountFragment.LOGIN_REQUEST_CODE_KEY)
+                        &&getActivity().getIntent().getIntExtra(AccountFragment.LOGIN_REQUEST_CODE_KEY,0)==AccountFragment.LOGIN_REQUEST_CODE){
+                    getActivity().setResult(Activity.RESULT_OK);
+                    getActivity().finish();
+                }
             }
         });
 

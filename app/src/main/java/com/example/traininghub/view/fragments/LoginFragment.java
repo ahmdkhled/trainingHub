@@ -7,6 +7,8 @@ import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 
+import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.Log;
@@ -52,9 +54,17 @@ public class LoginFragment extends Fragment {
         mRegistrationViewModel.getLoginResponse().observe(getViewLifecycleOwner(), new Observer<LoginResponse>() {
             @Override
             public void onChanged(LoginResponse loginResponse) {
-//                Toast.makeText(getContext(), "successful login", Toast.LENGTH_SHORT).show();
+                //Toast.makeText(getContext(), "successful login", Toast.LENGTH_SHORT).show();
                 mBinding.loginProgressBar.setVisibility(View.INVISIBLE);
+
+                if (getActivity().getIntent().hasExtra(AccountFragment.LOGIN_REQUEST_CODE_KEY)
+                &&getActivity().getIntent().getIntExtra(AccountFragment.LOGIN_REQUEST_CODE_KEY,0)==AccountFragment.LOGIN_REQUEST_CODE){
+                    getActivity().setResult(Activity.RESULT_OK);
+                    getActivity().finish();
+                }
+                else
                 listener.onSuccessfulLogin();
+
             }
         });
 
@@ -130,6 +140,7 @@ public class LoginFragment extends Fragment {
         void onRegisterButtonClicked();
         void onSuccessfulLogin();
     }
+
 
 
 }
