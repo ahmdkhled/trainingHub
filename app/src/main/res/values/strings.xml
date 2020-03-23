@@ -46,7 +46,7 @@
     <string name="dummy_group_name">Group 15</string>
     <string name="dummy_group_startdate">12/2/1996</string>
     <string name="error_enrolling_to_course">Error happened while Enrolling to tis course</string>
-    <string name="retry" >retry</string>
+    <string name="retry">retry</string>
     <string name="error_message">something went wrong. Please try again</string>
     <string name="successful_registration">Now you have a new account</string>
     <string name="dummy_instructor_bio">Ahmed khaled is an android developer with 2 years experience</string>
@@ -56,4 +56,36 @@
     <string name="signout">sign out</string>
     <string name="profile">profile</string>
     <string name="signin">sign in</string>
+    <string name="student_name_ar">student name in Arabic *</string>
+    <string name="student_name_en">student name in English *</string>
+    <string name="mobile_num">mobile number *</string>
+    <string name="state">state *</string>
+    <string name="city">city *</string>
+    <string name="address">Address *</string>
+    <string name="id_number">National Id number *</string>
+    <string name="mobile_num_sec">secondary mobile number (optional)</string>
+    <string name="passport_num">passport number (optional)</string>
+    <string name="faculty">faculty *</string>
+    <string name="degree">degree *</string>
+
+
+    <string-array name="stateList">
+        <item>Cairo</item>
+        <item>Mansoura</item>
+        <item>Alexandria</item>
+    </string-array>
+
+    <string-array name="facultyList">
+        <item>Engineering</item>
+        <item>Commerce</item>
+        <item>Law</item>
+    </string-array>
+
+    <string-array name="degreeList">
+        <item>High School</item>
+        <item>Bachleor</item>
+        <item>master</item>
+        <item>Law</item>
+    </string-array>
+
 </resources>

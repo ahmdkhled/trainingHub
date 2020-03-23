@@ -46,4 +46,15 @@
     <string name="signout">sign out</string>
     <string name="profile">profile</string>
     <string name="signin">sign in</string>
+    <string name="student_name_ar">student_name_ar</string>
+    <string name="student_name_en">student name in English</string>
+    <string name="mobile_num">mobile number</string>
+    <string name="state">state</string>
+    <string name="city">city</string>
+    <string name="address">Adress</string>
+    <string name="id_number">National Id number</string>
+    <string name="mobile_num_sec">secondary mobile number</string>
+    <string name="passport_num">passport number (oprional)</string>
+    <string name="faculty">faculty *</string>
+    <string name="degree">degree *</string>
 </resources>

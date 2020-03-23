@@ -17,6 +17,7 @@ import com.example.traininghub.App;
 import com.example.traininghub.R;
 import com.example.traininghub.databinding.FragmentAccountBinding;
 import com.example.traininghub.helpers.TokenManager;
+import com.example.traininghub.view.activities.ProfileActivity;
 import com.example.traininghub.view.activities.RegistrationActivity;
 
 public class AccountFragment extends Fragment {
@@ -43,6 +44,12 @@ public class AccountFragment extends Fragment {
                 intent.putExtra(LOGIN_REQUEST_CODE_KEY,LOGIN_REQUEST_CODE);
                 startActivityForResult(intent,LOGIN_REQUEST_CODE);
             }
+
+        });
+
+        binding.profile.setOnClickListener(view -> {
+            Intent intent=new Intent(getContext(), ProfileActivity.class);
+            startActivity(intent);
 
         });
 
