@@ -41,7 +41,7 @@ public class AllCoursesVM extends AndroidViewModel {
         Executor executor= Executors.newFixedThreadPool(5);
         coursesDataFactory=new CoursesDataFactory(limit,category,((App)getApplication()).getCoursesRepo());
         networkState=Transformations.switchMap(coursesDataFactory.getCoursesDataSource(),
-                (dataSource ->dataSource.getNetworkState())
+                (dataSource ->dataSource.getNetworkState() )
 
         );
         PagedList.Config pagedListConfig =

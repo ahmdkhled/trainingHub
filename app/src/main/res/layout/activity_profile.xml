@@ -128,7 +128,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/address"
-            app:layout_constraintTop_toBottomOf="@id/state"
+            app:layout_constraintTop_toBottomOf="@id/city"
             >
 
             <EditText
@@ -160,10 +160,11 @@
         </com.google.android.material.textfield.TextInputLayout>
 
         <ImageView
-            android:layout_width="100dp"
-            android:layout_height="100dp"
+            android:layout_width="70dp"
+            android:layout_height="70dp"
             android:id="@+id/id_img"
-            android:src="@color/accent"
+            android:src="@drawable/user_id"
+            android:scaleType="centerCrop"
             app:layout_constraintTop_toBottomOf="@id/id_number"
             app:layout_constraintStart_toStartOf="@id/id_number"
             android:layout_marginStart="10dp"
@@ -178,6 +179,7 @@
             app:layout_constraintTop_toTopOf="@id/id_img"
             app:layout_constraintStart_toEndOf="@id/id_img"
             app:layout_constraintEnd_toEndOf="@id/id_number"
+            android:layout_marginTop="15dp"
             android:layout_marginStart="10dp"
             android:layout_marginEnd="10dp"
             />

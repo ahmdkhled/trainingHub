@@ -67,25 +67,24 @@
     <string name="passport_num">passport number (optional)</string>
     <string name="faculty">faculty *</string>
     <string name="degree">degree *</string>
+    <string name="error_registering_student">"Error happened while registering student "</string>
+    <string name="required">required</string>
 
 
     <string-array name="stateList">
-        <item>Cairo</item>
-        <item>Mansoura</item>
-        <item>Alexandria</item>
+        <item>القاهره</item>
+        <item>الدقهليه</item>
+        <item>الاسكندريه</item>
     </string-array>
 
     <string-array name="facultyList">
-        <item>Engineering</item>
-        <item>Commerce</item>
-        <item>Law</item>
+        <item>هندسه</item>
+        <item>تجاره</item>
     </string-array>
 
     <string-array name="degreeList">
-        <item>High School</item>
-        <item>Bachleor</item>
-        <item>master</item>
-        <item>Law</item>
+        <item>طالب</item>
+        <item>خريح </item>
     </string-array>
 
 </resources>

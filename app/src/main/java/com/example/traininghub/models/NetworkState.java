@@ -36,6 +36,11 @@ public class NetworkState {
         this.action = action;
     }
 
+    public NetworkState(boolean loading, String errorMessage) {
+        this.loading = loading;
+        this.errorMessage = errorMessage;
+    }
+
     public boolean isLoading() {
         return loading;
     }

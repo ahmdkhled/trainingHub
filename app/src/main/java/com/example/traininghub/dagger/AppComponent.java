@@ -8,6 +8,7 @@ import com.example.traininghub.Repo.CoursesRepo;
 import com.example.traininghub.Repo.GroupsRepo;
 import com.example.traininghub.Repo.LoginRepository;
 import com.example.traininghub.Repo.ReviewsRepo;
+import com.example.traininghub.Repo.StudentsRepo;
 import com.example.traininghub.helpers.TokenManager;
 
 import javax.inject.Singleton;
@@ -24,6 +25,7 @@ public interface AppComponent {
     CoursesRepo getCoursesRepo();
     ReviewsRepo getReviewsRepo();
     GroupsRepo getGroupsRepo();
+    StudentsRepo getStudentsRepo();
 
     @Component.Builder
     interface Builder{
