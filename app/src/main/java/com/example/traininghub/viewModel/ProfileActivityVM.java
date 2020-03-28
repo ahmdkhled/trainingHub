@@ -38,7 +38,7 @@ public class ProfileActivityVM extends AndroidViewModel {
                                                     RequestBody idNumber, RequestBody passportNumber, RequestBody skillCardNumber,
                                                     MultipartBody.Part idImage, MultipartBody.Part  image){
         MutableLiveData<Student> registerStudent=new MutableLiveData<>();
-        networkState.setValue(new NetworkState(false,null));
+        networkState.setValue(new NetworkState(true,null));
 
         ((App)getApplication()).getStudentsRepo()
                 .registerStudent(nameAr,
@@ -59,9 +59,17 @@ public class ProfileActivityVM extends AndroidViewModel {
                         Student student=response.body();
                         if (response.isSuccessful()&&student!=null){
                             registerStudent.setValue(student);
+                            networkState.setValue(new NetworkState(false,null));
+
                         }else {
                             APIResponse apiResponse= APIErrorUtil.parseError(((App)getApplication()).getStudentsRepo().getRetrofitClient(),response);
+                            if (apiResponse==null)
+                                networkState.setValue(new NetworkState(false,getApplication().getApplicationContext()
+                                        .getString(R.string.error_registering_student)));
+
+                            else
                             networkState.setValue(new NetworkState(false,apiResponse.getMessage()));
+
                         }
                     }
 

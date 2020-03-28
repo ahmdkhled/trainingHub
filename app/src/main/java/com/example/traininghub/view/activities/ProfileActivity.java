@@ -14,7 +14,9 @@ import android.os.Build;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.Log;
+import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.EditText;
 import android.widget.Toast;
 
 import com.example.traininghub.R;
@@ -40,6 +42,7 @@ public class ProfileActivity extends AppCompatActivity {
     private int currentRequestCode;
     private MultipartBody.Part idImage;
     private MultipartBody.Part profileImage;
+    private static final String TAG = "ProfileActivity";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -93,13 +96,16 @@ public class ProfileActivity extends AppCompatActivity {
                         ,idImage,profileImage)
                 .observe(this,studentRes -> {
                     Toast.makeText(this, "Thanks for registering", Toast.LENGTH_SHORT).show();
+                    clearFields();
                 });
 
         profileActivityVM
                 .getNetworkState()
                 .observe(this,networkState -> {
+                    binding.setNetwork(networkState);
+                    Log.d(TAG, "getNetworkState: "+networkState.isLoading());
                     if (networkState.getErrorMessage()!=null)
-                    Toast.makeText(this, networkState.getErrorMessage(), Toast.LENGTH_SHORT).show();
+                    Toast.makeText(this,  networkState.getErrorMessage(), Toast.LENGTH_SHORT).show();
                 });
 
     }
@@ -113,7 +119,6 @@ public class ProfileActivity extends AppCompatActivity {
             if (TextUtils.isEmpty(inputs[i].getEditText().getText().toString())){
                 error=true;
                 inputs[i].setError(getString(R.string.required));
-                inputs[i].getEditText().setBackgroundResource(R.drawable.edittext_bg);
                 Log.d("ERROORRR", "field : "+i+inputs[i]);
 
             }else
@@ -132,7 +137,7 @@ public class ProfileActivity extends AppCompatActivity {
                 inputs[2].getEditText().getText().toString(), //email
                 inputs[3].getEditText().getText().toString(), // mobile num
                 null, //sec mobile num
-                "cairo",
+                binding.state.getText().toString(),
                 inputs[4].getEditText().getText().toString(),//city
                 inputs[5].getEditText().getText().toString() //address"
                  ,binding.faculty.getText().toString()
@@ -188,5 +193,12 @@ public class ProfileActivity extends AppCompatActivity {
 
     private RequestBody toRequestBody(String field){
         return field==null?null: RequestBody.create(field,MediaType.parse("text/plain"));
+    }
+
+    private void clearFields(){
+        for (int i = 0; i< binding.container.getChildCount(); i++){
+            if (binding.container.getChildAt(i) instanceof TextInputLayout)
+                ((TextInputLayout) binding.container.getChildAt(i)).getEditText().setText("");
+        }
     }
 }
