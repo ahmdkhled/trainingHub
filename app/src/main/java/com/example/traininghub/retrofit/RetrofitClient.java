@@ -4,6 +4,8 @@ import android.util.Log;
 
 import com.example.traininghub.retrofit.interceptor.RetrofitInterceptor;
 
+import java.util.concurrent.TimeUnit;
+
 import javax.inject.Inject;
 import javax.inject.Singleton;
 
@@ -50,10 +52,12 @@ public class RetrofitClient {
     }
 
     private OkHttpClient getOkHttpClient(){
-        return new OkHttpClient()
-                .newBuilder()
+        return new OkHttpClient.Builder()
                 .addInterceptor(retrofitInterceptor)
                 .addInterceptor(new HttpLoggingInterceptor().setLevel(HttpLoggingInterceptor.Level.BODY))
+                .connectTimeout(1, TimeUnit.MINUTES)
+                .readTimeout(60, TimeUnit.SECONDS)
+                .writeTimeout(120, TimeUnit.SECONDS)
                 .build();
 
     }

@@ -37,7 +37,7 @@ public class AccountFragment extends Fragment {
 
         binding.signOut.setOnClickListener(view -> {
             if (tokenManager.isLogin()){
-                tokenManager.deleteToken();
+                tokenManager.signOut();
                 setTokenManager();
             }else {
                 Intent intent=new Intent(getContext(), RegistrationActivity.class);

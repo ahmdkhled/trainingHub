@@ -19,6 +19,7 @@ import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.example.traininghub.App;
 import com.example.traininghub.R;
 import com.example.traininghub.databinding.ActivityProfileBinding;
 import com.example.traininghub.helpers.FileUtils;
@@ -96,7 +97,9 @@ public class ProfileActivity extends AppCompatActivity {
                         ,idImage,profileImage)
                 .observe(this,studentRes -> {
                     Toast.makeText(this, "Thanks for registering", Toast.LENGTH_SHORT).show();
-                    clearFields();
+                    ((App)getApplication()).getTokenManager()
+                            .saveStudent(studentRes);
+
                 });
 
         profileActivityVM
