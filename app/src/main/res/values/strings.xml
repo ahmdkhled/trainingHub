@@ -1,5 +1,9 @@
 <resources>
     <string name="app_name" translatable="false">training hub</string>
+
+    <string name="facebook_app_id" translatable="false">906160613172861</string>
+    <string name="fb_login_protocol_scheme" translatable="false">fb906160613172861</string>
+
     <string name="email">Email</string>
     <string name="password">Password</string>
     <string name="login">Login</string>
@@ -69,6 +73,8 @@
     <string name="degree">degree *</string>
     <string name="error_registering_student">"Error happened while registering student "</string>
     <string name="required">required</string>
+    <string name="continue_with_email">Continue With Email</string>
+    <string name="continue_with_gmail">continue with gmail</string>
 
 
     <string-array name="stateList">

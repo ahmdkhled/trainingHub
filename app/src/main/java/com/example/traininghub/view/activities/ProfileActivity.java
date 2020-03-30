@@ -23,6 +23,7 @@ import com.example.traininghub.App;
 import com.example.traininghub.R;
 import com.example.traininghub.databinding.ActivityProfileBinding;
 import com.example.traininghub.helpers.FileUtils;
+import com.example.traininghub.helpers.HashGenerator;
 import com.example.traininghub.models.Student;
 import com.example.traininghub.viewModel.ProfileActivityVM;
 import com.google.android.material.textfield.TextInputLayout;
@@ -51,7 +52,7 @@ public class ProfileActivity extends AppCompatActivity {
         setContentView(R.layout.activity_profile);
         binding= DataBindingUtil.setContentView(this,R.layout.activity_profile);
         profileActivityVM=new ViewModelProvider(this).get(ProfileActivityVM.class);
-
+        HashGenerator.generateHash(getApplicationContext());
         binding.register.setOnClickListener(view -> {
             Student student=getStudent();
             if (student!=null)

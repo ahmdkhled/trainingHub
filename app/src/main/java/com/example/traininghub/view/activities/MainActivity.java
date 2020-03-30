@@ -20,6 +20,9 @@ import com.example.traininghub.view.fragments.AccountFragment;
 import com.example.traininghub.view.fragments.MainFragment;
 import com.example.traininghub.view.fragments.MyCoursesFragment;
 import com.example.traininghub.viewModel.MainActivityVM;
+import com.facebook.BuildConfig;
+import com.facebook.FacebookSdk;
+import com.facebook.LoggingBehavior;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import butterknife.BindView;
@@ -38,7 +41,6 @@ public class MainActivity extends AppCompatActivity {
         ButterKnife.bind(this);
 
         MainActivityVM mainActivityVM= ViewModelProviders.of(this).get(MainActivityVM.class);
-
 
 
         if (savedInstanceState==null)

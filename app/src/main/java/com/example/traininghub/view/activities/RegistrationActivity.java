@@ -1,6 +1,5 @@
 package com.example.traininghub.view.activities;
 
-import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.Fragment;
@@ -9,12 +8,12 @@ import androidx.lifecycle.ViewModelProvider;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.widget.Toast;
 
 import com.example.traininghub.R;
 import com.example.traininghub.databinding.ActivityRegisterationActivtyBinding;
 import com.example.traininghub.view.fragments.LoginFragment;
 import com.example.traininghub.view.fragments.RegisterFragment;
+import com.example.traininghub.view.fragments.SigninMethodsFrag;
 import com.example.traininghub.viewModel.RegistrationViewModel;
 
 public class RegistrationActivity extends AppCompatActivity {
@@ -38,25 +37,25 @@ public class RegistrationActivity extends AppCompatActivity {
         mFragmentManager = getSupportFragmentManager();
 
         if(savedInstanceState == null) {
-            LoginFragment loginFragment = new LoginFragment();
+            SigninMethodsFrag loginFragment = new SigninMethodsFrag();
             RegisterFragment registerFragment = new RegisterFragment();
             mFragmentManager.beginTransaction()
                     .add(mBinding.container.getId(), loginFragment)
                     .commit();
 
-            loginFragment.setOnRegisterListener(new LoginFragment.RegisterListener() {
-                @Override
-                public void onRegisterButtonClicked() {
-                    replaceFragment(registerFragment);
-                }
-
-                @Override
-                public void onSuccessfulLogin() {
-                    Intent intent = new Intent(getApplicationContext(), MainActivity.class);
-                    startActivity(intent);
-                    finish();
-                }
-            });
+//            loginFragment.setOnRegisterListener(new LoginFragment.RegisterListener() {
+//                @Override
+//                public void onRegisterButtonClicked() {
+//                    replaceFragment(registerFragment);
+//                }
+//
+//                @Override
+//                public void onSuccessfulLogin() {
+//                    Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+//                    startActivity(intent);
+//                    finish();
+//                }
+//            });
 
 
             registerFragment.setOnLoginListener(new RegisterFragment.LoginListener() {

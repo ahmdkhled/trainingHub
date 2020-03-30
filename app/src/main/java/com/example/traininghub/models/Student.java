@@ -47,6 +47,11 @@ public class Student {
         this.idNumber=idNumber;
     }
 
+    public Student(String email,String profileImage) {
+        this.email = email;
+        this.image=profileImage;
+    }
+
     public int getId() {
         return id;
     }

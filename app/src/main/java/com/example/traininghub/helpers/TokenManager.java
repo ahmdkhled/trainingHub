@@ -5,6 +5,7 @@ import android.content.SharedPreferences;
 import android.util.Log;
 
 import com.example.traininghub.models.Student;
+import com.facebook.AccessToken;
 import com.google.gson.Gson;
 
 import javax.inject.Inject;
@@ -36,12 +37,10 @@ public class TokenManager {
     }
 
 
-    public void deleteToken(){
-        sharedPreferences.edit().putString(TOKEN_value,"null").apply();
-    }
 
     public boolean isLogin() {
-        return ! sharedPreferences.getString(TOKEN_value,"null").equals("null");
+        return ! sharedPreferences.getString(TOKEN_value,"null").equals("null")
+                ||(AccessToken.getCurrentAccessToken()!=null&&!AccessToken.getCurrentAccessToken().isExpired());
     }
 
 
@@ -57,6 +56,6 @@ public class TokenManager {
         sharedPreferences.edit()
                 .putString(STUDENT_VALUE,"").apply();
         sharedPreferences.edit()
-                .putString(TOKEN_value,"").apply();
+                .putString(TOKEN_value,"null").apply();
     }
 }

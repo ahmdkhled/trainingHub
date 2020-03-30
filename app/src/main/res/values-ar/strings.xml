@@ -59,4 +59,6 @@
     <string name="degree">degree *</string>
     <string name="error_registering_student">"Error happened while registering student "</string>
     <string name="required">required</string>
+    <string name="continue_with_email">Continue With Email</string>
+    <string name="continue_with_gmail">continue with gmail</string>
 </resources>

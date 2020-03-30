@@ -17,14 +17,17 @@
             />
         <activity
             android:name=".view.activities.RegistrationActivity"
-            android:exported="true" />
+            android:exported="true"
+            android:windowSoftInputMode="adjustResize"
+            />
         <activity android:name=".view.activities.AllCoursesActivity" />
         <activity
             android:name=".view.activities.ReviewsActivity"
             android:exported="true"
             android:theme="@style/ReviewsActivityTheme" />
         <activity android:name=".view.activities.DetailActivity" />
-        <activity android:name=".view.activities.MainActivity" />
+        <activity android:name=".view.activities.MainActivity"
+            android:launchMode="singleInstance"/>
         <activity
             android:name=".view.activities.SplashActivity"
             android:theme="@style/NoActionBarTheme">
@@ -34,6 +37,25 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <meta-data android:name="com.facebook.sdk.ApplicationId"
+            android:value="@string/facebook_app_id"/>
+
+        <activity android:name="com.facebook.FacebookActivity"
+            android:configChanges=
+                "keyboard|keyboardHidden|screenLayout|screenSize|orientation"
+            android:label="@string/app_name" />
+        <activity
+            android:name="com.facebook.CustomTabActivity"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+                <data android:scheme="@string/fb_login_protocol_scheme" />
+            </intent-filter>
+        </activity>
+
     </application>
     <uses-permission android:name="android.permission.INTERNET" />
 

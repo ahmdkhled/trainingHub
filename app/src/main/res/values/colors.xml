@@ -17,4 +17,5 @@
     <color name="duskYellow" >#E6EB50</color>
     <color name="shimmer" >#dddddd</color>
     <color name="gray" >#F4F4F4</color>
+    <color name="blur">#65000000</color>
 </resources>

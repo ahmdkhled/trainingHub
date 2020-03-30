@@ -19,6 +19,8 @@ import com.example.traininghub.databinding.FragmentAccountBinding;
 import com.example.traininghub.helpers.TokenManager;
 import com.example.traininghub.view.activities.ProfileActivity;
 import com.example.traininghub.view.activities.RegistrationActivity;
+import com.facebook.AccessToken;
+import com.facebook.login.LoginManager;
 
 public class AccountFragment extends Fragment {
 
@@ -37,7 +39,14 @@ public class AccountFragment extends Fragment {
 
         binding.signOut.setOnClickListener(view -> {
             if (tokenManager.isLogin()){
+                Toast.makeText(getContext(), "is logged in", Toast.LENGTH_SHORT).show();
                 tokenManager.signOut();
+                AccessToken accessToken=AccessToken.getCurrentAccessToken();
+
+                if (accessToken!=null&&!accessToken.isExpired()){
+                    LoginManager.getInstance().logOut();
+                    ((App)getActivity().getApplication()).getTokenManager().signOut();
+                }
                 setTokenManager();
             }else {
                 Intent intent=new Intent(getContext(), RegistrationActivity.class);
