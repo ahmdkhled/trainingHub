@@ -6,6 +6,7 @@ import android.util.Log;
 
 import com.example.traininghub.models.Student;
 import com.facebook.AccessToken;
+import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.gson.Gson;
 
 import javax.inject.Inject;
@@ -19,10 +20,12 @@ public class TokenManager {
     private static final String TOKEN_value = "token_value";
     private static final String STUDENT_VALUE = "student_value";
     private SharedPreferences sharedPreferences;
+    private Context context;
 
     @Inject
     public TokenManager(Context context) {
         sharedPreferences = context.getSharedPreferences(TPKEN_SHARED_PREF, Context.MODE_PRIVATE);
+        this.context=context;
     }
 
     public void saveToken(String token){
@@ -40,7 +43,9 @@ public class TokenManager {
 
     public boolean isLogin() {
         return ! sharedPreferences.getString(TOKEN_value,"null").equals("null")
-                ||(AccessToken.getCurrentAccessToken()!=null&&!AccessToken.getCurrentAccessToken().isExpired());
+                ||(AccessToken.getCurrentAccessToken()!=null&&!AccessToken.getCurrentAccessToken().isExpired())
+                || (GoogleSignIn.getLastSignedInAccount(context)!=null);
+
     }
 
 

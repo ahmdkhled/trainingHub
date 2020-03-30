@@ -4,6 +4,9 @@
     <string name="facebook_app_id" translatable="false">906160613172861</string>
     <string name="fb_login_protocol_scheme" translatable="false">fb906160613172861</string>
 
+    <string name="client_id" translatable="false">98288831859-opb8iel4cg9l4fchdhpekuvoifai51ch.apps.googleusercontent.com </string>
+    <string name="secret" translatable="false">cM6Hc5nZrO5zNrFlpkxJ1Ku8 </string>
+
     <string name="email">Email</string>
     <string name="password">Password</string>
     <string name="login">Login</string>

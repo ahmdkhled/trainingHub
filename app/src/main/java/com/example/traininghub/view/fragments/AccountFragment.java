@@ -21,6 +21,8 @@ import com.example.traininghub.view.activities.ProfileActivity;
 import com.example.traininghub.view.activities.RegistrationActivity;
 import com.facebook.AccessToken;
 import com.facebook.login.LoginManager;
+import com.google.android.gms.auth.api.signin.GoogleSignIn;
+import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 
 public class AccountFragment extends Fragment {
 
@@ -47,6 +49,15 @@ public class AccountFragment extends Fragment {
                     LoginManager.getInstance().logOut();
                     ((App)getActivity().getApplication()).getTokenManager().signOut();
                 }
+
+                if (GoogleSignIn.getLastSignedInAccount(getContext())!=null){
+                    GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+                            .requestEmail()
+                            .build();
+                    GoogleSignIn.getClient(getContext(), gso)
+                    .signOut();
+                }
+
                 setTokenManager();
             }else {
                 Intent intent=new Intent(getContext(), RegistrationActivity.class);
