@@ -2,6 +2,7 @@ package com.example.traininghub.view.activities;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 import androidx.lifecycle.ViewModelProvider;
@@ -16,6 +17,7 @@ import android.view.MenuItem;
 import android.view.ViewGroup;
 
 import com.example.traininghub.R;
+import com.example.traininghub.databinding.ActivityMainBinding;
 import com.example.traininghub.view.fragments.AccountFragment;
 import com.example.traininghub.view.fragments.MainFragment;
 import com.example.traininghub.view.fragments.MyCoursesFragment;
@@ -30,9 +32,9 @@ import butterknife.ButterKnife;
 
 public class MainActivity extends AppCompatActivity {
 
-    @BindView(R.id.mainBottomNavigation)
-    BottomNavigationView mainBottomNavigation;
+
     Fragment currentFrag;
+    ActivityMainBinding binding;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,6 +42,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
 
+        binding= DataBindingUtil.setContentView(this,R.layout.activity_main);
         MainActivityVM mainActivityVM= ViewModelProviders.of(this).get(MainActivityVM.class);
 
 
@@ -47,7 +50,7 @@ public class MainActivity extends AppCompatActivity {
         showFragment(mainActivityVM.getMainFragment(),false);
 
 
-        mainBottomNavigation.setOnNavigationItemSelectedListener(menuItem -> {
+        binding.mainBottomNavigation.setOnNavigationItemSelectedListener(menuItem -> {
             Log.d("FRAGG", "OnNavigationItemSelected: "+menuItem.getItemId());
             if (menuItem.getItemId()==R.id.home){
                 showFragment(mainActivityVM.getMainFragment(),false);
