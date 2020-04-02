@@ -7,6 +7,9 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.lifecycle.ViewModelProviders;
+import androidx.navigation.Navigation;
+import androidx.navigation.fragment.NavHostFragment;
+import androidx.navigation.ui.NavigationUI;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -34,34 +37,28 @@ public class MainActivity extends AppCompatActivity {
 
 
     Fragment currentFrag;
-    ActivityMainBinding binding;
+    public ActivityMainBinding binding;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
-        ButterKnife.bind(this);
 
         binding= DataBindingUtil.setContentView(this,R.layout.activity_main);
         MainActivityVM mainActivityVM= ViewModelProviders.of(this).get(MainActivityVM.class);
 
 
-        if (savedInstanceState==null)
-        showFragment(mainActivityVM.getMainFragment(),false);
-
-
         binding.mainBottomNavigation.setOnNavigationItemSelectedListener(menuItem -> {
             Log.d("FRAGG", "OnNavigationItemSelected: "+menuItem.getItemId());
             if (menuItem.getItemId()==R.id.home){
-                showFragment(mainActivityVM.getMainFragment(),false);
-                currentFrag=mainActivityVM.getMainFragment();
+                Navigation.findNavController(this,R.id.main_nav_host_fragment).navigate(R.id.main_frag);
             } else if (menuItem.getItemId()==R.id.myCourses){
-                showFragment(mainActivityVM.getMyCoursesFragment(),false);
+                Navigation.findNavController(this,R.id.main_nav_host_fragment).navigate(R.id.mycourses_frag);
+
 
             } else if (menuItem.getItemId()==R.id.account){
-                showFragment(mainActivityVM.getAccountFragment(),false);
-//                Intent intent=new Intent(this,RegistrationActivity.class);
-//                startActivity(intent);
+                Navigation.findNavController(this,R.id.main_nav_host_fragment)
+                        .navigate(R.id.account_frag);
+
             }
             return true;
         });
@@ -69,37 +66,6 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-    private void showFragment(Fragment fragment,boolean addToBackStack){
-        Log.d("FRAGG", "added: "+fragment.isAdded());
-        if (fragment.isAdded()){
-            FragmentTransaction fragmentTransaction=getSupportFragmentManager()
-                    .beginTransaction()
-                    .show(fragment);
-                    if (addToBackStack)fragmentTransaction.addToBackStack(null);
-                    fragmentTransaction.commit();
-
-
-
-
-        }else {
-            FragmentTransaction fragmentTransaction=getSupportFragmentManager()
-                    .beginTransaction()
-                    .add(R.id.mainFragContainer,fragment);
-                    if (addToBackStack)fragmentTransaction.addToBackStack(null);
-                    fragmentTransaction.commit();
-
-        }
-
-        for(Fragment frag : getSupportFragmentManager().getFragments()){
-            if(frag != fragment && frag.isAdded()){
-                getSupportFragmentManager()
-                        .beginTransaction()
-                        .hide(frag)
-                        .commit();
-            }
-        }
-
-    }
 
 
 }

@@ -6,6 +6,8 @@ import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
+import androidx.navigation.Navigation;
+import androidx.navigation.fragment.NavHostFragment;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -23,6 +25,7 @@ import com.example.traininghub.models.APIResponse;
 import com.example.traininghub.models.LoginResponse;
 import com.example.traininghub.models.User;
 import com.example.traininghub.viewModel.RegistrationViewModel;
+import com.example.traininghub.viewModel.SigninFragVM;
 
 import java.util.Objects;
 
@@ -33,6 +36,7 @@ public class LoginFragment extends Fragment {
     private RegistrationViewModel mRegistrationViewModel;
     private FragmentLoginBinding mBinding;
     private RegisterListener listener;
+    Fragment fragment;
 
 
     @Override
@@ -48,8 +52,11 @@ public class LoginFragment extends Fragment {
         mBinding = DataBindingUtil.inflate(inflater, R.layout.fragment_login, container, false);
 
         View view = mBinding.getRoot();
+        fragment=this;
 
         mRegistrationViewModel = new ViewModelProvider(getActivity()).get(RegistrationViewModel.class);
+        SigninFragVM signinFragVM=new ViewModelProvider(this).get(SigninFragVM.class);
+
 
         mRegistrationViewModel.getLoginResponse().observe(getViewLifecycleOwner(), new Observer<LoginResponse>() {
             @Override
@@ -62,8 +69,9 @@ public class LoginFragment extends Fragment {
                     getActivity().setResult(Activity.RESULT_OK);
                     getActivity().finish();
                 }
-                else
-                listener.onSuccessfulLogin();
+                else{
+                    Navigation.findNavController(getView()).navigate(R.id.signIn_methods_frag);
+                }
 
             }
         });
@@ -93,9 +101,8 @@ public class LoginFragment extends Fragment {
         mBinding.createAccountBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(listener != null){
-                    listener.onRegisterButtonClicked();
-                }
+                Log.d(TAG, "onClick: ");
+                Navigation.findNavController(getActivity(),R.id.nav_host_fragment).navigate(R.id.register_frag);
             }
         });
 
@@ -128,6 +135,10 @@ public class LoginFragment extends Fragment {
             mBinding.loginPassIL.setError(null);
             return true;
         }
+    }
+
+    public RegistrationViewModel getRegistrationViewModel() {
+        return mRegistrationViewModel;
     }
 
     public void setOnRegisterListener(RegisterListener listener){

@@ -6,6 +6,7 @@ import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
+import androidx.navigation.Navigation;
 
 import android.app.Activity;
 import android.os.Bundle;
@@ -58,6 +59,8 @@ public class RegisterFragment extends Fragment {
                     getActivity().setResult(Activity.RESULT_OK);
                     getActivity().finish();
                 }
+                Navigation.findNavController(getView()).navigate(R.id.signIn_methods_frag);
+
             }
         });
 

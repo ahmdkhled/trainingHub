@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    app:startDestination="@id/main_frag"
+    android:id="@+id/nav_graph">
+
+    <fragment
+        android:id="@+id/main_frag"
+        tools:layout="@layout/fragment_main"
+        android:name="com.example.traininghub.view.fragments.MainFragment"
+        />
+
+    <fragment
+        android:id="@+id/mycourses_frag"
+        tools:layout="@layout/fragment_mycourses"
+        android:name="com.example.traininghub.view.fragments.MyCoursesFragment"
+        />
+
+    <fragment
+        android:id="@+id/account_frag"
+        tools:layout="@layout/fragment_account"
+        android:name="com.example.traininghub.view.fragments.AccountFragment"
+        />
+
+    <fragment
+        android:id="@+id/signIn_methods_frag"
+        tools:layout="@layout/signin_methods_frag"
+        android:name="com.example.traininghub.view.fragments.SigninMethodsFrag"
+        >
+
+        <action
+            android:id="@+id/action_signIn_methods_frag_to_login_frag"
+            app:destination="@id/login_frag" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/login_frag"
+        tools:layout="@layout/fragment_login"
+        android:name="com.example.traininghub.view.fragments.LoginFragment"
+        >
+        <action
+            android:id="@+id/action_login_frag_to_register_frag"
+            app:destination="@id/register_frag" />
+    </fragment>
+
+
+    <fragment
+        android:id="@+id/register_frag"
+        tools:layout="@layout/fragment_register"
+        android:name="com.example.traininghub.view.fragments.RegisterFragment"
+        />
+
+</navigation>

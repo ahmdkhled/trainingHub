@@ -12,6 +12,9 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.ViewModelProvider;
+import androidx.navigation.Navigation;
+import androidx.navigation.fragment.NavHostFragment;
 
 import com.example.traininghub.App;
 import com.example.traininghub.R;
@@ -20,6 +23,7 @@ import com.example.traininghub.helpers.TokenManager;
 import com.example.traininghub.models.Student;
 import com.example.traininghub.view.activities.MainActivity;
 import com.example.traininghub.view.activities.RegistrationActivity;
+import com.example.traininghub.viewModel.SigninFragVM;
 import com.facebook.AccessToken;
 import com.facebook.CallbackManager;
 import com.facebook.FacebookCallback;
@@ -46,6 +50,7 @@ public class SigninMethodsFrag extends Fragment {
     private CallbackManager callbackManager;
     private static final String TAG = "SigninMethodsFrag";
     private GoogleSignInClient mGoogleSignInClient;
+    private OnLoginCompleted onLoginCompleted;
     private int RC_SIGN_IN=115;
 
     @Nullable
@@ -53,11 +58,14 @@ public class SigninMethodsFrag extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         binding= DataBindingUtil.inflate(inflater, R.layout.signin_methods_frag,container,false);
 
+        SigninFragVM signinFragVM=new ViewModelProvider(this).get(SigninFragVM.class);
+
         callbackManager = CallbackManager.Factory.create();
 
         binding.emailLogin
                 .setOnClickListener(view->{
-                    showFrag();
+                    Navigation.findNavController(view).navigate(R.id.login_frag);
+                    Log.d(TAG, R.id.signIn_methods_frag + " onCreateView: "+NavHostFragment.findNavController(this).getCurrentDestination());
                 });
 
         binding.fbLoginButton.setPermissions(Arrays.asList("email","public_profile"));
@@ -118,14 +126,6 @@ public class SigninMethodsFrag extends Fragment {
         return binding.getRoot();
     }
 
-    private void showFrag(){
-        LoginFragment loginFragment=new LoginFragment();
-        getParentFragmentManager()
-                .beginTransaction()
-                .addToBackStack(null)
-                .add(((RegistrationActivity)getActivity()).mBinding.container.getId(),loginFragment,loginFragment.getClass().getSimpleName())
-        .commit();
-    }
 
     public void getUserData(AccessToken accessToken){
         GraphRequest graphRequest=GraphRequest.newMeRequest(
@@ -136,8 +136,10 @@ public class SigninMethodsFrag extends Fragment {
                     String name = object.getString("name");
                     String email = object.getString("email");
                     String image = object.getJSONObject("picture").getJSONObject("data").getString("url");
+                    Student student=new Student(email,image);
                     ((App)getActivity().getApplication()).getTokenManager()
-                            .saveStudent(new Student(email,image));
+                            .saveStudent(student);
+                    onLoginCompleted.onLoginCompleted();
                     Log.d(TAG, "onCompleted: "+name+"  >>  "+email+"  >>  "+image);
 
                 } catch (JSONException e) {
@@ -164,8 +166,10 @@ public class SigninMethodsFrag extends Fragment {
                 Toast.makeText(getContext(), "success", Toast.LENGTH_SHORT).show();
                 try {
                     GoogleSignInAccount account = task.getResult(ApiException.class);
+                    Student student=new Student(account.getEmail(),account.getPhotoUrl().toString());
                     ((App)getActivity().getApplication()).getTokenManager()
-                            .saveStudent(new Student(account.getEmail(),account.getPhotoUrl().toString()));
+                            .saveStudent(student);
+                    onLoginCompleted.onLoginCompleted();
 
 
                 } catch (ApiException e) {
@@ -181,5 +185,13 @@ public class SigninMethodsFrag extends Fragment {
 
         }
 
+    }
+
+    public void setOnCompleteLoginListener(OnLoginCompleted onCompleteLoginListener){
+        this.onLoginCompleted=onCompleteLoginListener;
+    }
+
+    public interface OnLoginCompleted{
+        void onLoginCompleted();
     }
 }

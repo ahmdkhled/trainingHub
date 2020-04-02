@@ -12,11 +12,14 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.Fragment;
+import androidx.navigation.Navigation;
 
 import com.example.traininghub.App;
 import com.example.traininghub.R;
 import com.example.traininghub.databinding.FragmentAccountBinding;
 import com.example.traininghub.helpers.TokenManager;
+import com.example.traininghub.models.Student;
+import com.example.traininghub.view.activities.MainActivity;
 import com.example.traininghub.view.activities.ProfileActivity;
 import com.example.traininghub.view.activities.RegistrationActivity;
 import com.facebook.AccessToken;
@@ -30,6 +33,7 @@ public class AccountFragment extends Fragment {
     TokenManager tokenManager;
     public static final int LOGIN_REQUEST_CODE=112;
     public static final String LOGIN_REQUEST_CODE_KEY="login_key";
+    SigninMethodsFrag signinMethodsFrag;
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -37,7 +41,7 @@ public class AccountFragment extends Fragment {
 
         tokenManager=((App)getActivity().getApplication()).getTokenManager();
         setTokenManager();
-
+        signinMethodsFrag=new SigninMethodsFrag();
 
         binding.signOut.setOnClickListener(view -> {
             if (tokenManager.isLogin()){
@@ -60,9 +64,8 @@ public class AccountFragment extends Fragment {
 
                 setTokenManager();
             }else {
-                Intent intent=new Intent(getContext(), RegistrationActivity.class);
-                intent.putExtra(LOGIN_REQUEST_CODE_KEY,LOGIN_REQUEST_CODE);
-                startActivityForResult(intent,LOGIN_REQUEST_CODE);
+                Navigation.findNavController(getActivity(),R.id.nav_host_fragment)
+                        .navigate(R.id.signIn_methods_frag);
             }
 
         });
@@ -72,6 +75,12 @@ public class AccountFragment extends Fragment {
             startActivity(intent);
 
         });
+
+        signinMethodsFrag
+                .setOnCompleteLoginListener(() ->  {
+                    getParentFragmentManager().popBackStackImmediate();
+                    setTokenManager();
+                });
 
         return binding.getRoot();
     }
